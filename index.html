@@ -303,7 +303,7 @@ footer{margin-top:44px;border-top:1px solid var(--line);padding-block:16px 40px;
 (function(){
 /* SAMPLE numbers. Replaced by the daily public metrics.json once the pipeline is live. */
 const M = {
-  sample:true, date:'2026-10-24',
+  sample:true, date:new Date(Date.now()-864e5).toLocaleDateString('en-CA',{timeZone:'America/Toronto'}),
   stations:{
     inbox:   {status:'ok',   runs:4, issues:0, toMe:7, in:145, done:5},
     career:  {status:'warn', runs:6, issues:2, toMe:2, in:38,  done:1},
@@ -333,7 +333,7 @@ const T = {
   f2:['handled by AI','件 AI 处理'], f2p:['sorted, analyzed, summarized, logged','分拣、分析、摘要、记录'],
   f3:['escalated to me','件交给我'], f3p:['need a human judgment','需要人来判断'],
   f4:['decided','件已决定'], f4p:['the rest stay on my desk until reviewed','其余留在桌上等我看'],
-  ratio:['of today\'s items reached me','今天的事项送到了我手上'],
+  ratio:['of the day\'s items reached me','当天的事项送到了我手上'],
   projH:['The systems','五个系统'], projSub:['Tap a station above for its run data','点上方插图里的站点查看运行数据'],
   methH:['How they are governed','怎么管住它们'],
   intro:['I\'m Rene Wang, a legal and governance professional based in Toronto. I spent 16 years in public prosecution in Beijing, then led a 13-person legal cooperation team at ByteDance before joining TikTok Canada. I\'m completing an LL.M. in Canadian common law at Osgoode Hall, hold the CIPP/C and PMP, and I\'m looking for roles in legal operations and data privacy.','我是 Rene Wang，常驻多伦多的法律与治理从业者。我在北京做了 16 年公诉工作，之后在字节跳动带领 13 人的法律协作团队，随后加入 TikTok Canada。目前在 Osgoode Hall 攻读加拿大普通法 LL.M.，持有 CIPP/C 和 PMP，正在寻找法律运营与数据隐私方向的职位。'],
