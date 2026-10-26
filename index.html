@@ -62,12 +62,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .links a:hover{border-color:var(--coral);color:var(--coral)}
 .links a[hidden]{display:none}
 .links svg{width:14px;height:14px;fill:currentColor}
-footer .links a{padding:4px 10px;font-size:11.5px}
+footer .links a,.links.mini a{padding:4px 10px;font-size:11.5px}
+.links.mini{margin-top:8px}
 
 /* hero */
 .hero{position:relative}
 .stage{position:relative;width:100%;aspect-ratio:1312/941;border-radius:18px;overflow:hidden}
-@media (min-width:821px){.stage{width:min(100%,1000px,calc((100vh - 290px) * 1.394));width:min(100%,1000px,calc((100svh - 290px) * 1.394));margin-inline:auto}}
+@media (min-width:821px){.stage{width:min(100%,1000px,calc((100vh - 185px) * 1.394));width:min(100%,1000px,calc((100svh - 185px) * 1.394));margin-inline:auto}}
 /* the illustration's empty left 360px are cropped; all overlays stay in full-image % coordinates on .canvas */
 .canvas{position:absolute;top:0;bottom:0;left:-27.44%;width:127.44%}
 .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s}
@@ -233,18 +234,13 @@ footer{margin-top:44px;border-top:1px solid var(--line);padding-block:16px 40px;
 
 <div class="gut"><div class="wrap">
   <div class="bar">
-    <div class="me"><b>RENE WANG</b><span data-t="role"></span></div>
+    <div class="me"><b>RENE WANG</b><span data-t="role"></span><nav class="links mini" aria-label="Contact" data-links></nav></div>
     <div class="ctrl">
       <span class="sample" id="sample"></span>
       <span class="clock" id="clock"></span>
       <div class="seg" role="group" aria-label="Day or night"><button type="button" id="m-day" data-m="day"></button><button type="button" id="m-night" data-m="night"></button></div>
       <div class="seg" role="group" aria-label="Language"><button type="button" id="l-en" data-l="en">EN</button><button type="button" id="l-zh" data-l="zh">中文</button></div>
     </div>
-  </div>
-
-  <div class="intro">
-    <p data-t="intro"></p>
-    <nav class="links" aria-label="Contact" data-links></nav>
   </div>
 
   <div class="hero">
