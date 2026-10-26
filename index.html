@@ -360,8 +360,8 @@ const PROJECTS = [
   {k:'career', en:['Career Ops','Searches, de-duplicates and analyzes roles daily, with an independent gap check and a daily run matrix.','A supervisor flags tasks that report success but produce nothing.'],
    zh:['求职运营','每天检索、去重、分析岗位，另有独立查漏和每日运行矩阵。','总控会揪出"显示成功但没干活"的任务。'],
    kv:[[11,'workflows','个工作流'],[2,'review layers','层独立审查']]},
-  {k:'inbox', en:['Inbox Triage','Reads legal-association email and turns it into a short, prioritized list of decisions.','My choices sync to my events tracker; the AI never replies for me.'],
-   zh:['邮件分拣','读取法律协会邮件，整理成按优先级排列的待决定清单。','我的选择同步到活动追踪表；AI 从不替我回复。'],
+  {k:'inbox', en:['Inbox Triage','Reads my inbox (professional associations, school, recruiters, events, newsletters) and turns it into a short, prioritized list of what needs my decision.','My choices sync to my events tracker; the AI never replies for me.'],
+   zh:['邮件分拣','读取我的邮箱（专业协会、学校、招聘、活动、订阅资讯等），整理成按优先级排列的待决定清单。','我的选择同步到活动追踪表；AI 从不替我回复。'],
    kv:[[145,'emails / week','封 / 周'],[67,'flagged for action','条需行动']]},
   {k:'vocab', repo:'https://github.com/rene-wang1024/learning-closure-agent',
    en:['Legal Vocab · Da Wang','Local-first legal English lookup and spaced review, with a desktop companion named after my cat.','Delivery gated by a decision ledger and release checks.'],
@@ -517,7 +517,7 @@ function ambient(){
 /* SAMPLE run details per station (public-safe: task names, times, results, issue categories only). */
 const RUN = {
   inbox:{hist:'oooooooooooooo', tasks:[
-      ['08:00',['Pull new association email','拉取协会新邮件'],'ok'],
+      ['08:00',['Pull new email','拉取新邮件'],'ok'],
       ['08:05',['Classify, summarize, rank','分类、摘要、排序'],'ok'],
       ['12:00',['Sync my decisions to tracker','把我的决定同步到追踪表'],'ok'],
       ['18:00',['Weekly digest','周汇总'],'ok']],
