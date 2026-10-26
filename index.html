@@ -207,6 +207,10 @@ footer{margin-top:44px;border-top:1px solid var(--line);padding-block:16px 40px;
 .res.ok{color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
 .res.warn{color:var(--warn);background:color-mix(in srgb,var(--warn) 14%,transparent)}
 .res.bad{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.res.auto{color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.res.wip{color:var(--sky);background:color-mix(in srgb,var(--sky) 12%,transparent)}
+.res.plan,.res.manual{color:var(--muted);background:color-mix(in srgb,var(--muted) 12%,transparent)}
+.wfl .who{display:block;font-style:normal;font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;color:var(--muted);margin-top:2px}
 .res.off{color:var(--muted);background:color-mix(in srgb,var(--muted) 12%,transparent)}
 .iss{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .iss li{border-left:3px solid var(--warn);padding:2px 0 2px 10px;font-size:13.5px}
@@ -370,7 +374,7 @@ const PROJECTS = [
    kv:[[20,'review cap / day','题 / 天上限'],['V2','released','已发布']]},
   {k:'podcast', en:['Podcast Studio','An automation workbench for a Chinese-language legal podcast: rough cut, fine cut and platform cuts from transcript to edit list, with hand-offs across the production team.','Every cut is proposed by AI and approved by ear.'],
    zh:['播客剪辑','一档中文法律播客的自动化工作台：从字幕到剪辑点方案，完成粗剪、精剪和各平台版本，并衔接制作团队之间的协作。','每个剪辑点由 AI 提出、我试听确认。'],
-   kv:[[3,'stages','个阶段'],['EDL','output','输出']]}
+   kv:[[5,'workflows','个工作流'],[1,'automated so far','个已自动化']]}
 ];
 const METHOD = [
   ['HUMAN','Map','拆解','Break each recurring project into tasks with clear inputs, outputs and a definition of done.','把每个日常项目拆成任务，明确输入、输出和完成标准。'],
@@ -547,12 +551,18 @@ const RUN = {
       ['—',['Rough-cut edit decision list','粗剪剪辑点方案'],'off'],
       ['—',['Write back to editing project','写回剪辑工程'],'off']],
     issues:[['bad',['Waiting for my listening check before the next cut','等我试听确认后才能进入下一步']]],
-    ai:['Proposes every cut from the transcript','根据字幕提出每个剪辑点'], me:['Approves by ear','试听后确认']}
+    wf:[
+      ['Edit (rough cut)','剪辑（粗剪）','AGENT + HUMAN','auto'],
+      ['Transcript from final video','从定稿视频生成口播文本','AGENT','plan'],
+      ['Show notes & timestamps','Show notes 与时间码','AGENT + HUMAN','plan'],
+      ['Cover design','平面设计','HUMAN · GPT','manual'],
+      ['Publish on Xiaoyuzhou','小宇宙发布','HUMAN','manual']],
+    ai:['Proposes every cut from the transcript','根据字幕提出每个剪辑点'], me:['Approves by ear; publishes each episode','试听确认；每期由人发布']}
 };
-const RES = {ok:['done','完成'], warn:['check','需检查'], bad:['failed','失败'], off:['not run','未运行']};
+const RES = {ok:['done','完成'], warn:['check','需检查'], bad:['failed','失败'], off:['not run','未运行'], auto:['automated','已自动化'], wip:['building','搭建中'], plan:['planned','计划中'], manual:['manual','手动']};
 const DT = {
   title:['Run data','运行数据'], today:['Today','今天'], last14:['Last 14 days','最近 14 天'], tasks:['Tasks today','今天的任务'],
-  issues:['Issues found','发现的问题'], none:['No issues today.','今天没有问题。'], aiDoes:['AI DOES','AI 负责'], iDecide:['I DECIDE','我负责'],
+  issues:['Issues found','发现的问题'], none:['No issues today.','今天没有问题。'], aiDoes:['AGENT DOES','智能体负责'], iDecide:['HUMAN DECIDES','人来决定'], wf:['Workflows','工作流'],
   close:['Close','关闭'], card:['Project details ↓','项目介绍 ↓'], sample:['Sample data','示例数据'],
   stOk:['Running normally','运行正常'], stWarn:['Running, with issues to check','在运行，有问题待查'], stBad:['Paused, needs my attention','已暂停，需要我处理'],
   lOk:['ran OK','正常'], lWarn:['issues','有问题'], lBad:['failed / paused','失败/暂停'], lOff:['not scheduled','不需运行'],
@@ -573,6 +583,7 @@ function openRun(k){
     <div><span class="lbl">${dt('last14')}</span><div class="strip" style="margin-top:8px">${r.hist.split('').map(c=>`<i class="${map[c]||'off'}"></i>`).join('')}</div>
       <div class="strip-axis"><span>${dt('ago')}</span><span>${dt('today')}</span></div>
       <div class="legend2"><span><i style="background:var(--ok)"></i>${dt('lOk')}</span><span><i style="background:var(--warn)"></i>${dt('lWarn')}</span><span><i style="background:var(--bad)"></i>${dt('lBad')}</span><span><i style="background:var(--line)"></i>${dt('lOff')}</span></div></div>
+    ${r.wf?`<div><span class="lbl">${dt('wf')} · ${r.wf.length}</span><ul class="tasks wfl" style="margin-top:8px">${r.wf.map(([en,zh,who,st],i)=>`<li><span class="tm">${String(i+1).padStart(2,'0')}</span><span>${esc(lang==='en'?en:zh)}<em class="who">${esc(who)}</em></span><span class="res ${st}">${esc(RES[st][lang==='en'?0:1])}</span></li>`).join('')}</ul></div>`:''}
     <div><span class="lbl">${dt('tasks')}</span><ul class="tasks" style="margin-top:8px">${r.tasks.map(([tm,nm,res])=>`<li><span class="tm">${esc(tm)}</span><span>${esc(nm[lang==='en'?0:1])}</span><span class="res ${res}">${esc(RES[res][lang==='en'?0:1])}</span></li>`).join('')}</ul></div>
     <div><span class="lbl">${dt('issues')}</span><ul class="iss" style="margin-top:8px">${r.issues.length?r.issues.map(([lv,tx])=>`<li class="${lv}">${esc(tx[lang==='en'?0:1])}</li>`).join(''):`<li class="empty">${dt('none')}</li>`}</ul></div>
     <div class="dsplit"><div><b>${dt('aiDoes')}</b>${esc(r.ai[lang==='en'?0:1])}</div><div class="h"><b>${dt('iDecide')}</b>${esc(r.me[lang==='en'?0:1])}</div></div>
