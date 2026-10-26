@@ -1,6 +1,6 @@
 # rene-wang1024.github.io
 
-Personal site of Rene Wang (Legal Ops · Data Privacy · Toronto).
+Personal site of Rene Wang — Legal Operations & Regulatory Response | CIPP/C, PMP | Osgoode LL.M. Candidate.
 
 ## Why I built this
 
