@@ -58,6 +58,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* hero */
 .hero{position:relative}
 .stage{position:relative;width:100%;aspect-ratio:1312/941;border-radius:18px;overflow:hidden}
+@media (min-width:821px){.stage{width:min(100%,1000px,calc((100vh - 150px) * 1.394));width:min(100%,1000px,calc((100svh - 150px) * 1.394));margin-inline:auto}}
 /* the illustration's empty left 360px are cropped; all overlays stay in full-image % coordinates on .canvas */
 .canvas{position:absolute;top:0;bottom:0;left:-27.44%;width:127.44%}
 .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s}
