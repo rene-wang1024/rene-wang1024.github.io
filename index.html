@@ -304,7 +304,7 @@ const DESK = [50,70]; const OUT=[97,93];
 const S = {
   inbox:  {en:'Inbox triage', zh:'邮件分拣', m_en:s=>`<b>${s.in}</b> emails sorted`, m_zh:s=>`分拣 <b>${s.in}</b> 封邮件`},
   career: {en:'Career ops', zh:'求职运营', m_en:s=>`<b>${s.in}</b> postings screened`, m_zh:s=>`筛查 <b>${s.in}</b> 个岗位`},
-  privacy:{en:'Privacy watch', zh:'隐私瞭望', m_en:s=>`<b>${s.in}</b> sources checked`, m_zh:s=>`检查 <b>${s.in}</b> 个来源`},
+  privacy:{en:'Privacy Radar', zh:'隐私雷达', m_en:s=>`<b>${s.in}</b> sources checked`, m_zh:s=>`检查 <b>${s.in}</b> 个来源`},
   vocab:  {en:'Legal vocab', zh:'法律英语', m_en:s=>`<b>${s.in}</b> reviews · ${s.streak}-day streak`, m_zh:s=>`复习 <b>${s.in}</b> 题 · 连续 ${s.streak} 天`},
   podcast:{en:'Podcast studio', zh:'播客剪辑', m_en:s=>`paused · needs attention`, m_zh:s=>`已暂停 · 需要处理`}
 };
@@ -354,8 +354,8 @@ function renderLinks(){
 }
 const PROJECTS = [
   {k:'privacy', live:true, url:'privacy-watch/',
-   en:['Privacy Watch','Tracks 2026 privacy developments across federal, Ontario and Québec law, mapped to the obligations they change.','Every item checked against the primary source before it counts.'],
-   zh:['隐私瞭望','追踪联邦、安省、魁北克 2026 年的隐私动态，归到它们改变的义务之下。','每条都对照官方原文核对后才计入。'],
+   en:['Privacy Radar','Tracks 2026 privacy developments across federal, Ontario and Québec law, mapped to the obligations they change.','Every item checked against the primary source before it counts.'],
+   zh:['隐私雷达','追踪联邦、安省、魁北克 2026 年的隐私动态，归到它们改变的义务之下。','每条都对照官方原文核对后才计入。'],
    kv:[[53,'developments tracked','条动态'],[12,'high impact','条高影响']]},
   {k:'career', en:['Career Ops','Searches, de-duplicates and analyzes roles daily, with an independent gap check and a daily run matrix.','A supervisor flags tasks that report success but produce nothing.'],
    zh:['求职运营','每天检索、去重、分析岗位，另有独立查漏和每日运行矩阵。','总控会揪出"显示成功但没干活"的任务。'],

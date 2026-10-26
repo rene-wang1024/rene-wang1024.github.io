@@ -15,4 +15,4 @@ The workshop on the home page is the result. Each station is a live workflow, sh
 ## What's here
 
 - `/` — AI workshop: the workflows above, one station each. Station numbers are sample data until the daily public metrics feed is connected.
-- `/privacy-watch/` — Canada Privacy Watch: 2026 privacy developments across federal, Ontario and Québec law, each linked to its official source. A monitoring project, not legal advice.
+- `/privacy-watch/` — Canada Privacy Radar: 2026 privacy developments across federal, Ontario and Québec law, each linked to its official source. A monitoring project, not legal advice.
