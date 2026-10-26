@@ -210,6 +210,12 @@ footer{margin-top:44px;border-top:1px solid var(--line);padding-block:16px 40px;
 .res.auto{color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
 .res.wip{color:var(--sky);background:color-mix(in srgb,var(--sky) 12%,transparent)}
 .res.plan,.res.manual{color:var(--muted);background:color-mix(in srgb,var(--muted) 12%,transparent)}
+.loop{list-style:none;margin:0;padding:0;counter-reset:lp;display:flex;flex-direction:column;gap:6px}
+.loop li{counter-increment:lp;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel-2);font-size:13px;line-height:1.45}
+.loop li b{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;color:var(--sky);padding-top:2px}
+.loop li b::before{content:counter(lp,decimal-leading-zero) "  ";color:var(--muted)}
+.loop li.h b{color:var(--coral)}
+.loop li:last-child::after{content:"↻";grid-column:2;color:var(--muted);font-size:12px}
 .wfl .who{display:block;font-style:normal;font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;color:var(--muted);margin-top:2px}
 .res.off{color:var(--muted);background:color-mix(in srgb,var(--muted) 12%,transparent)}
 .iss{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
@@ -557,12 +563,17 @@ const RUN = {
       ['Show notes & timestamps','Show notes 与时间码','AGENT + HUMAN','plan'],
       ['Cover design','平面设计','HUMAN · GPT','manual'],
       ['Publish on Xiaoyuzhou','小宇宙发布','HUMAN','manual']],
-    ai:['Proposes every cut from the transcript','根据字幕提出每个剪辑点'], me:['Approves by ear; publishes each episode','试听确认；每期由人发布']}
+    loop:[
+      ['AGENT','Transcribes the raw recording and proposes every cut as an edit list, written back into the editing project.','转写原始录音，提出每一个剪辑点，生成剪辑清单并写回剪辑工程。'],
+      ['HUMAN','Listens through, then keeps, restores or adds cuts in the editor.','完整试听，在剪辑软件里保留、恢复或补充剪辑点。'],
+      ['AGENT','Compares the human\'s final cut with its own proposal, cut by cut.','把人的定稿和自己的方案逐个剪辑点比对。'],
+      ['HUMAN','Reviews the differences and approves which become rules in the next version of the skill.','审阅差异，决定哪些写成规则，进入下一版剪辑技能。']],
+    ai:['Proposes cuts, then learns from every human correction','提出剪辑点，并从人的每一次修改中学习'], me:['Approves by ear, sets the rules, publishes each episode','试听确认，制定规则，每期由人发布']}
 };
 const RES = {ok:['done','完成'], warn:['check','需检查'], bad:['failed','失败'], off:['not run','未运行'], auto:['automated','已自动化'], wip:['building','搭建中'], plan:['planned','计划中'], manual:['manual','手动']};
 const DT = {
   title:['Run data','运行数据'], today:['Today','今天'], last14:['Last 14 days','最近 14 天'], tasks:['Tasks today','今天的任务'],
-  issues:['Issues found','发现的问题'], none:['No issues today.','今天没有问题。'], aiDoes:['AGENT DOES','智能体负责'], iDecide:['HUMAN DECIDES','人来决定'], wf:['Workflows','工作流'],
+  issues:['Issues found','发现的问题'], none:['No issues today.','今天没有问题。'], aiDoes:['AGENT DOES','智能体负责'], iDecide:['HUMAN DECIDES','人来决定'], wf:['Workflows','工作流'], loop:['How the editing skill improves','剪辑技能怎么越剪越准'],
   close:['Close','关闭'], card:['Project details ↓','项目介绍 ↓'], sample:['Sample data','示例数据'],
   stOk:['Running normally','运行正常'], stWarn:['Running, with issues to check','在运行，有问题待查'], stBad:['Paused, needs my attention','已暂停，需要我处理'],
   lOk:['ran OK','正常'], lWarn:['issues','有问题'], lBad:['failed / paused','失败/暂停'], lOff:['not scheduled','不需运行'],
@@ -584,6 +595,7 @@ function openRun(k){
       <div class="strip-axis"><span>${dt('ago')}</span><span>${dt('today')}</span></div>
       <div class="legend2"><span><i style="background:var(--ok)"></i>${dt('lOk')}</span><span><i style="background:var(--warn)"></i>${dt('lWarn')}</span><span><i style="background:var(--bad)"></i>${dt('lBad')}</span><span><i style="background:var(--line)"></i>${dt('lOff')}</span></div></div>
     ${r.wf?`<div><span class="lbl">${dt('wf')} · ${r.wf.length}</span><ul class="tasks wfl" style="margin-top:8px">${r.wf.map(([en,zh,who,st],i)=>`<li><span class="tm">${String(i+1).padStart(2,'0')}</span><span>${esc(lang==='en'?en:zh)}<em class="who">${esc(who)}</em></span><span class="res ${st}">${esc(RES[st][lang==='en'?0:1])}</span></li>`).join('')}</ul></div>`:''}
+    ${r.loop?`<div><span class="lbl">${dt('loop')}</span><ol class="loop" style="margin-top:8px">${r.loop.map(([who,en,zh])=>`<li class="${who==='HUMAN'?'h':''}"><b>${who==='HUMAN'?(lang==='en'?'HUMAN':'人工'):(lang==='en'?'AGENT':'智能体')}</b><span>${esc(lang==='en'?en:zh)}</span></li>`).join('')}</ol></div>`:''}
     <div><span class="lbl">${dt('tasks')}</span><ul class="tasks" style="margin-top:8px">${r.tasks.map(([tm,nm,res])=>`<li><span class="tm">${esc(tm)}</span><span>${esc(nm[lang==='en'?0:1])}</span><span class="res ${res}">${esc(RES[res][lang==='en'?0:1])}</span></li>`).join('')}</ul></div>
     <div><span class="lbl">${dt('issues')}</span><ul class="iss" style="margin-top:8px">${r.issues.length?r.issues.map(([lv,tx])=>`<li class="${lv}">${esc(tx[lang==='en'?0:1])}</li>`).join(''):`<li class="empty">${dt('none')}</li>`}</ul></div>
     <div class="dsplit"><div><b>${dt('aiDoes')}</b>${esc(r.ai[lang==='en'?0:1])}</div><div class="h"><b>${dt('iDecide')}</b>${esc(r.me[lang==='en'?0:1])}</div></div>
