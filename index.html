@@ -226,7 +226,7 @@ footer{margin-top:44px;border-top:1px solid var(--line);padding-block:16px 40px;
 @media (min-width:821px){
   .hero{display:grid;grid-template-columns:minmax(270px,320px) minmax(0,1fr);gap:20px;align-items:center}
   .mlist{display:grid;order:-1;grid-template-columns:1fr;gap:8px}
-  .st .tag{display:none!important}
+  .st{display:none!important}
 }
 @media (max-width:820px){
   .st,.out{display:none}
@@ -405,7 +405,7 @@ function render(){
   let html='';
   Object.entries(POS).forEach(([k,[x,y,dir]])=>{ const s=M.stations[k], d=S[k];
     html+=`<a class="st ${dir}" href="#run-${k}" data-open="${k}" style="left:${x}%;top:${y}%"><span class="card"><span class="row"><span class="dot ${s.status==='ok'?'':s.status}"></span><span class="name">${esc(d[lang])}</span></span><span class="metric">${(lang==='en'?d.m_en:d.m_zh)(s)}</span></span><span class="stem"></span></a>`; });
-  Object.entries(typeof HOT!=='undefined'?HOT:{}).forEach(([k,[x,y]])=>{ html+=`<button type="button" class="hot" data-open="${k}" style="left:${x}%;top:${y}%" aria-label="${esc(S[k][lang])}"></button>`; });
+  Object.entries(typeof HOT!=='undefined'?HOT:{}).forEach(([k,[x,y]])=>{ html+=`<button type="button" class="hot" data-open="${k}" style="left:${x}%;top:${y}%" aria-label="${esc(S[k][lang])}" title="${esc(S[k][lang])}"></button>`; });
   stage.querySelectorAll('.hot').forEach(n=>n.remove());
   stage.insertAdjacentHTML('beforeend',html);
   document.getElementById('mlist').innerHTML=Object.keys(POS).map(k=>{const s=M.stations[k],d=S[k];return `<a class="mi" href="#run-${k}" data-open="${k}" style="text-decoration:none"><span class="dot ${s.status==='ok'?'':s.status}"></span><span class="name">${esc(d[lang])}<span class="metric" style="display:block;text-align:left">${(lang==='en'?d.m_en:d.m_zh)(s)}</span></span>${brief(s)}</a>`;}).join('');
