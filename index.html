@@ -598,6 +598,10 @@ function setCharacter(k){ const c=CHAR[k]||CHAR.normal;
 (async()=>{ let k=null;
   try{ k=new URLSearchParams(location.search).get('state'); }catch(e){}
   if(!k){ try{ const r=await fetch('status.json',{cache:'no-store'}); if(r.ok){ const j=await r.json(); k=j&&j.state; } }catch(e){} }
+  /* privacy: outside 10:00–18:00 Toronto time the character always shows the normal state (a ?state= preview still works) */
+  const preview=(()=>{ try{ return new URLSearchParams(location.search).has('state'); }catch(e){ return false; } })();
+  const h=torontoHour();
+  if(!preview && (h<10 || h>=18)) k='normal';
   if(k && CHAR[k] && k!=='normal') setCharacter(k);
 })();
 if(matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('.deskv').forEach(v=>{v.autoplay=false; try{v.pause();}catch(e){}});
