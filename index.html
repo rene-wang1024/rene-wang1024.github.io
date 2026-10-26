@@ -301,9 +301,11 @@ footer{margin-top:44px;border-top:1px solid var(--line);padding-block:16px 40px;
 
 <script>
 (function(){
+function nowTO(){const d=new Date(),o={timeZone:'America/Toronto'};return d.toLocaleDateString('en-CA',o)+' '+d.toLocaleTimeString('en-GB',{...o,hour:'2-digit',minute:'2-digit',hour12:false});}
+setInterval(()=>{const el=document.getElementById('nowclock');if(el)el.textContent=nowTO();},15000);
 /* SAMPLE numbers. Replaced by the daily public metrics.json once the pipeline is live. */
 const M = {
-  sample:true, date:new Date(Date.now()-864e5).toLocaleDateString('en-CA',{timeZone:'America/Toronto'}),
+  sample:true, date:new Date().toLocaleDateString('en-CA',{timeZone:'America/Toronto'}),
   stations:{
     inbox:   {status:'ok',   runs:4, issues:0, toMe:7, in:145, done:5},
     career:  {status:'warn', runs:6, issues:2, toMe:2, in:38,  done:1},
@@ -333,7 +335,7 @@ const T = {
   f2:['handled by AI','件 AI 处理'], f2p:['sorted, analyzed, summarized, logged','分拣、分析、摘要、记录'],
   f3:['escalated to me','件交给我'], f3p:['need a human judgment','需要人来判断'],
   f4:['decided','件已决定'], f4p:['the rest stay on my desk until reviewed','其余留在桌上等我看'],
-  ratio:['of the day\'s items reached me','当天的事项送到了我手上'],
+  ratio:['of today\'s items reached me','今天的事项送到了我手上'],
   projH:['The systems','五个系统'], projSub:['Tap a station above for its run data','点上方插图里的站点查看运行数据'],
   methH:['How they are governed','怎么管住它们'],
   intro:['I\'m Rene Wang, a legal and governance professional based in Toronto. I spent 16 years in public prosecution in Beijing, then led a 13-person legal cooperation team at ByteDance before joining TikTok Canada. I\'m completing an LL.M. in Canadian common law at Osgoode Hall, hold the CIPP/C and PMP, and I\'m looking for roles in legal operations and data privacy.','我是 Rene Wang，常驻多伦多的法律与治理从业者。我在北京做了 16 年公诉工作，之后在字节跳动带领 13 人的法律协作团队，随后加入 TikTok Canada。目前在 Osgoode Hall 攻读加拿大普通法 LL.M.，持有 CIPP/C 和 PMP，正在寻找法律运营与数据隐私方向的职位。'],
@@ -428,7 +430,7 @@ function render(){
   document.getElementById('funnel').innerHTML=[[T0.in,'f1','f1p',''],[ai,'f2','f2p',''],[T0.toMe,'f3','f3p','me-step'],[T0.done,'f4','f4p','me-step']]
     .map(([n,a,b,c])=>`<div class="fs ${c}"><span class="lbl">${esc(t(a))}</span><b>${n}</b><p>${esc(t(b))}</p></div>`).join('');
   const pct=(T0.toMe/T0.in*100);
-  document.getElementById('ratio').innerHTML=`<span class="lbl">${esc(M.date)}</span><span class="bar2" aria-hidden="true"><i style="width:${100-pct}%;background:var(--faint);opacity:.45"></i><i style="width:${pct}%;background:var(--coral)"></i></span><span><b style="color:var(--ink)">${pct.toFixed(1)}%</b> ${esc(t('ratio'))}</span>`;
+  document.getElementById('ratio').innerHTML=`<span class="lbl" id="nowclock">${esc(nowTO())}</span><span class="bar2" aria-hidden="true"><i style="width:${100-pct}%;background:var(--faint);opacity:.45"></i><i style="width:${pct}%;background:var(--coral)"></i></span><span><b style="color:var(--ink)">${pct.toFixed(1)}%</b> ${esc(t('ratio'))}</span>`;
   document.getElementById('projects').innerHTML=PROJECTS.map(p=>{const L=lang==='en'?p.en:p.zh; const s=M.stations[p.k];
     const tag=p.url?'a':'div'; const attrs=p.url?` href="${p.url}"`:'';
     return `<${tag} class="pj" id="pj-${p.k}"${attrs}><div class="top"><span class="row" style="display:flex;gap:8px;align-items:center"><span class="dot ${s.status==='ok'?'':s.status}"></span><h3>${esc(L[0])}</h3></span>${p.live?'<span class="pill">LIVE</span>':''}</div>
