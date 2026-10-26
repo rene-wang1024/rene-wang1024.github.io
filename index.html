@@ -393,8 +393,7 @@ function render(){
   stage.querySelectorAll('.st,.desk,.out').forEach(n=>n.remove());
   let html='';
   Object.entries(POS).forEach(([k,[x,y,dir]])=>{ const s=M.stations[k], d=S[k];
-    html+=`<a class="st ${dir}" href="#run-${k}" data-open="${k}" style="left:${x}%;top:${y}%"><span class="card"><span class="row"><span class="dot ${s.status==='ok'?'':s.status}"></span><span class="name">${esc(d[lang])}</span>${runs(s)}${tag(s)}</span><span class="metric">${(lang==='en'?d.m_en:d.m_zh)(s)}</span></span><span class="stem"></span></a>`; });
-  html+=`<div class="desk" style="left:${DESK[0]}%;top:${DESK[1]}%"><span class="badge"><b>${T0.toMe-T0.done}</b>${esc(t('desk'))}</span></div>`;
+    html+=`<a class="st ${dir}" href="#run-${k}" data-open="${k}" style="left:${x}%;top:${y}%"><span class="card"><span class="row"><span class="dot ${s.status==='ok'?'':s.status}"></span><span class="name">${esc(d[lang])}</span></span><span class="metric">${(lang==='en'?d.m_en:d.m_zh)(s)}</span></span><span class="stem"></span></a>`; });
   Object.entries(typeof HOT!=='undefined'?HOT:{}).forEach(([k,[x,y]])=>{ html+=`<button type="button" class="hot" data-open="${k}" style="left:${x}%;top:${y}%" aria-label="${esc(S[k][lang])}"></button>`; });
   stage.querySelectorAll('.hot').forEach(n=>n.remove());
   stage.insertAdjacentHTML('beforeend',html);
