@@ -100,6 +100,8 @@ footer .links a,.links.mini a{padding:4px 10px;font-size:11.5px}
 .st .row{display:flex;align-items:center;gap:7px}
 .tag{display:inline-flex!important;flex-direction:row!important;white-space:nowrap;align-items:baseline;gap:4px;margin-left:4px;padding:1px 7px;border-radius:999px;font-family:var(--f-num);font-size:14px;font-weight:600;line-height:1.3}
 .tag i{display:inline!important;font-style:normal;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:400}
+.tag.rn{color:var(--ink);background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.tag.rn i{color:var(--muted)}
 .tag.me{background:color-mix(in srgb,var(--coral) 16%,transparent);color:var(--coral)}
 .tag.wn{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
 .st .name{font-weight:600;font-size:12.5px;white-space:nowrap}
@@ -290,7 +292,7 @@ const M = {
     podcast: {status:'bad',  runs:0, issues:1, toMe:0, in:1,   done:0}
   }
 };
-const POS = { inbox:[39,15,'up'], career:[63,10,'left'], privacy:[90,24,'up'], vocab:[38,47,'up'], podcast:[72,86,'down'] };
+const POS = { inbox:[37,15,'up'], career:[71,12,'up'], privacy:[90,24,'up'], vocab:[38,47,'up'], podcast:[72,86,'down'] };
 const DESK = [50,70]; const OUT=[97,93];
 const S = {
   inbox:  {en:'Inbox triage', zh:'邮件分拣', m_en:s=>`<b>${s.in}</b> emails sorted`, m_zh:s=>`分拣 <b>${s.in}</b> 封邮件`},
@@ -367,6 +369,7 @@ function clock(){ let s=''; try{ s=new Intl.DateTimeFormat(lang==='en'?'en-CA':'
   document.getElementById('clock').innerHTML=`<span>Toronto ${esc(s)}</span>`; }
 function brief(s){ const L=lang==='en'?['tasks','issues','to me']:['任务','问题','待我'];
   return `<span class="brief"><span><b>${s.runs}</b><i>${L[0]}</i></span><span><b class="${s.issues?'wn':''}">${s.issues}</b><i>${L[1]}</i></span><span><b class="${s.toMe?'me':''}">${s.toMe}</b><i>${L[2]}</i></span></span>`; }
+function runs(s){ return `<span class="tag rn">${s.runs}<i>${lang==='en'?(s.runs===1?'run':'runs'):'次运行'}</i></span>`; }
 function tag(s){ if(s.toMe) return `<span class="tag me">${s.toMe}<i>${lang==='en'?'to me':'待我'}</i></span>`;
   if(s.issues) return `<span class="tag wn">${s.issues}<i>${lang==='en'?(s.issues>1?'issues':'issue'):'问题'}</i></span>`; return ''; }
 function tot(){ const v=Object.values(M.stations); const a=k=>v.reduce((x,s)=>x+(s[k]||0),0); return {in:a('in'),toMe:a('toMe'),done:a('done')}; }
@@ -383,7 +386,7 @@ function render(){
   stage.querySelectorAll('.st,.desk,.out').forEach(n=>n.remove());
   let html='';
   Object.entries(POS).forEach(([k,[x,y,dir]])=>{ const s=M.stations[k], d=S[k];
-    html+=`<a class="st ${dir}" href="#run-${k}" data-open="${k}" style="left:${x}%;top:${y}%"><span class="card"><span class="row"><span class="dot ${s.status==='ok'?'':s.status}"></span><span class="name">${esc(d[lang])}</span>${tag(s)}</span><span class="metric">${(lang==='en'?d.m_en:d.m_zh)(s)}</span></span><span class="stem"></span></a>`; });
+    html+=`<a class="st ${dir}" href="#run-${k}" data-open="${k}" style="left:${x}%;top:${y}%"><span class="card"><span class="row"><span class="dot ${s.status==='ok'?'':s.status}"></span><span class="name">${esc(d[lang])}</span>${runs(s)}${tag(s)}</span><span class="metric">${(lang==='en'?d.m_en:d.m_zh)(s)}</span></span><span class="stem"></span></a>`; });
   html+=`<div class="desk" style="left:${DESK[0]}%;top:${DESK[1]}%"><span class="badge"><b>${T0.toMe-T0.done}</b>${esc(t('desk'))}</span></div>`;
   Object.entries(typeof HOT!=='undefined'?HOT:{}).forEach(([k,[x,y]])=>{ html+=`<button type="button" class="hot" data-open="${k}" style="left:${x}%;top:${y}%" aria-label="${esc(S[k][lang])}"></button>`; });
   stage.querySelectorAll('.hot').forEach(n=>n.remove());
