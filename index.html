@@ -373,7 +373,7 @@ const PROJECTS = [
 ];
 const METHOD = [
   ['AI','Execute','执行','Agents search, sort, summarize and log on a schedule.','智能体按计划检索、分拣、摘要、记录。'],
-  ['AI','Review','审查','A second, independent agent checks the first one\'s output.','另一个独立智能体审查前者的产出。'],
+  ['SUB','Review','审查','A second, independent agent checks the first one\'s output.','另一个独立智能体审查前者的产出。'],
   ['HUMAN','Decide','决定','Anything that needs judgment is escalated to me, never auto-sent.','需要判断的都交给我，绝不自动发出。'],
   ['HUMAN','Calibrate','校准','My decisions become rules; rules are checked after 14 days.','我的决定变成规则，14 天后检验效果。']
 ];
@@ -420,7 +420,7 @@ function render(){
       <p>${esc(L[1])}</p><div class="kv">${p.kv.map(([n,en,zh])=>`<div><b>${esc(n)}</b><span>${esc(lang==='en'?en:zh)}</span></div>`).join('')}</div>
       <div class="ctrl-line">${esc(L[2])}</div>
       <span class="go ${p.url||p.repo?'':'muted'}">${p.url?t('open'):p.repo?`<a href="${p.repo}" target="_blank" rel="noopener">${t('repo')}</a>`:esc(t('soon'))}</span></${tag}>`;}).join('');
-  document.getElementById('method').innerHTML=METHOD.map(([w,en,zh,de,dz])=>`<div class="mt ${w==='HUMAN'?'h':''}"><span>${w==='AI'?(lang==='en'?'AGENT':'智能体'):(lang==='en'?'HUMAN':'人工')}</span><b>${esc(lang==='en'?en:zh)}</b><p>${esc(lang==='en'?de:dz)}</p></div>`).join('');
+  document.getElementById('method').innerHTML=METHOD.map(([w,en,zh,de,dz])=>`<div class="mt ${w==='HUMAN'?'h':''}"><span>${w==='AI'?(lang==='en'?'AGENT':'智能体'):w==='SUB'?(lang==='en'?'SUB-AGENT':'子智能体'):(lang==='en'?'HUMAN':'人工')}</span><b>${esc(lang==='en'?en:zh)}</b><p>${esc(lang==='en'?de:dz)}</p></div>`).join('');
   clock();
 }
 const h=torontoHour(); setMode(h>=7&&h<18?'day':'night');
