@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Legal Ops and Data Privacy in Toronto. Five AI workflows I designed and govern: AI handles the volume, I make the calls.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rene Wang · AI Workshop">
+<meta property="og:description" content="Legal Ops and Data Privacy in Toronto. Five AI workflows I designed and govern: AI handles the volume, I make the calls.">
+<meta property="og:url" content="https://rene-wang1024.github.io/">
+<meta property="og:image" content="https://rene-wang1024.github.io/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1119'/%3E%3Crect x='7' y='8' width='4' height='16' rx='1' fill='%23ff7a66'/%3E%3Crect x='14' y='8' width='4' height='16' rx='1' fill='%23f4bf55'/%3E%3Crect x='21' y='8' width='4' height='16' rx='1' fill='%236fb3ff'/%3E%3C/svg%3E">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Rene Wang · AI Workshop</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+</head>
+<body>
+<style>
+/* Layout: the workshop illustration is the hero; live labels sit on each station; below it, the day's human-in-the-loop funnel and the project cards. Day/night follows Toronto time. */
+:root{
+  --bg:#f7f3ee; --panel:#ffffff; --panel-2:#fbf8f4; --line:#e8e1d8; --ink:#1d1a17; --muted:#6e665d; --faint:#a39a8f;
+  --coral:#e2674f; --amber:#c98a12; --sky:#3f7fd6; --ok:#1f8a5a; --warn:#c98a12; --bad:#d0412a;
+  --chip:rgba(255,255,255,.88); --chip-line:rgba(29,26,23,.1); --shadow:0 6px 24px rgba(60,40,20,.08);
+  --f-num:"Barlow Condensed","Noto Sans SC",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans","Noto Sans SC",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-mode="night"]{
+  --bg:#0b0f17; --panel:#121826; --panel-2:#161d2c; --line:#253047; --ink:#ecf0f6; --muted:#9aa4b8; --faint:#5f6a80;
+  --coral:#ff8a72; --amber:#f4bf55; --sky:#7db7ff; --ok:#62d6a0; --warn:#f4bf55; --bad:#ff6b57;
+  --chip:rgba(18,24,38,.86); --chip-line:rgba(255,255,255,.1); --shadow:0 6px 24px rgba(0,0,0,.35); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0;color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;transition:background .4s,color .4s}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--sky);outline-offset:2px;border-radius:4px}
+.lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* top bar */
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-block:16px}
+.me{display:flex;flex-direction:column;line-height:1.2}
+.me b{font-family:var(--f-num);font-size:22px;font-weight:600;letter-spacing:.02em}
+.me span{font-size:12.5px;color:var(--muted)}
+.ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;padding:2px;background:var(--panel)}
+.seg button{padding:4px 11px;border-radius:999px;font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.clock{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);display:flex;gap:6px;align-items:center}
+
+/* hero */
+.hero{position:relative}
+.stage{position:relative;width:100%;aspect-ratio:1672/941;border-radius:18px;overflow:hidden}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s}
+.stage img.night{opacity:0}
+:root[data-mode="night"] .stage img.night{opacity:1}
+.flow{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+/* desk loop video placed over the illustration's desk (box measured in 1672×941 image space) */
+.deskv{position:absolute;left:48.33%;top:22.64%;width:29.43%;height:52.29%;object-fit:cover;z-index:1;pointer-events:none;transition:opacity .6s;
+  -webkit-mask-image:radial-gradient(ellipse 50% 47% at 50% 55%,#000 74%,transparent 100%);mask-image:radial-gradient(ellipse 50% 47% at 50% 55%,#000 74%,transparent 100%)}
+.deskv.night{opacity:0}
+:root[data-mode="night"] .deskv.night{opacity:1}
+:root[data-mode="night"] .deskv.day{opacity:0}
+:root[data-mode="night"] .flow .cube{filter:drop-shadow(0 0 5px rgba(255,190,100,.55))}
+.flow .cube{filter:drop-shadow(0 2px 2px rgba(80,50,20,.18))}
+.headline{position:absolute;left:3.2%;top:6%;width:27%;display:flex;flex-direction:column;gap:12px;z-index:2}
+.headline h1{margin:0;font-family:var(--f-num);font-weight:600;font-size:clamp(26px,3.3vw,46px);line-height:.98;text-transform:uppercase;letter-spacing:.005em;text-wrap:balance}
+.headline h1 em{font-style:normal;color:var(--coral)}
+.headline p{margin:0;color:var(--muted);font-size:clamp(13px,1.15vw,15.5px);max-width:40ch}
+.sample{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;color:var(--warn);border:1px dashed var(--warn);border-radius:999px;padding:2px 9px;align-self:flex-start}
+
+/* station labels */
+.st{position:absolute;transform:translate(-50%,-100%);z-index:3;display:flex;flex-direction:column;align-items:center;text-decoration:none}
+.st.down{transform:translate(-50%,0);flex-direction:column-reverse}
+.st.left{transform:translate(-100%,-50%);flex-direction:row}
+.st.left .stem{width:14px;height:1px}
+.st.right{transform:translate(0,-50%);flex-direction:row-reverse}
+.st.right .stem{width:14px;height:1px}
+.st .card{background:var(--chip);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--chip-line);border-radius:10px;padding:6px 10px 7px;box-shadow:var(--shadow);text-align:left;min-width:132px;flex:none;width:max-content}
+.st .row{display:flex;align-items:center;gap:7px}
+.st .name{font-weight:600;font-size:12.5px;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 22%,transparent)}
+.dot.warn{background:var(--warn);box-shadow:0 0 0 3px color-mix(in srgb,var(--warn) 22%,transparent)}
+.dot.bad{background:var(--bad);box-shadow:0 0 0 3px color-mix(in srgb,var(--bad) 22%,transparent);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.35}}
+.st .metric{display:none;font-family:var(--f-mono);font-size:10.5px;color:var(--muted);white-space:nowrap;margin-top:3px}
+.brief{display:grid;grid-template-columns:repeat(3,auto);gap:0 12px;margin-top:5px}
+.brief span{display:flex;flex-direction:column;line-height:1.1}
+.brief b{font-family:var(--f-num);font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.brief b.wn{color:var(--warn)} .brief b.me{color:var(--coral)}
+.brief i{white-space:nowrap;font-style:normal;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+.st .metric b{color:var(--ink);font-weight:500}
+.st .stem{width:1px;height:14px;background:var(--chip-line)}
+.st:hover .card,.st:focus-visible .card{border-color:var(--ink)}
+.desk{position:absolute;transform:translate(-50%,-50%);z-index:4}
+.desk .badge{display:flex;align-items:center;gap:8px;background:var(--ink);color:var(--bg);border-radius:999px;padding:6px 12px 6px 7px;box-shadow:var(--shadow);font-size:12.5px;white-space:nowrap}
+.desk .badge b{font-family:var(--f-num);font-size:20px;line-height:1;background:var(--coral);color:#fff;border-radius:999px;min-width:28px;height:28px;display:grid;place-items:center;padding:0 6px}
+.out{position:absolute;transform:translate(-100%,-50%);z-index:3;font-family:var(--f-mono);font-size:11px;color:var(--muted);background:var(--chip);border:1px solid var(--chip-line);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.out b{color:var(--ink);font-weight:500}
+
+/* funnel */
+.funnel{margin-top:20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.fs{padding:16px 18px;display:flex;flex-direction:column;gap:4px;position:relative;min-width:0}
+.fs + .fs{border-left:1px solid var(--line)}
+.fs + .fs::before{content:"";position:absolute;left:-7px;top:50%;width:12px;height:12px;background:var(--panel);border-top:1px solid var(--line);border-right:1px solid var(--line);transform:translateY(-50%) rotate(45deg)}
+.fs b{font-family:var(--f-num);font-size:44px;line-height:1;font-weight:600;font-variant-numeric:tabular-nums}
+.fs.me-step b{color:var(--coral)}
+.fs p{margin:0;color:var(--muted);font-size:13px}
+.ratio{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:13.5px}
+.ratio .bar2{flex:1;min-width:160px;height:8px;border-radius:4px;background:var(--line);overflow:hidden;display:flex}
+.ratio .bar2 i{display:block;height:100%}
+
+/* projects */
+section.block{margin-top:44px}
+.sh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.sh h2{margin:0;font-family:var(--f-num);font-weight:600;font-size:26px;text-transform:uppercase;letter-spacing:.02em}
+.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.pj{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0;text-decoration:none}
+a.pj:hover{border-color:var(--ink)}
+.pj .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pj h3{margin:0;font-size:16px;font-weight:600}
+.pj p{margin:0;color:var(--muted);font-size:13.5px}
+.pj .kv{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pj .kv div{display:flex;flex-direction:column}
+.pj .kv b{font-family:var(--f-num);font-size:26px;line-height:1;font-weight:600}
+.pj .kv span{font-size:11.5px;color:var(--muted)}
+.pj .ctrl-line{font-family:var(--f-mono);font-size:11px;color:var(--muted);border-top:1px dashed var(--line);padding-top:9px}
+.pj .go{font-family:var(--f-mono);font-size:11.5px;color:var(--sky)}
+.pill{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+
+/* method */
+.method{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.mt{border-top:2px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:4px}
+.mt.h{border-color:var(--coral)}
+.mt span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;color:var(--muted)}
+.mt.h span{color:var(--coral)}
+.mt b{font-size:15px}
+.mt p{margin:0;color:var(--muted);font-size:13px}
+footer{margin-top:44px;border-top:1px solid var(--line);padding-block:16px 40px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--faint);font-size:12.5px}
+
+
+/* station drawer */
+.hot{position:absolute;transform:translate(-50%,-50%);width:11%;aspect-ratio:1;border-radius:50%;z-index:2;cursor:pointer}
+.hot:hover{background:radial-gradient(closest-side,color-mix(in srgb,var(--ink) 8%,transparent),transparent)}
+.st{cursor:pointer}
+.scrim{position:fixed;inset:0;background:rgba(10,12,18,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--panel);border-left:1px solid var(--line);z-index:41;transform:translateX(105%);transition:transform .25s ease;overflow-y:auto;
+  padding:calc(18px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) 20px;display:flex;flex-direction:column;gap:18px;box-shadow:-12px 0 40px rgba(0,0,0,.18)}
+.drawer.on{transform:none}
+.drawer > *{flex-shrink:0}
+.dh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.dh h3{margin:0;font-family:var(--f-num);font-weight:600;font-size:28px;text-transform:uppercase;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.dh .x{font-family:var(--f-mono);font-size:18px;line-height:1;padding:6px 10px;border:1px solid var(--line);border-radius:8px;color:var(--muted)}
+.dstat{font-size:13.5px;color:var(--muted)}
+.big3{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.big3 div{padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.big3 div+div{border-left:1px solid var(--line)}
+.big3 b{font-family:var(--f-num);font-size:36px;line-height:1;font-weight:600}
+.big3 b.hot2{color:var(--warn)} .big3 b.me{color:var(--coral)}
+.strip{display:grid;grid-template-columns:repeat(14,1fr);gap:4px}
+.strip i{display:block;aspect-ratio:1;border-radius:3px;background:var(--line)}
+.strip i.ok{background:var(--ok)} .strip i.warn{background:var(--warn)} .strip i.bad{background:var(--bad)} .strip i.idle{background:transparent;border:1.5px dashed var(--bad)} .strip i.off{background:var(--line)}
+.strip-axis{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10px;color:var(--faint);margin-top:4px}
+.legend2{display:flex;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:10.5px;color:var(--muted);margin-top:8px}
+.legend2 span{display:flex;align-items:center;gap:5px}
+.legend2 i{width:9px;height:9px;border-radius:2px;display:inline-block}
+.tasks{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.tasks li{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;font-size:13.5px}
+.tasks li+li{border-top:1px solid var(--line)}
+.tasks .tm{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.res{font-family:var(--f-mono);font-size:10.5px;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.res.ok{color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.res.warn{color:var(--warn);background:color-mix(in srgb,var(--warn) 14%,transparent)}
+.res.bad{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.res.off{color:var(--muted);background:color-mix(in srgb,var(--muted) 12%,transparent)}
+.iss{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.iss li{border-left:3px solid var(--warn);padding:2px 0 2px 10px;font-size:13.5px}
+.iss li.bad{border-color:var(--bad)}
+.iss .empty{border:0;padding:0;color:var(--muted)}
+.dsplit{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dsplit div{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--muted)}
+.dsplit b{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;margin-bottom:3px;color:var(--sky)}
+.dsplit div.h b{color:var(--coral)}
+.dlink{font-family:var(--f-mono);font-size:12px;color:var(--sky)}
+/* mobile list replaces on-image labels */
+.mlist{display:none}
+@media (max-width:820px){
+  .st,.out{display:none}
+  .hero{display:flex;flex-direction:column}
+  .headline{position:static;width:auto;padding-block:8px 16px;order:-1}
+  .stage{border-radius:14px}
+  .desk .badge{font-size:11px;padding:4px 9px 4px 5px}
+  .desk .badge b{font-size:16px;min-width:22px;height:22px}
+  .mlist{display:grid;grid-template-columns:1fr;gap:6px;margin-top:12px}
+  .mlist .mi{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+  .mlist .mi .name{font-weight:600;font-size:13.5px;flex:1;min-width:0}
+  .mlist .mi .metric{font-family:var(--f-mono);font-size:11px;color:var(--muted);text-align:right}
+  .funnel{grid-template-columns:1fr 1fr}
+  .fs:nth-child(3){border-left:0}
+  .fs:nth-child(n+3){border-top:1px solid var(--line)}
+  .fs:nth-child(3)::before{display:none}
+  .method{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="gut"><div class="wrap">
+  <div class="bar">
+    <div class="me"><b>RENE WANG</b><span data-t="role"></span></div>
+    <div class="ctrl">
+      <span class="sample" id="sample"></span>
+      <span class="clock" id="clock"></span>
+      <div class="seg" role="group" aria-label="Day or night"><button type="button" id="m-day" data-m="day"></button><button type="button" id="m-night" data-m="night"></button></div>
+      <div class="seg" role="group" aria-label="Language"><button type="button" id="l-en" data-l="en">EN</button><button type="button" id="l-zh" data-l="zh">中文</button></div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="stage" id="stage">
+      <img class="day" src="day.webp" alt="" width="1672" height="941">
+      <img class="night" src="night.webp" alt="" width="1672" height="941">
+      <video class="deskv day" src="desk-day.mp4" poster="poster-day.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+      <video class="deskv night" src="desk-night.mp4" poster="poster-night.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+      <svg class="flow" id="flow" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+    </div>
+    <div class="mlist" id="mlist"></div>
+  </div>
+
+  <div class="funnel" id="funnel"></div>
+  <div class="ratio" id="ratio"></div>
+
+  <section class="block">
+    <div class="sh"><h2 data-t="projH"></h2><span class="lbl" data-t="projSub"></span></div>
+    <div class="projects" id="projects"></div>
+  </section>
+
+  <section class="block">
+    <div class="sh"><h2 data-t="methH"></h2></div>
+    <div class="method" id="method"></div>
+  </section>
+
+  <footer><span data-t="privacy"></span><span data-t="foot"></span></footer>
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="d-title" aria-hidden="true"></aside>
+</div></div>
+
+<script>
+(function(){
+/* SAMPLE numbers. Replaced by the daily public metrics.json once the pipeline is live. */
+const M = {
+  sample:true, date:'2026-10-24',
+  stations:{
+    inbox:   {status:'ok',   runs:4, issues:0, toMe:7, in:145, done:5},
+    career:  {status:'warn', runs:6, issues:2, toMe:2, in:38,  done:1},
+    privacy: {status:'ok',   runs:1, issues:0, toMe:0, in:12,  done:0},
+    vocab:   {status:'ok',   runs:1, issues:0, toMe:0, in:18,  done:0, streak:18},
+    podcast: {status:'bad',  runs:0, issues:1, toMe:0, in:1,   done:0}
+  }
+};
+const POS = { inbox:[41,14,'up'], career:[63,10,'left'], privacy:[90,24,'up'], vocab:[38,47,'up'], podcast:[72,86,'down'] };
+const DESK = [50,70]; const OUT=[97,93];
+const S = {
+  inbox:  {en:'Inbox triage', zh:'邮件分拣', m_en:s=>`<b>${s.in}</b> emails sorted`, m_zh:s=>`分拣 <b>${s.in}</b> 封邮件`},
+  career: {en:'Career ops', zh:'求职运营', m_en:s=>`<b>${s.in}</b> postings screened`, m_zh:s=>`筛查 <b>${s.in}</b> 个岗位`},
+  privacy:{en:'Privacy watch', zh:'隐私瞭望', m_en:s=>`<b>${s.in}</b> sources checked`, m_zh:s=>`检查 <b>${s.in}</b> 个来源`},
+  vocab:  {en:'Legal vocab', zh:'法律英语', m_en:s=>`<b>${s.in}</b> reviews · ${s.streak}-day streak`, m_zh:s=>`复习 <b>${s.in}</b> 题 · 连续 ${s.streak} 天`},
+  podcast:{en:'Podcast studio', zh:'播客剪辑', m_en:s=>`paused · needs attention`, m_zh:s=>`已暂停 · 需要处理`}
+};
+const T = {
+  role:['Legal Ops · Data Privacy · Toronto','法律运营 · 数据隐私 · 多伦多'],
+  day:['DAY','白天'], night:['NIGHT','夜晚'],
+  sample:['SAMPLE DATA · live feed in progress','示例数据 · 实时数据接入中'],
+  h1:['AI handles the volume. <em>I make the calls.</em>','AI 处理大量工作，<em>判断由我来做。</em>'],
+  lede:['Five small systems I designed run every day. Most work flows straight through; the few items that need judgment come to my desk.','我设计的五个小系统每天自动运行。大部分工作直接流过；需要判断的少数几件，送到我的桌上。'],
+  desk:['waiting for my decision','件等我判断'],
+  out:['handled automatically','件自动处理完'],
+  f1:['items in','件进入'], f1p:['email, job postings, regulator pages, study queue','邮件、岗位、监管页面、学习队列'],
+  f2:['handled by AI','件 AI 处理'], f2p:['sorted, analyzed, summarized, logged','分拣、分析、摘要、记录'],
+  f3:['escalated to me','件交给我'], f3p:['need a human judgment','需要人来判断'],
+  f4:['decided','件已决定'], f4p:['the rest stay on my desk until reviewed','其余留在桌上等我看'],
+  ratio:['of today\'s items reached me','今天的事项送到了我手上'],
+  projH:['The systems','五个系统'], projSub:['Every number links to its source','每个数字都能追溯来源'],
+  methH:['How they are governed','怎么管住它们'],
+  privacy:['Public counts only, published a day late. No email content, employer names or personal decisions are shown.','只公开计数，延迟一天发布；不展示邮件内容、雇主名称或个人决定。'],
+  foot:['Built and maintained by Rene Wang','由 Rene Wang 设计和维护'],
+  open:['Open ↗','打开 ↗'], soon:['Write-up coming','介绍整理中'], repo:['GitHub ↗','GitHub ↗']
+};
+const PROJECTS = [
+  {k:'privacy', live:true, url:'privacy-watch/',
+   en:['Privacy Watch','Tracks 2026 privacy developments across federal, Ontario and Québec law, mapped to the obligations they change.','Every item checked against the primary source before it counts.'],
+   zh:['隐私瞭望','追踪联邦、安省、魁北克 2026 年的隐私动态，归到它们改变的义务之下。','每条都对照官方原文核对后才计入。'],
+   kv:[[53,'developments tracked','条动态'],[12,'high impact','条高影响']]},
+  {k:'career', en:['Career Ops','Searches, de-duplicates and analyzes roles daily, with an independent gap check and a daily run matrix.','A supervisor flags tasks that report success but produce nothing.'],
+   zh:['求职运营','每天检索、去重、分析岗位，另有独立查漏和每日运行矩阵。','总控会揪出"显示成功但没干活"的任务。'],
+   kv:[[11,'workflows','个工作流'],[2,'review layers','层独立审查']]},
+  {k:'inbox', en:['Inbox Triage','Reads legal-association email and turns it into a short, prioritized list of decisions.','My choices sync to my events tracker; the AI never replies for me.'],
+   zh:['邮件分拣','读取法律协会邮件，整理成按优先级排列的待决定清单。','我的选择同步到活动追踪表；AI 从不替我回复。'],
+   kv:[[145,'emails / week','封 / 周'],[67,'flagged for action','条需行动']]},
+  {k:'vocab', repo:'https://github.com/rene-wang1024/learning-closure-agent',
+   en:['Legal Vocab · Da Wang','Local-first legal English lookup and spaced review, with a desktop companion named after my cat.','Delivery gated by a decision ledger and release checks.'],
+   zh:['法律英语 · 大王','本地优先的法律英语查词与间隔复习，桌面陪伴以我的猫命名。','交付受决策台账和发布关卡约束。'],
+   kv:[[20,'review cap / day','题 / 天上限'],['V2','released','已发布']]},
+  {k:'podcast', en:['Podcast Studio','Rough cut, fine cut and platform cuts for my legal podcast, from transcript to edit decision list.','Every cut is proposed by AI and approved by ear.'],
+   zh:['播客剪辑','法律播客从字幕到剪辑点方案，粗剪、精剪到各平台版本。','每个剪辑点由 AI 提出、我试听确认。'],
+   kv:[[3,'stages','个阶段'],['EDL','output','输出']]}
+];
+const METHOD = [
+  ['AI','Execute','执行','Agents search, sort, summarize and log on a schedule.','智能体按计划检索、分拣、摘要、记录。'],
+  ['AI','Review','审查','A second, independent agent checks the first one\'s output.','另一个独立智能体审查前者的产出。'],
+  ['HUMAN','Decide','决定','Anything that needs judgment is escalated to me, never auto-sent.','需要判断的都交给我，绝不自动发出。'],
+  ['HUMAN','Calibrate','校准','My decisions become rules; rules are checked after 14 days.','我的决定变成规则，14 天后检验效果。']
+];
+let lang='en', mode=null;
+try{const s=localStorage.getItem('rw-lang'); if(s==='en'||s==='zh') lang=s;}catch(e){}
+const t=k=>T[k][lang==='en'?0:1];
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function torontoHour(){ try{ return +new Intl.DateTimeFormat('en-CA',{hour:'2-digit',hour12:false,timeZone:'America/Toronto'}).format(new Date()); }catch(e){ return new Date().getHours(); } }
+function setMode(m){ mode=m; document.documentElement.dataset.mode=m; document.querySelectorAll('[data-m]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.m===m))); }
+function clock(){ let s=''; try{ s=new Intl.DateTimeFormat(lang==='en'?'en-CA':'zh-CN',{hour:'2-digit',minute:'2-digit',timeZone:'America/Toronto'}).format(new Date()); }catch(e){}
+  document.getElementById('clock').innerHTML=`<span>Toronto ${esc(s)}</span>`; }
+function brief(s){ const L=lang==='en'?['tasks','issues','to me']:['任务','问题','待我'];
+  return `<span class="brief"><span><b>${s.runs}</b><i>${L[0]}</i></span><span><b class="${s.issues?'wn':''}">${s.issues}</b><i>${L[1]}</i></span><span><b class="${s.toMe?'me':''}">${s.toMe}</b><i>${L[2]}</i></span></span>`; }
+function tot(){ const v=Object.values(M.stations); const a=k=>v.reduce((x,s)=>x+(s[k]||0),0); return {in:a('in'),toMe:a('toMe'),done:a('done')}; }
+function render(){
+  document.documentElement.lang=lang==='en'?'en':'zh-Hans';
+  document.querySelectorAll('[data-t]').forEach(el=>el.textContent=t(el.dataset.t));
+  document.getElementById('m-day').textContent=t('day'); document.getElementById('m-night').textContent=t('night');
+  document.querySelectorAll('[data-l]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.l===lang)));
+  document.getElementById('sample').textContent=t('sample'); document.getElementById('sample').hidden=!M.sample;
+
+  const T0=tot();
+  const stage=document.getElementById('stage');
+  stage.querySelectorAll('.st,.desk,.out').forEach(n=>n.remove());
+  let html='';
+  Object.entries(POS).forEach(([k,[x,y,dir]])=>{ const s=M.stations[k], d=S[k];
+    html+=`<a class="st ${dir}" href="#run-${k}" data-open="${k}" style="left:${x}%;top:${y}%"><span class="card"><span class="row"><span class="dot ${s.status==='ok'?'':s.status}"></span><span class="name">${esc(d[lang])}</span></span>${brief(s)}<span class="metric">${(lang==='en'?d.m_en:d.m_zh)(s)}</span></span><span class="stem"></span></a>`; });
+  html+=`<div class="desk" style="left:${DESK[0]}%;top:${DESK[1]}%"><span class="badge"><b>${T0.toMe-T0.done}</b>${esc(t('desk'))}</span></div>`;
+  html+=`<div class="out" style="left:${OUT[0]}%;top:${OUT[1]}%"><b>${T0.in-T0.toMe}</b> ${esc(t('out'))} →</div>`;
+  Object.entries(typeof HOT!=='undefined'?HOT:{}).forEach(([k,[x,y]])=>{ html+=`<button type="button" class="hot" data-open="${k}" style="left:${x}%;top:${y}%" aria-label="${esc(S[k][lang])}"></button>`; });
+  stage.querySelectorAll('.hot').forEach(n=>n.remove());
+  stage.insertAdjacentHTML('beforeend',html);
+  document.getElementById('mlist').innerHTML=Object.keys(POS).map(k=>{const s=M.stations[k],d=S[k];return `<a class="mi" href="#run-${k}" data-open="${k}" style="text-decoration:none"><span class="dot ${s.status==='ok'?'':s.status}"></span><span class="name">${esc(d[lang])}<span class="metric" style="display:block;text-align:left">${(lang==='en'?d.m_en:d.m_zh)(s)}</span></span>${brief(s)}</a>`;}).join('');
+  const ai=T0.in-T0.toMe;
+  document.getElementById('funnel').innerHTML=[[T0.in,'f1','f1p',''],[ai,'f2','f2p',''],[T0.toMe,'f3','f3p','me-step'],[T0.done,'f4','f4p','me-step']]
+    .map(([n,a,b,c])=>`<div class="fs ${c}"><span class="lbl">${esc(t(a))}</span><b>${n}</b><p>${esc(t(b))}</p></div>`).join('');
+  const pct=(T0.toMe/T0.in*100);
+  document.getElementById('ratio').innerHTML=`<span class="lbl">${esc(M.date)}</span><span class="bar2" aria-hidden="true"><i style="width:${100-pct}%;background:var(--faint);opacity:.45"></i><i style="width:${pct}%;background:var(--coral)"></i></span><span><b style="color:var(--ink)">${pct.toFixed(1)}%</b> ${esc(t('ratio'))}</span>`;
+  document.getElementById('projects').innerHTML=PROJECTS.map(p=>{const L=lang==='en'?p.en:p.zh; const s=M.stations[p.k];
+    const tag=p.url?'a':'div'; const attrs=p.url?` href="${p.url}"`:'';
+    return `<${tag} class="pj" id="pj-${p.k}"${attrs}><div class="top"><span class="row" style="display:flex;gap:8px;align-items:center"><span class="dot ${s.status==='ok'?'':s.status}"></span><h3>${esc(L[0])}</h3></span>${p.live?'<span class="pill">LIVE</span>':''}</div>
+      <p>${esc(L[1])}</p><div class="kv">${p.kv.map(([n,en,zh])=>`<div><b>${esc(n)}</b><span>${esc(lang==='en'?en:zh)}</span></div>`).join('')}</div>
+      <div class="ctrl-line">${esc(L[2])}</div>
+      <span class="go">${p.url?t('open'):p.repo?`<a href="${p.repo}" target="_blank" rel="noopener">${t('repo')}</a>`:esc(t('soon'))}</span></${tag}>`;}).join('');
+  document.getElementById('method').innerHTML=METHOD.map(([w,en,zh,de,dz])=>`<div class="mt ${w==='HUMAN'?'h':''}"><span>${w==='AI'?'AI':(lang==='en'?'HUMAN':'人工')}</span><b>${esc(lang==='en'?en:zh)}</b><p>${esc(lang==='en'?de:dz)}</p></div>`).join('');
+  clock();
+}
+const h=torontoHour(); setMode(h>=7&&h<18?'day':'night');
+document.querySelectorAll('[data-m]').forEach(b=>b.addEventListener('click',()=>{setMode(b.dataset.m); renderFlow();}));
+document.querySelectorAll('[data-l]').forEach(b=>b.addEventListener('click',()=>{lang=b.dataset.l;try{localStorage.setItem('rw-lang',lang)}catch(e){} render(); renderFlow(); if(openK) openRun(openK);}));
+
+/* Moving parcels: paths traced on the illustration (1672×941 image coordinates). */
+const LANES = {
+  mainA:[[860,245],[880,195],[940,165],[1010,148],[1060,142]],
+  mainB:[[1282,212],[1305,245],[1335,290],[1335,345],[1305,400],[1305,450],[1350,495],[1430,525],[1510,560],[1570,610],[1580,670],[1535,720],[1460,755],[1450,790],[1520,825],[1600,860],[1700,910]],
+  inbox:[[715,350],[800,370],[850,395],[895,428]],
+  career:[[1282,290],[1262,350],[1245,412]],
+  vocab:[[700,585],[770,565],[830,545],[872,535]],
+  out:[[950,640],[1020,668],[1095,692],[1135,720],[1170,752],[1205,772]]
+};
+function crPath(pts){ let d=`M${pts[0][0]},${pts[0][1]}`;
+  for(let i=0;i<pts.length-1;i++){ const p0=pts[i-1]||pts[i], p1=pts[i], p2=pts[i+1], p3=pts[i+2]||p2;
+    d+=` C${p1[0]+(p2[0]-p0[0])/6},${p1[1]+(p2[1]-p0[1])/6} ${p2[0]-(p3[0]-p1[0])/6},${p2[1]-(p3[1]-p1[1])/6} ${p2[0]},${p2[1]}`; }
+  return d; }
+const CUBE = {cream:['#fbf1e0','#ead7b8','#d8bf98'], coral:['#f8a892','#e9826a','#cf6a53']};
+function cube(c,s){ const [tp,l,r]=CUBE[c]; const k=s/11;
+  const P=a=>a.map(([x,y])=>`${x*k},${y*k}`).join(' ');
+  return `<polygon points="${P([[0,-10],[11,-4.5],[0,1],[-11,-4.5]])}" fill="${tp}"/><polygon points="${P([[-11,-4.5],[0,1],[0,13],[-11,7.5]])}" fill="${l}"/><polygon points="${P([[11,-4.5],[0,1],[0,13],[11,7.5]])}" fill="${r}"/>`; }
+function renderFlow(){
+  const svg=document.getElementById('flow'); if(!svg) return;
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const st=M.stations, cap=n=>Math.max(0,Math.min(3,n|0));
+  const spec=[
+    ['mainA', 5, 9, 15],
+    ['mainB', 12, 26, 16],
+    ['inbox', cap(st.inbox.toMe), 7, 14],
+    ['career', cap(st.career.toMe), 5, 14],
+    ['vocab', cap(st.vocab.toMe), 6, 14],
+    ['out', cap(st.inbox.done+st.career.done), 9, 14]
+  ];
+  let h='';
+  spec.forEach(([lane,n,dur,size],li)=>{
+    const d=crPath(LANES[lane]);
+    for(let i=0;i<n;i++){
+      const col=((i+li)%3===0)?'coral':'cream'; const off=-(dur*i/n).toFixed(2);
+      if(still){ continue; }
+      h+=`<g class="cube" opacity="0">${cube(col,size)}
+        <animateMotion dur="${dur}s" begin="${off}s" repeatCount="indefinite" path="${d}"/>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.9;1" dur="${dur}s" begin="${off}s" repeatCount="indefinite"/></g>`;
+    }
+  });
+  if(!still) h+=ambient();
+  svg.innerHTML=h;
+}
+let typeTimer=null;
+const TYPE_LINES={en:['review: privacy update…','decide: apply? → yes','flag: deadline in 5 days','skip: needs 10+ yrs','reply? → I write it'],
+  zh:['审阅：隐私法规更新…','判断：申请吗？→ 申请','提醒：5 天后截止','跳过：要求 10 年以上','回复？→ 我自己写']};
+function startTyping(){
+  if(typeTimer){clearTimeout(typeTimer);typeTimer=null;}
+  const tx=document.getElementById('typetext'), cur=document.getElementById('typecur'); if(!tx) return;
+  const lines=TYPE_LINES[lang]; let li=0, ci=0, del=false;
+  const place=()=>{ try{ const w=tx.getComputedTextLength(); cur.setAttribute('x',1062+w+3); }catch(e){} };
+  const step=()=>{ const L=lines[li]; 
+    if(!del){ ci++; tx.textContent=L.slice(0,ci); place(); if(ci>=L.length){del=true; typeTimer=setTimeout(step,1600); return;} typeTimer=setTimeout(step,lang==='en'?70:140); }
+    else { ci--; tx.textContent=L.slice(0,ci); place(); if(ci<=0){del=false; li=(li+1)%lines.length; typeTimer=setTimeout(step,350); return;} typeTimer=setTimeout(step,28); } };
+  step();
+}
+function ambient(){
+  const night=document.documentElement.dataset.mode==='night';
+  const gold='#f6c461', coral='#f08a72', teal='#5fd3b0';
+  let s=`<defs>
+    <radialGradient id="g-lamp"><stop offset="0" stop-color="#ffd27a" stop-opacity=".75"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>
+    <radialGradient id="g-shield"><stop offset="0" stop-color="#7db7ff" stop-opacity=".55"/><stop offset="1" stop-color="#7db7ff" stop-opacity="0"/></radialGradient>
+  </defs>`;
+  /* lamp breathing */
+  s+=`<ellipse cx="1140" cy="395" rx="95" ry="70" fill="url(#g-lamp)" opacity=".5"><animate attributeName="opacity" values=".25;.7;.25" dur="4s" repeatCount="indefinite"/></ellipse>`;
+  /* shield halo */
+  s+=`<ellipse cx="1495" cy="365" rx="150" ry="125" fill="url(#g-shield)" opacity=".4"><animate attributeName="opacity" values=".15;.55;.15" dur="5s" repeatCount="indefinite"/></ellipse>`;
+  /* envelopes dropping into inbox */
+  [0,1].forEach(i=>{ s+=`<g opacity="0"><rect x="-13" y="-9" width="26" height="18" rx="2.5" fill="#fbf1e0" stroke="${coral}" stroke-width="1.5"/><path d="M-13,-9 L0,2 L13,-9" fill="none" stroke="${coral}" stroke-width="1.5"/>
+    <animateMotion dur="3.2s" begin="${i*1.6}s" repeatCount="indefinite" path="M${672+i*30},40 L${680+i*24},150"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.75;1" dur="3.2s" begin="${i*1.6}s" repeatCount="indefinite"/></g>`; });
+  /* career: light running along the gold arc */
+  s+=`<circle r="6" fill="${gold}" opacity=".95"><animateMotion dur="3.5s" repeatCount="indefinite" path="M1108,190 C1160,170 1215,135 1268,96"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="3.5s" repeatCount="indefinite"/></circle>`;
+  /* sleeping cat z's */
+  [0,1,2].forEach(i=>{ s+=`<text x="0" y="0" font-family="IBM Plex Sans,sans-serif" font-weight="600" font-size="${16+i*4}" fill="${night?'#c9d0dd':'#8a8178'}" opacity="0">z
+    <animateMotion dur="4.5s" begin="${i*1.5}s" repeatCount="indefinite" path="M655,575 C665,550 650,530 672,505"/>
+    <animate attributeName="opacity" values="0;.9;0" dur="4.5s" begin="${i*1.5}s" repeatCount="indefinite"/></text>`; });
+  /* mic sound waves */
+  [0,1,2].forEach(i=>{ s+=`<ellipse cx="1305" cy="660" rx="60" ry="60" fill="none" stroke="${coral}" stroke-width="2.5" opacity="0">
+    <animate attributeName="rx" values="60;135" dur="3s" begin="${i}s" repeatCount="indefinite"/><animate attributeName="ry" values="60;125" dur="3s" begin="${i}s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values=".7;0" dur="3s" begin="${i}s" repeatCount="indefinite"/></ellipse>`; });
+  /* status dot clusters twinkle */
+  [[737,113,teal],[1240,48,gold],[1520,243,teal],[605,436,teal],[1343,576,teal]].forEach(([x,y,c],i)=>{
+    s+=`<circle cx="${x}" cy="${y}" r="24" fill="none" stroke="${c}" stroke-width="2" opacity="0"><animate attributeName="r" values="10;30" dur="2.4s" begin="${i*0.4}s" repeatCount="indefinite"/><animate attributeName="opacity" values=".6;0" dur="2.4s" begin="${i*0.4}s" repeatCount="indefinite"/></circle>`; });
+  return s;
+}
+
+/* SAMPLE run details per station (public-safe: task names, times, results, issue categories only). */
+const RUN = {
+  inbox:{hist:'oooooooooooooo', tasks:[
+      ['08:00',['Pull new association email','拉取协会新邮件'],'ok'],
+      ['08:05',['Classify, summarize, rank','分类、摘要、排序'],'ok'],
+      ['12:00',['Sync my decisions to tracker','把我的决定同步到追踪表'],'ok'],
+      ['18:00',['Weekly digest','周汇总'],'ok']],
+    issues:[], ai:['Reads, sorts and explains why each item matters','阅读、分拣、说明每条为什么值得看'], me:['Attend, watch or skip','参加、观望还是不参加']},
+  career:{hist:'owowoo-owoowow', tasks:[
+      ['09:47',['Daily job search (5 tracks)','每日搜岗（5 个方向）'],'ok'],
+      ['10:20',['De-duplicate and analyze roles','去重与岗位分析'],'ok'],
+      ['12:47',['Supervisor patrol','总控巡检'],'ok'],
+      ['14:23',['Local archive','本地存档'],'off'],
+      ['15:13',['Independent gap check','独立查漏'],'off']],
+    issues:[['warn',['A task reported success but produced nothing; logged for review','有任务显示成功但没有产出，已记录待查']],
+            ['warn',['Archive task paused while the computer was offline','电脑离线，存档任务暂停']]],
+    ai:['Searches, screens, analyzes, self-audits','检索、筛查、分析、自查'], me:['Apply or not','申不申请']},
+  privacy:{hist:'oooooooooooooo', tasks:[
+      ['06:00',['Check regulator and legislature pages','检查监管机构与议会页面'],'ok'],
+      ['06:20',['Draft summaries, tag obligations','起草摘要、归类义务'],'ok'],
+      ['06:40',['Verify against primary sources','对照官方原文核对'],'ok']],
+    issues:[], ai:['Collects and drafts','采集与起草'], me:['Verifies before publishing','发布前核对']},
+  vocab:{hist:'oooooooooooooo', tasks:[
+      ['07:00',['Freeze today\'s review plan','冻结今日复习计划'],'ok'],
+      ['20:00',['Daily reminder','每日提醒'],'ok']],
+    issues:[], ai:['Looks up, explains, schedules reviews','查词、释义、安排复习'], me:['Reviews and keeps the streak','完成复习、保持连续']},
+  podcast:{hist:'ooo--b-----bbb', tasks:[
+      ['—',['Rough-cut edit decision list','粗剪剪辑点方案'],'off'],
+      ['—',['Write back to editing project','写回剪辑工程'],'off']],
+    issues:[['bad',['Waiting for my listening check before the next cut','等我试听确认后才能进入下一步']]],
+    ai:['Proposes every cut from the transcript','根据字幕提出每个剪辑点'], me:['Approves by ear','试听后确认']}
+};
+const RES = {ok:['done','完成'], warn:['check','需检查'], bad:['failed','失败'], off:['not run','未运行']};
+const DT = {
+  title:['Run data','运行数据'], today:['Today','今天'], last14:['Last 14 days','最近 14 天'], tasks:['Tasks today','今天的任务'],
+  issues:['Issues found','发现的问题'], none:['No issues today.','今天没有问题。'], aiDoes:['AI DOES','AI 负责'], iDecide:['I DECIDE','我负责'],
+  close:['Close','关闭'], card:['Project details ↓','项目介绍 ↓'], sample:['Sample data','示例数据'],
+  stOk:['Running normally','运行正常'], stWarn:['Running, with issues to check','在运行，有问题待查'], stBad:['Paused, needs my attention','已暂停，需要我处理'],
+  lOk:['ran OK','正常'], lWarn:['issues','有问题'], lBad:['failed / paused','失败/暂停'], lOff:['not scheduled','不需运行'],
+  ago:['14d ago','14 天前']
+};
+const dt=k=>DT[k][lang==='en'?0:1];
+let lastFocus=null, openK=null;
+function openRun(k){
+  const s=M.stations[k], d=S[k], r=RUN[k]; if(!s||!r) return;
+  openK=k; lastFocus=document.activeElement;
+  const map={o:'ok',w:'warn',b:'bad','-':'off',i:'idle'};
+  const stTxt=s.status==='ok'?dt('stOk'):s.status==='warn'?dt('stWarn'):dt('stBad');
+  const el=document.getElementById('drawer');
+  el.innerHTML=`<div class="dh"><div><span class="lbl">${dt('title')}${M.sample?' · '+dt('sample'):''}</span>
+      <h3 id="d-title"><span class="dot ${s.status==='ok'?'':s.status}"></span>${esc(d[lang])}</h3><div class="dstat">${esc(stTxt)} · ${esc(M.date)}</div></div>
+      <button type="button" class="x" id="d-close" aria-label="${dt('close')}">×</button></div>
+    <div class="big3"><div><span class="lbl">${lang==='en'?'TASKS':'任务'}</span><b>${s.runs}</b></div><div><span class="lbl">${lang==='en'?'ISSUES':'问题'}</span><b class="${s.issues?'hot2':''}">${s.issues}</b></div><div><span class="lbl">${lang==='en'?'TO ME':'待我'}</span><b class="${s.toMe?'me':''}">${s.toMe}</b></div></div>
+    <div><span class="lbl">${dt('last14')}</span><div class="strip" style="margin-top:8px">${r.hist.split('').map(c=>`<i class="${map[c]||'off'}"></i>`).join('')}</div>
+      <div class="strip-axis"><span>${dt('ago')}</span><span>${dt('today')}</span></div>
+      <div class="legend2"><span><i style="background:var(--ok)"></i>${dt('lOk')}</span><span><i style="background:var(--warn)"></i>${dt('lWarn')}</span><span><i style="background:var(--bad)"></i>${dt('lBad')}</span><span><i style="background:var(--line)"></i>${dt('lOff')}</span></div></div>
+    <div><span class="lbl">${dt('tasks')}</span><ul class="tasks" style="margin-top:8px">${r.tasks.map(([tm,nm,res])=>`<li><span class="tm">${esc(tm)}</span><span>${esc(nm[lang==='en'?0:1])}</span><span class="res ${res}">${esc(RES[res][lang==='en'?0:1])}</span></li>`).join('')}</ul></div>
+    <div><span class="lbl">${dt('issues')}</span><ul class="iss" style="margin-top:8px">${r.issues.length?r.issues.map(([lv,tx])=>`<li class="${lv}">${esc(tx[lang==='en'?0:1])}</li>`).join(''):`<li class="empty">${dt('none')}</li>`}</ul></div>
+    <div class="dsplit"><div><b>${dt('aiDoes')}</b>${esc(r.ai[lang==='en'?0:1])}</div><div class="h"><b>${dt('iDecide')}</b>${esc(r.me[lang==='en'?0:1])}</div></div>
+    <a class="dlink" href="#pj-${k}" id="d-card">${dt('card')}</a>`;
+  el.classList.add('on'); el.setAttribute('aria-hidden','false'); document.getElementById('scrim').classList.add('on');
+  document.getElementById('d-close').addEventListener('click',closeRun);
+  document.getElementById('d-card').addEventListener('click',()=>closeRun(false));
+  document.getElementById('d-close').focus();
+}
+function closeRun(refocus){
+  const el=document.getElementById('drawer'); el.classList.remove('on'); el.setAttribute('aria-hidden','true'); document.getElementById('scrim').classList.remove('on');
+  if(refocus!==false && lastFocus) try{lastFocus.focus();}catch(e){}
+  openK=null;
+}
+document.getElementById('scrim').addEventListener('click',closeRun);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&openK) closeRun(); });
+document.addEventListener('click',e=>{ const a=e.target.closest('[data-open]'); if(a){ e.preventDefault(); openRun(a.dataset.open); } });
+const HOT = { inbox:[41,24], career:[69,15], privacy:[90,38], vocab:[33,59], podcast:[78,73] };
+if(matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('.deskv').forEach(v=>{v.autoplay=false; try{v.pause();}catch(e){}});
+render(); renderFlow(); setInterval(clock,30000);
+})();
+</script>
+
+</body>
+</html>
