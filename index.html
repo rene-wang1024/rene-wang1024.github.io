@@ -57,7 +57,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* hero */
 .hero{position:relative}
-.stage{position:relative;width:100%;aspect-ratio:1672/941;border-radius:18px;overflow:hidden}
+.stage{position:relative;width:100%;aspect-ratio:1312/941;border-radius:18px;overflow:hidden}
+/* the illustration's empty left 360px are cropped; all overlays stay in full-image % coordinates on .canvas */
+.canvas{position:absolute;top:0;bottom:0;left:-27.44%;width:127.44%}
 .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s}
 .stage img.night{opacity:0}
 :root[data-mode="night"] .stage img.night{opacity:1}
@@ -121,18 +123,25 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 section.block{margin-top:44px}
 .sh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px}
 .sh h2{margin:0;font-family:var(--f-num);font-weight:600;font-size:26px;text-transform:uppercase;letter-spacing:.02em}
-.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.projects{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.projects .pj{grid-column:span 2}
+.projects .pj:nth-child(-n+2){grid-column:span 3}
+@media (max-width:980px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}.projects .pj,.projects .pj:nth-child(-n+2){grid-column:span 1}.projects .pj:last-child{grid-column:1 / -1}}
+@media (max-width:640px){.projects{grid-template-columns:1fr}.projects .pj:last-child{grid-column:auto}}
 .pj{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0;text-decoration:none}
 a.pj:hover{border-color:var(--ink)}
 .pj .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .pj h3{margin:0;font-size:16px;font-weight:600}
-.pj p{margin:0;color:var(--muted);font-size:13.5px}
+.pj p{margin:0;color:var(--muted);font-size:13.5px;flex:1}
 .pj .kv{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .pj .kv div{display:flex;flex-direction:column}
 .pj .kv b{font-family:var(--f-num);font-size:26px;line-height:1;font-weight:600}
 .pj .kv span{font-size:11.5px;color:var(--muted)}
 .pj .ctrl-line{font-family:var(--f-mono);font-size:11px;color:var(--muted);border-top:1px dashed var(--line);padding-top:9px}
 .pj .go{font-family:var(--f-mono);font-size:11.5px;color:var(--sky)}
+.pj .go a{color:inherit;text-decoration:none}
+.pj .go.muted{color:var(--faint)}
+a.pj:hover .go,.pj .go a:hover{text-decoration:underline;text-underline-offset:3px}
 .pill{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
 
 /* method */
@@ -224,12 +233,13 @@ footer{margin-top:44px;border-top:1px solid var(--line);padding-block:16px 40px;
   </div>
 
   <div class="hero">
-    <div class="stage" id="stage">
+    <div class="stage" id="stage"><div class="canvas" id="canvas">
       <img class="day" src="day.webp" alt="" width="1672" height="941">
       <img class="night" src="night.webp" alt="" width="1672" height="941">
       <video class="deskv day" src="desk-day.mp4" poster="poster-day.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
       <video class="deskv night" src="desk-night.mp4" poster="poster-night.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
       <svg class="flow" id="flow" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+    </div>
     </div>
     <div class="mlist" id="mlist"></div>
   </div>
@@ -287,7 +297,7 @@ const T = {
   f3:['escalated to me','件交给我'], f3p:['need a human judgment','需要人来判断'],
   f4:['decided','件已决定'], f4p:['the rest stay on my desk until reviewed','其余留在桌上等我看'],
   ratio:['of today\'s items reached me','今天的事项送到了我手上'],
-  projH:['The systems','五个系统'], projSub:['Every number links to its source','每个数字都能追溯来源'],
+  projH:['The systems','五个系统'], projSub:['Tap a station above for its run data','点上方插图里的站点查看运行数据'],
   methH:['How they are governed','怎么管住它们'],
   privacy:['Public counts only, published a day late. No email content, employer names or personal decisions are shown.','只公开计数，延迟一天发布；不展示邮件内容、雇主名称或个人决定。'],
   foot:['Built and maintained by Rene Wang','由 Rene Wang 设计和维护'],
@@ -337,7 +347,7 @@ function render(){
   document.getElementById('sample').textContent=t('sample'); document.getElementById('sample').hidden=!M.sample;
 
   const T0=tot();
-  const stage=document.getElementById('stage');
+  const stage=document.getElementById('canvas');
   stage.querySelectorAll('.st,.desk,.out').forEach(n=>n.remove());
   let html='';
   Object.entries(POS).forEach(([k,[x,y,dir]])=>{ const s=M.stations[k], d=S[k];
@@ -358,7 +368,7 @@ function render(){
     return `<${tag} class="pj" id="pj-${p.k}"${attrs}><div class="top"><span class="row" style="display:flex;gap:8px;align-items:center"><span class="dot ${s.status==='ok'?'':s.status}"></span><h3>${esc(L[0])}</h3></span>${p.live?'<span class="pill">LIVE</span>':''}</div>
       <p>${esc(L[1])}</p><div class="kv">${p.kv.map(([n,en,zh])=>`<div><b>${esc(n)}</b><span>${esc(lang==='en'?en:zh)}</span></div>`).join('')}</div>
       <div class="ctrl-line">${esc(L[2])}</div>
-      <span class="go">${p.url?t('open'):p.repo?`<a href="${p.repo}" target="_blank" rel="noopener">${t('repo')}</a>`:esc(t('soon'))}</span></${tag}>`;}).join('');
+      <span class="go ${p.url||p.repo?'':'muted'}">${p.url?t('open'):p.repo?`<a href="${p.repo}" target="_blank" rel="noopener">${t('repo')}</a>`:esc(t('soon'))}</span></${tag}>`;}).join('');
   document.getElementById('method').innerHTML=METHOD.map(([w,en,zh,de,dz])=>`<div class="mt ${w==='HUMAN'?'h':''}"><span>${w==='AI'?'AI':(lang==='en'?'HUMAN':'人工')}</span><b>${esc(lang==='en'?en:zh)}</b><p>${esc(lang==='en'?de:dz)}</p></div>`).join('');
   clock();
 }
