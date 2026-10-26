@@ -420,7 +420,7 @@ function render(){
       <p>${esc(L[1])}</p><div class="kv">${p.kv.map(([n,en,zh])=>`<div><b>${esc(n)}</b><span>${esc(lang==='en'?en:zh)}</span></div>`).join('')}</div>
       <div class="ctrl-line">${esc(L[2])}</div>
       <span class="go ${p.url||p.repo?'':'muted'}">${p.url?t('open'):p.repo?`<a href="${p.repo}" target="_blank" rel="noopener">${t('repo')}</a>`:esc(t('soon'))}</span></${tag}>`;}).join('');
-  document.getElementById('method').innerHTML=METHOD.map(([w,en,zh,de,dz])=>`<div class="mt ${w==='HUMAN'?'h':''}"><span>${w==='AI'?'AI':(lang==='en'?'HUMAN':'人工')}</span><b>${esc(lang==='en'?en:zh)}</b><p>${esc(lang==='en'?de:dz)}</p></div>`).join('');
+  document.getElementById('method').innerHTML=METHOD.map(([w,en,zh,de,dz])=>`<div class="mt ${w==='HUMAN'?'h':''}"><span>${w==='AI'?(lang==='en'?'AGENT':'智能体'):(lang==='en'?'HUMAN':'人工')}</span><b>${esc(lang==='en'?en:zh)}</b><p>${esc(lang==='en'?de:dz)}</p></div>`).join('');
   clock();
 }
 const h=torontoHour(); setMode(h>=7&&h<18?'day':'night');
