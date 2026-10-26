@@ -373,12 +373,12 @@ const PROJECTS = [
    kv:[[3,'stages','个阶段'],['EDL','output','输出']]}
 ];
 const METHOD = [
-  ['HUMAN','Map','拆解','I break each recurring project into tasks, each with clear inputs, outputs and a definition of done.','我把每个日常项目拆成任务，明确输入、输出和完成标准。'],
-  ['HUMAN','Design','设计','I chain the tasks into workflows, add quality checks, and set them to run automatically.','我把任务串成工作流，加上质量检查，再设成自动运行。'],
-  ['AI','Execute','执行','Agents search, sort, summarize and log on a schedule.','智能体按计划检索、分拣、摘要、记录。'],
-  ['SUB','Review','审查','A second, independent agent checks the first one\'s output.','另一个独立智能体审查前者的产出。'],
-  ['HUMAN','Decide','决定','Anything that needs judgment is escalated to me, never auto-sent.','需要判断的都交给我，绝不自动发出。'],
-  ['HUMAN','Calibrate','校准','My decisions become rules; rules are checked after 14 days.','我的决定变成规则，14 天后检验效果。']
+  ['HUMAN','Map','拆解','Break each recurring project into tasks with clear inputs, outputs and a definition of done.','把每个日常项目拆成任务，明确输入、输出和完成标准。'],
+  ['HUMAN','Design','设计','Write a playbook for each workflow (rules, fact boundaries, a golden example), then automate it.','为每个工作流写 playbook（规则、事实边界、标准样例），再设为自动运行。'],
+  ['AI','Execute','执行','Search, sort, summarize and log on a schedule, following the playbook.','按 playbook 定时检索、分拣、摘要、记录。'],
+  ['SUB','Review','审查','An independent agent checks the output against the playbook and the golden example.','另一个独立智能体对照 playbook 和标准样例审查产出。'],
+  ['HUMAN','Decide','决定','Anything that needs judgment goes to a human; nothing is sent automatically.','需要判断的都交给人，任何内容都不会自动发出。'],
+  ['HUMAN','Calibrate','校准','Decisions become rules; each rule is re-checked after 14 days.','决定沉淀为规则，每条规则 14 天后复核。']
 ];
 let lang='en', mode=null;
 try{const s=localStorage.getItem('rw-lang'); if(s==='en'||s==='zh') lang=s;}catch(e){}
