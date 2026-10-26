@@ -588,6 +588,18 @@ document.getElementById('scrim').addEventListener('click',closeRun);
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&openK) closeRun(); });
 document.addEventListener('click',e=>{ const a=e.target.closest('[data-open]'); if(a){ e.preventDefault(); openRun(a.dataset.open); } });
 const HOT = { inbox:[41,24], career:[69,15], privacy:[90,38], vocab:[33,59], podcast:[78,73] };
+/* character state: normal | studying | strength | meeting | social. Read from status.json (published by a scheduled task; category only, no calendar details). ?state= previews one. */
+const CHAR = { normal:{day:['desk-day.mp4','poster-day.jpg'], night:['desk-night.mp4','poster-night.jpg']} };
+['studying','strength','meeting','social'].forEach(k=>{ CHAR[k]={day:[`states/${k}-day.mp4`,`states/${k}-day.jpg`], night:[`states/${k}-night.mp4`,`states/${k}-night.jpg`]}; });
+function setCharacter(k){ const c=CHAR[k]||CHAR.normal;
+  document.querySelectorAll('.deskv').forEach(v=>{ const m=v.classList.contains('night')?'night':'day'; const [src,poster]=c[m];
+    if(v.getAttribute('src')===src) return; v.setAttribute('poster',poster); v.setAttribute('src',src); try{ v.load(); if(v.autoplay) v.play().catch(()=>{}); }catch(e){} });
+  document.documentElement.dataset.char=k in CHAR?k:'normal'; }
+(async()=>{ let k=null;
+  try{ k=new URLSearchParams(location.search).get('state'); }catch(e){}
+  if(!k){ try{ const r=await fetch('status.json',{cache:'no-store'}); if(r.ok){ const j=await r.json(); k=j&&j.state; } }catch(e){} }
+  if(k && CHAR[k] && k!=='normal') setCharacter(k);
+})();
 if(matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('.deskv').forEach(v=>{v.autoplay=false; try{v.pause();}catch(e){}});
 render(); renderFlow(); setInterval(clock,30000);
 })();
