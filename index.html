@@ -340,6 +340,17 @@ const LINKS = [
 function renderLinks(){
   const html = LINKS.filter(l=>l.url).map(l=>`<a href="${l.url}"${l.url.startsWith('http')?' target="_blank" rel="noopener"':''}>${l.icon}<span>${l.label}</span></a>`).join('');
   document.querySelectorAll('[data-links]').forEach(n=>n.innerHTML=html);
+  document.querySelectorAll('[data-links] a[href^="mailto:"]').forEach(a=>{
+    const addr=a.getAttribute('href').slice(7), lab=a.querySelector('span');
+    a.title=addr;
+    a.addEventListener('click',async e=>{
+      e.preventDefault();
+      let ok=false; try{ await navigator.clipboard.writeText(addr); ok=true; }catch(err){}
+      if(!ok){ try{ const ta=document.createElement('textarea'); ta.value=addr; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); ok=document.execCommand('copy'); ta.remove(); }catch(err){} }
+      lab.textContent = ok ? (lang==='en'?'Copied ✓':'已复制 ✓') : addr;
+      clearTimeout(a._t); a._t=setTimeout(()=>{ lab.textContent='Email'; },ok?1800:6000);
+    });
+  });
 }
 const PROJECTS = [
   {k:'privacy', live:true, url:'privacy-watch/',
