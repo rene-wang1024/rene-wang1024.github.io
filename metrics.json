@@ -1,38 +1,51 @@
 {
-  "date": "2026-10-26",
-  "updatedAt": "2026-10-27T03:55:00Z",
+  "date": "2026-10-27",
+  "updatedAt": "2026-10-27T12:32:12Z",
   "stations": {
-    "inbox":  {"status": "warn", "runs": 5, "issues": 1, "toMe": 25, "in": 189, "done": 24},
-    "career": {"status": "warn", "runs": 10, "issues": 8, "toMe": 7, "in": 47, "done": 4}
+    "inbox": {
+      "status": "ok",
+      "runs": 2,
+      "issues": 0,
+      "toMe": 1,
+      "in": 15,
+      "done": 0
+    },
+    "career": {
+      "status": "ok",
+      "runs": 0,
+      "issues": 0,
+      "toMe": 0,
+      "in": 0,
+      "done": 0
+    }
   },
   "run": {
     "inbox": {
-      "hist": "-------------w",
+      "hist": "------------wo",
       "tasks": [
-        ["—", ["Inbox triage (button run)", "收件箱分拣（按钮启动）"], "bad"],
-        ["—", ["Inbox triage, rerun in chat: 91 threads", "收件箱分拣（对话里补跑）：91 个会话"], "ok"],
-        ["12:47", ["Supervisor patrol triage: 81 threads", "日巡检分拣：81 个会话"], "ok"],
-        ["—", ["Triage on demand: 17 threads", "立即分拣：17 个会话"], "ok"],
-        ["—", ["Triage on demand: no new mail", "立即分拣：没有新邮件"], "ok"]
+        [
+          "—",
+          [
+            "Triage on demand: 9 threads",
+            "立即分拣：9 个会话"
+          ],
+          "ok"
+        ],
+        [
+          "01:46",
+          [
+            "Triage on demand: no new mail, 6 rechecked",
+            "立即分拣：没有新邮件，复查 6 个会话"
+          ],
+          "ok"
+        ]
       ],
-      "issues": [
-        ["warn", ["One run could not load its instructions; rerun succeeded", "一次运行未能加载技能，补跑成功"]]
-      ]
+      "issues": []
     },
     "career": {
-      "hist": "woow--oowow-ww",
-      "tasks": [
-        ["09:49", ["Daily job search (5 tracks): 47 postings screened", "每日搜岗（5 个方向）：筛查 47 个岗位"], "warn"],
-        ["12:47", ["Supervisor patrol", "总控巡检"], "warn"],
-        ["12:47", ["Event registration receipts", "活动报名回执"], "ok"],
-        ["20:56", ["Connection requests (4 attempts)", "发好友申请（4 次尝试）"], "bad"],
-        ["23:25", ["Event registration", "活动报名"], "ok"],
-        ["23:36", ["Event registration (not open yet)", "活动报名（尚未开放）"], "off"]
-      ],
-      "issues": [
-        ["warn", ["Search coverage short: 8 sources failed, 42 not reached", "搜岗覆盖不足：8 个来源失败、42 个未查到"]],
-        ["warn", ["Background runs could not reach the browser; moved those steps into a supervised session", "后台任务连不到浏览器，相关步骤改到有人在场时执行"]]
-      ]
+      "hist": "oow--oowow-ww-",
+      "tasks": [],
+      "issues": []
     }
   }
 }
