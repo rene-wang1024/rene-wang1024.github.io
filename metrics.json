@@ -1,19 +1,19 @@
 {
   "date": "2026-10-27",
-  "updatedAt": "2026-10-27T15:27:47Z",
+  "updatedAt": "2026-10-27T18:25:07Z",
   "stations": {
     "inbox": {
       "status": "ok",
-      "runs": 5,
+      "runs": 8,
       "issues": 0,
-      "toMe": 2,
-      "in": 29,
-      "done": 1
+      "toMe": 3,
+      "in": 51,
+      "done": 3
     },
     "career": {
-      "status": "warn",
-      "runs": 4,
-      "issues": 3,
+      "status": "bad",
+      "runs": 8,
+      "issues": 6,
       "toMe": 5,
       "in": 38,
       "done": 0
@@ -23,6 +23,22 @@
     "inbox": {
       "hist": "------------wo",
       "tasks": [
+        [
+          "—",
+          [
+            "Triage on demand: 17 threads",
+            "立即分拣：17 个会话"
+          ],
+          "ok"
+        ],
+        [
+          "—",
+          [
+            "Triage on demand: no new mail",
+            "立即分拣：没有新邮件"
+          ],
+          "ok"
+        ],
         [
           "—",
           [
@@ -60,6 +76,14 @@
           [
             "Triage on demand: no new mail, 5 rechecked",
             "立即分拣：没有新邮件，复查 5 个会话"
+          ],
+          "ok"
+        ],
+        [
+          "12:05",
+          [
+            "Daily check triage: 5 threads",
+            "日巡检分拣：5 个会话"
           ],
           "ok"
         ]
@@ -100,6 +124,38 @@
             "每日搜岗（5 个方向）：筛查 38 个岗位"
           ],
           "warn"
+        ],
+        [
+          "12:05",
+          [
+            "Ops check",
+            "总控巡检"
+          ],
+          "warn"
+        ],
+        [
+          "12:05",
+          [
+            "Event registration receipts",
+            "活动报名回执"
+          ],
+          "ok"
+        ],
+        [
+          "13:48",
+          [
+            "Send connection requests (1 attempt)",
+            "发好友申请（1 次尝试）"
+          ],
+          "bad"
+        ],
+        [
+          "14:05",
+          [
+            "Send greetings",
+            "发招呼"
+          ],
+          "bad"
         ]
       ],
       "issues": [
@@ -113,15 +169,15 @@
         [
           "bad",
           [
-            "Morning greetings stopped at a permission check; 0 sent, needs approval and a rerun",
-            "早间打招呼被权限检查拦下，0 条已发，需授权后重跑"
+            "Browser tasks ran in the cloud without access to the computer; nothing sent",
+            "浏览器类任务在云端运行时连不到电脑，未发出"
           ]
         ],
         [
-          "warn",
+          "bad",
           [
-            "Ops check ran before the job search, so today's search output was not reviewed",
-            "巡检早于搜岗运行，当天搜岗产出未能检查"
+            "Morning greetings stopped at a permission check; 0 sent, needs approval and a rerun",
+            "早间打招呼被权限检查拦下，0 条已发，需授权后重跑"
           ]
         ]
       ]
