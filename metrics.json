@@ -1,21 +1,21 @@
 {
   "date": "2026-10-27",
-  "updatedAt": "2026-10-27T12:32:12Z",
+  "updatedAt": "2026-10-27T15:27:47Z",
   "stations": {
     "inbox": {
       "status": "ok",
-      "runs": 2,
+      "runs": 5,
       "issues": 0,
-      "toMe": 1,
-      "in": 15,
-      "done": 0
+      "toMe": 2,
+      "in": 29,
+      "done": 1
     },
     "career": {
-      "status": "ok",
-      "runs": 0,
-      "issues": 0,
-      "toMe": 0,
-      "in": 0,
+      "status": "warn",
+      "runs": 4,
+      "issues": 3,
+      "toMe": 5,
+      "in": 38,
       "done": 0
     }
   },
@@ -38,14 +38,93 @@
             "立即分拣：没有新邮件，复查 6 个会话"
           ],
           "ok"
+        ],
+        [
+          "09:12",
+          [
+            "Daily check triage: 5 threads",
+            "日巡检分拣：5 个会话"
+          ],
+          "ok"
+        ],
+        [
+          "—",
+          [
+            "Triage on demand: 9 threads",
+            "立即分拣：9 个会话"
+          ],
+          "ok"
+        ],
+        [
+          "11:20",
+          [
+            "Triage on demand: no new mail, 5 rechecked",
+            "立即分拣：没有新邮件，复查 5 个会话"
+          ],
+          "ok"
         ]
       ],
       "issues": []
     },
     "career": {
-      "hist": "oow--oowow-ww-",
-      "tasks": [],
-      "issues": []
+      "hist": "oow--oowow-www",
+      "tasks": [
+        [
+          "09:12",
+          [
+            "Ops check",
+            "总控巡检"
+          ],
+          "warn"
+        ],
+        [
+          "09:12",
+          [
+            "Morning greetings (0 sent)",
+            "早间打招呼（0 条已发）"
+          ],
+          "bad"
+        ],
+        [
+          "09:12",
+          [
+            "Event registration receipts",
+            "活动报名回执"
+          ],
+          "ok"
+        ],
+        [
+          "09:52",
+          [
+            "Daily job search (5 tracks): screened 38 roles",
+            "每日搜岗（5 个方向）：筛查 38 个岗位"
+          ],
+          "warn"
+        ]
+      ],
+      "issues": [
+        [
+          "warn",
+          [
+            "Search coverage short: about 59 sources unchecked, 1 source failed",
+            "搜岗覆盖不足：约 59 个来源未查，1 个来源失败"
+          ]
+        ],
+        [
+          "bad",
+          [
+            "Morning greetings stopped at a permission check; 0 sent, needs approval and a rerun",
+            "早间打招呼被权限检查拦下，0 条已发，需授权后重跑"
+          ]
+        ],
+        [
+          "warn",
+          [
+            "Ops check ran before the job search, so today's search output was not reviewed",
+            "巡检早于搜岗运行，当天搜岗产出未能检查"
+          ]
+        ]
+      ]
     }
   }
 }
