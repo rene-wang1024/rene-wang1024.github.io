@@ -303,7 +303,7 @@ footer{margin-top:44px;border-top:1px solid var(--line);padding-block:16px 40px;
 (function(){
 function nowTO(){const d=new Date(),o={timeZone:'America/Toronto'};return d.toLocaleDateString('en-CA',o)+' '+d.toLocaleTimeString('en-GB',{...o,hour:'2-digit',minute:'2-digit',hour12:false});}
 setInterval(()=>{const el=document.getElementById('nowclock');if(el)el.textContent=nowTO();},15000);
-/* SAMPLE numbers. Replaced by the daily public metrics.json once the pipeline is live. */
+/* SAMPLE numbers. Stations listed in metrics.json (published by a scheduled task: counts only) replace these; the rest stay sample. */
 const M = {
   sample:true, date:new Date().toLocaleDateString('en-CA',{timeZone:'America/Toronto'}),
   stations:{
@@ -339,7 +339,7 @@ const T = {
   projH:['The systems','五个系统'], projSub:['Tap a station above for its run data','点上方插图里的站点查看运行数据'],
   methH:['How they are governed','怎么管住它们'],
   intro:['I\'m Rene Wang, a legal and governance professional based in Toronto. I spent 16 years in public prosecution in Beijing, then led a 13-person legal cooperation team at ByteDance before joining TikTok Canada. I\'m completing an LL.M. in Canadian common law at Osgoode Hall, hold the CIPP/C and PMP, and I\'m looking for roles in legal operations and data privacy.','我是 Rene Wang，常驻多伦多的法律与治理从业者。我在北京做了 16 年公诉工作，之后在字节跳动带领 13 人的法律协作团队，随后加入 TikTok Canada。目前在 Osgoode Hall 攻读加拿大普通法 LL.M.，持有 CIPP/C 和 PMP，正在寻找法律运营与数据隐私方向的职位。'],
-  privacy:['Public counts only, published a day late. No email content, names of employers I apply to, or personal decisions are shown.','只公开计数，延迟一天发布；不展示邮件内容、所申请的雇主名称或个人决定。'],
+  privacy:['Public counts only, updated through the day. No email content, names of employers I apply to, or personal decisions are shown.','只公开计数，白天随运行更新；不展示邮件内容、所申请的雇主名称或个人决定。'],
   foot:['Built and maintained by Rene Wang','由 Rene Wang 设计和维护'],
   open:['Open ↗','打开 ↗'], soon:['Write-up coming','介绍整理中'], repo:['GitHub ↗','GitHub ↗']
 };
@@ -414,7 +414,7 @@ function render(){
   renderLinks();
   document.getElementById('m-day').textContent=t('day'); document.getElementById('m-night').textContent=t('night');
   document.querySelectorAll('[data-l]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.l===lang)));
-  document.getElementById('sample').textContent=t('sample'); document.getElementById('sample').hidden=!M.sample;
+  document.getElementById('sample').textContent=LIVE.size?(lang==='en'?'LIVE: ':'实时：')+[...LIVE].map(k=>S[k][lang]).join(lang==='en'?' & ':'、')+(M.sample?(lang==='en'?' · other stations show sample data':' · 其他站点为示例数据'):''):t('sample'); document.getElementById('sample').hidden=!M.sample&&!LIVE.size;
 
   const T0=tot();
   const stage=document.getElementById('canvas');
@@ -575,6 +575,23 @@ const RUN = {
     lesson:['EP35: the first draft matched the final length, but 9 minutes of content differed. New rule: shorten wording, never whole points.','EP35：初稿和定稿长度几乎一样，但有 9 分钟内容不同。新规则：精简表达，不整段删观点。'],
     ai:['Drafts, self-checks, learns from every correction','出初稿、自查、从每次修改中学习'], me:['Sets the bar, makes content calls, approves the rules','定标准、做内容取舍、批准规则']}
 };
+const LIVE = new Set();
+/* metrics.json: {date, updatedAt, stations:{k:{status,runs,issues,toMe,in,done}}, run:{k:{hist,tasks,issues}}} — counts and generic task names only */
+async function loadMetrics(){
+  try{
+    const r = await fetch('metrics.json',{cache:'no-store'}); if(!r.ok) return false;
+    const j = await r.json(); if(!j || !j.stations) return false;
+    for(const [k,s] of Object.entries(j.stations)){
+      if(!M.stations[k]) continue;
+      M.stations[k] = Object.assign({}, M.stations[k], s); LIVE.add(k);
+      const rr = j.run && j.run[k];
+      if(rr && RUN[k]) ['hist','tasks','issues'].forEach(f=>{ if(Array.isArray(rr[f]) || typeof rr[f]==='string') RUN[k][f] = rr[f]; });
+    }
+    if(j.date) M.date = j.date;
+    M.sample = Object.keys(M.stations).some(k=>!LIVE.has(k));
+    return LIVE.size>0;
+  }catch(e){ return false }
+}
 const RES = {ok:['done','完成'], warn:['check','需检查'], bad:['failed','失败'], off:['not run','未运行'], auto:['automated','已自动化'], wip:['building','搭建中'], plan:['planned','计划中'], manual:['manual','手动']};
 const DT = {
   title:['Run data','运行数据'], today:['Today','今天'], last14:['Last 14 days','最近 14 天'], tasks:['Tasks today','今天的任务'],
@@ -592,7 +609,7 @@ function openRun(k){
   const map={o:'ok',w:'warn',b:'bad','-':'off',i:'idle'};
   const stTxt=s.status==='ok'?dt('stOk'):s.status==='warn'?dt('stWarn'):dt('stBad');
   const el=document.getElementById('drawer');
-  el.innerHTML=`<div class="dh"><div><span class="lbl">${dt('title')}${M.sample?' · '+dt('sample'):''}</span>
+  el.innerHTML=`<div class="dh"><div><span class="lbl">${dt('title')}${!LIVE.has(k)?' · '+dt('sample'):''}</span>
       <h3 id="d-title"><span class="dot ${s.status==='ok'?'':s.status}"></span>${esc(d[lang])}</h3><div class="dstat">${esc(stTxt)} · ${esc(M.date)}</div></div>
       <button type="button" class="x" id="d-close" aria-label="${dt('close')}">×</button></div>
     <div class="big3"><div><span class="lbl">${lang==='en'?'TASKS':'任务'}</span><b>${s.runs}</b></div><div><span class="lbl">${lang==='en'?'ISSUES':'问题'}</span><b class="${s.issues?'hot2':''}">${s.issues}</b></div><div><span class="lbl">${lang==='en'?'TO ME':'待我'}</span><b class="${s.toMe?'me':''}">${s.toMe}</b></div></div>
@@ -638,6 +655,7 @@ function setCharacter(k){ const c=CHAR[k]||CHAR.normal;
 })();
 if(matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('.deskv').forEach(v=>{v.autoplay=false; try{v.pause();}catch(e){}});
 render(); renderFlow(); setInterval(clock,30000);
+loadMetrics().then(ok=>{ if(ok){ render(); renderFlow(); if(openK) openRun(openK); } });
 })();
 </script>
 

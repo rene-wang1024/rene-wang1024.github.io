@@ -10,9 +10,9 @@ I took every recurring project in my life (job search, Canadian privacy monitori
 
 Running them day after day showed me where automation should stop. After many rounds I settled which steps an agent can own (searching, deduplicating, drafting, logging), which need an independent reviewer that did not do the work, and which stay with me: every decision to apply, anything sent to another person, and any fact that isn't already on record.
 
-The workshop on the home page is the result. Each station is a live workflow, showing what it ran, what it flagged, and what it handed back to me. Personal details stay out; only aggregated counts are published, one day late.
+The workshop on the home page is the result. Each station is a live workflow, showing what it ran, what it flagged, and what it handed back to me. Personal details stay out; only aggregated counts are published, updated through the day.
 
 ## What's here
 
-- `/` — AI workshop: the workflows above, one station each. Station numbers are sample data until the daily public metrics feed is connected.
+- `/` — AI workshop: the workflows above, one station each. Stations with a live feed read `metrics.json` (counts and generic task names only, refreshed by a scheduled task); the others still show sample numbers.
 - `/privacy-watch/` — Canada Privacy Radar: 2026 privacy developments across federal, Ontario and Québec law, each linked to its official source. A monitoring project, not legal advice.
