@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Legal Operations & Regulatory Response · CIPP/C, PMP · Osgoode LL.M. Candidate. Five AI workflows I designed and govern: AI handles the volume, I make the calls.">
+<meta name="description" content="Legal Operations & Regulatory Response · CIPP/C, PMP · Osgoode LL.M. Candidate. Four AI workflows I designed and govern: AI handles the volume, I make the calls.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rene Wang · AI Workshop">
-<meta property="og:description" content="Legal Operations & Regulatory Response · CIPP/C, PMP · Osgoode LL.M. Candidate. Five AI workflows I designed and govern: AI handles the volume, I make the calls.">
+<meta property="og:description" content="Legal Operations & Regulatory Response · CIPP/C, PMP · Osgoode LL.M. Candidate. Four AI workflows I designed and govern: AI handles the volume, I make the calls.">
 <meta property="og:url" content="https://rene-wang1024.github.io/">
 <meta property="og:image" content="https://rene-wang1024.github.io/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -310,17 +310,15 @@ const M = {
     inbox:   {status:'ok',   runs:4, issues:0, toMe:7, in:145, done:5},
     career:  {status:'warn', runs:6, issues:2, toMe:2, in:38,  done:1},
     privacy: {status:'ok',   runs:1, issues:0, toMe:0, in:12,  done:0},
-    vocab:   {status:'ok',   runs:1, issues:0, toMe:0, in:18,  done:0, streak:18},
     podcast: {status:'bad',  runs:0, issues:1, toMe:0, in:1,   done:0}
   }
 };
-const POS = { inbox:[37,15,'up'], career:[71,12,'up'], privacy:[90,24,'up'], vocab:[38,47,'up'], podcast:[72,86,'down'] };
+const POS = { inbox:[37,15,'up'], career:[71,12,'up'], privacy:[90,24,'up'], podcast:[72,86,'down'] };
 const DESK = [50,70]; const OUT=[97,93];
 const S = {
   inbox:  {en:'Inbox triage', zh:'邮件分拣', m_en:s=>`<b>${s.in}</b> emails sorted`, m_zh:s=>`分拣 <b>${s.in}</b> 封邮件`},
   career: {en:'Career ops', zh:'求职运营', m_en:s=>`<b>${s.in}</b> postings screened`, m_zh:s=>`筛查 <b>${s.in}</b> 个岗位`},
   privacy:{en:'Privacy Radar', zh:'隐私雷达', m_en:s=>`<b>${s.in}</b> sources checked`, m_zh:s=>`检查 <b>${s.in}</b> 个来源`},
-  vocab:  {en:'Legal vocab', zh:'法律英语', m_en:s=>`<b>${s.in}</b> reviews · ${s.streak}-day streak`, m_zh:s=>`复习 <b>${s.in}</b> 题 · 连续 ${s.streak} 天`},
   podcast:{en:'Podcast studio', zh:'播客剪辑', m_en:s=>`paused · needs attention`, m_zh:s=>`已暂停 · 需要处理`}
 };
 const T = {
@@ -328,15 +326,15 @@ const T = {
   day:['DAY','白天'], night:['NIGHT','夜晚'],
   sample:['SAMPLE DATA · live feed in progress','示例数据 · 实时数据接入中'],
   h1:['AI handles the volume. <em>I make the calls.</em>','AI 处理大量工作，<em>判断由我来做。</em>'],
-  lede:['Five small systems I designed run every day. Most work flows straight through; the few items that need judgment come to my desk.','我设计的五个小系统每天自动运行。大部分工作直接流过；需要判断的少数几件，送到我的桌上。'],
+  lede:['Four small systems I designed run every day. Most work flows straight through; the few items that need judgment come to my desk.','我设计的四个小系统每天自动运行。大部分工作直接流过；需要判断的少数几件，送到我的桌上。'],
   desk:['waiting for my decision','件等我判断'],
   out:['handled automatically','件自动处理完'],
-  f1:['items in','件进入'], f1p:['email, job postings, regulator pages, study queue','邮件、岗位、监管页面、学习队列'],
+  f1:['items in','件进入'], f1p:['email, job postings, regulator pages','邮件、岗位、监管页面'],
   f2:['handled by AI','件 AI 处理'], f2p:['sorted, analyzed, summarized, logged','分拣、分析、摘要、记录'],
   f3:['escalated to me','件交给我'], f3p:['need a human judgment','需要人来判断'],
   f4:['decided','件已决定'], f4p:['the rest stay on my desk until reviewed','其余留在桌上等我看'],
   ratio:['of today\'s items reached me','今天的事项送到了我手上'],
-  projH:['The systems','五个系统'], projSub:['Tap a station above for its run data','点上方插图里的站点查看运行数据'],
+  projH:['The systems','四个系统'], projSub:['Tap a station above for its run data','点上方插图里的站点查看运行数据'],
   methH:['How they are governed','怎么管住它们'],
   intro:['I\'m Rene Wang, a legal and governance professional based in Toronto. I spent 16 years in public prosecution in Beijing, then led a 13-person legal cooperation team at ByteDance before joining TikTok Canada. I\'m completing an LL.M. in Canadian common law at Osgoode Hall, hold the CIPP/C and PMP, and I\'m looking for roles in legal operations and data privacy.','我是 Rene Wang，常驻多伦多的法律与治理从业者。我在北京做了 16 年公诉工作，之后在字节跳动带领 13 人的法律协作团队，随后加入 TikTok Canada。目前在 Osgoode Hall 攻读加拿大普通法 LL.M.，持有 CIPP/C 和 PMP，正在寻找法律运营与数据隐私方向的职位。'],
   privacy:['Public counts only, updated through the day. No email content, names of employers I apply to, or personal decisions are shown.','只公开计数，白天随运行更新；不展示邮件内容、所申请的雇主名称或个人决定。'],
@@ -378,10 +376,6 @@ const PROJECTS = [
   {k:'inbox', en:['Inbox Triage','Reads my inbox (professional associations, school, recruiters, events, newsletters) and turns it into a short, prioritized list of what needs my decision.','My choices sync to my events tracker; the AI never replies for me.'],
    zh:['邮件分拣','读取我的邮箱（专业协会、学校、招聘、活动、订阅资讯等），整理成按优先级排列的待决定清单。','我的选择同步到活动追踪表；AI 从不替我回复。'],
    kv:[[145,'emails / week','封 / 周'],[67,'flagged for action','条需行动']]},
-  {k:'vocab', repo:'https://github.com/rene-wang1024/learning-closure-agent',
-   en:['Legal Vocab · Da Wang','Local-first legal English lookup and spaced review, with a desktop companion named after my cat.','Delivery gated by a decision ledger and release checks.'],
-   zh:['法律英语 · 大王','本地优先的法律英语查词与间隔复习，桌面陪伴以我的猫命名。','交付受决策台账和发布关卡约束。'],
-   kv:[[20,'review cap / day','题 / 天上限'],['V2','released','已发布']]},
   {k:'podcast', en:['Podcast Studio','An automation workbench for a Chinese-language legal podcast: rough cut, fine cut and platform cuts from transcript to edit list, with hand-offs across the production team.','Every cut is proposed by AI and approved by ear.'],
    zh:['播客剪辑','一档中文法律播客的自动化工作台：从字幕到剪辑点方案，完成粗剪、精剪和各平台版本，并衔接制作团队之间的协作。','每个剪辑点由 AI 提出、我试听确认。'],
    kv:[[5,'workflows','个工作流'],[1,'automated so far','个已自动化']]}
@@ -453,7 +447,6 @@ const LANES = {
   mainB:[[1282,212],[1305,245],[1335,290],[1335,345],[1305,400],[1305,450],[1350,495],[1430,525],[1510,560],[1570,610],[1580,670],[1535,720],[1460,755],[1450,790],[1520,825],[1600,860],[1700,910]],
   inbox:[[715,350],[800,370],[850,395],[895,428]],
   career:[[1282,290],[1262,350],[1245,412]],
-  vocab:[[700,585],[770,565],[830,545],[872,535]],
   out:[[950,640],[1020,668],[1095,692],[1135,720],[1170,752],[1205,772]]
 };
 function crPath(pts){ let d=`M${pts[0][0]},${pts[0][1]}`;
@@ -473,7 +466,6 @@ function renderFlow(){
     ['mainB', 12, 26, 16],
     ['inbox', cap(st.inbox.toMe), 7, 14],
     ['career', cap(st.career.toMe), 5, 14],
-    ['vocab', cap(st.vocab.toMe), 6, 14],
     ['out', cap(st.inbox.done+st.career.done), 9, 14]
   ];
   let h='';
@@ -520,16 +512,12 @@ function ambient(){
     <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.75;1" dur="3.2s" begin="${i*1.6}s" repeatCount="indefinite"/></g>`; });
   /* career: light running along the gold arc */
   s+=`<circle r="6" fill="${gold}" opacity=".95"><animateMotion dur="3.5s" repeatCount="indefinite" path="M1108,190 C1160,170 1215,135 1268,96"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="3.5s" repeatCount="indefinite"/></circle>`;
-  /* sleeping cat z's */
-  [0,1,2].forEach(i=>{ s+=`<text x="0" y="0" font-family="IBM Plex Sans,sans-serif" font-weight="600" font-size="${16+i*4}" fill="${night?'#c9d0dd':'#8a8178'}" opacity="0">z
-    <animateMotion dur="4.5s" begin="${i*1.5}s" repeatCount="indefinite" path="M655,575 C665,550 650,530 672,505"/>
-    <animate attributeName="opacity" values="0;.9;0" dur="4.5s" begin="${i*1.5}s" repeatCount="indefinite"/></text>`; });
   /* mic sound waves */
   [0,1,2].forEach(i=>{ s+=`<ellipse cx="1305" cy="660" rx="60" ry="60" fill="none" stroke="${coral}" stroke-width="2.5" opacity="0">
     <animate attributeName="rx" values="60;135" dur="3s" begin="${i}s" repeatCount="indefinite"/><animate attributeName="ry" values="60;125" dur="3s" begin="${i}s" repeatCount="indefinite"/>
     <animate attributeName="opacity" values=".7;0" dur="3s" begin="${i}s" repeatCount="indefinite"/></ellipse>`; });
   /* status dot clusters twinkle */
-  [[737,113,teal],[1240,48,gold],[1520,243,teal],[605,436,teal],[1343,576,teal]].forEach(([x,y,c],i)=>{
+  [[737,113,teal],[1240,48,gold],[1520,243,teal],[1343,576,teal]].forEach(([x,y,c],i)=>{
     s+=`<circle cx="${x}" cy="${y}" r="24" fill="none" stroke="${c}" stroke-width="2" opacity="0"><animate attributeName="r" values="10;30" dur="2.4s" begin="${i*0.4}s" repeatCount="indefinite"/><animate attributeName="opacity" values=".6;0" dur="2.4s" begin="${i*0.4}s" repeatCount="indefinite"/></circle>`; });
   return s;
 }
@@ -556,10 +544,6 @@ const RUN = {
       ['06:20',['Draft summaries, tag obligations','起草摘要、归类义务'],'ok'],
       ['06:40',['Verify against primary sources','对照官方原文核对'],'ok']],
     issues:[], ai:['Collects and drafts','采集与起草'], me:['Verifies before publishing','发布前核对']},
-  vocab:{hist:'oooooooooooooo', tasks:[
-      ['07:00',['Freeze today\'s review plan','冻结今日复习计划'],'ok'],
-      ['20:00',['Daily reminder','每日提醒'],'ok']],
-    issues:[], ai:['Looks up, explains, schedules reviews','查词、释义、安排复习'], me:['Reviews and keeps the streak','完成复习、保持连续']},
   podcast:{hist:'ooo--b-----bbb', tasks:[
       ['—',['Rough-cut edit decision list','粗剪剪辑点方案'],'off'],
       ['—',['Write back to editing project','写回剪辑工程'],'off']],
@@ -638,7 +622,7 @@ function closeRun(refocus){
 document.getElementById('scrim').addEventListener('click',closeRun);
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&openK) closeRun(); });
 document.addEventListener('click',e=>{ const a=e.target.closest('[data-open]'); if(a){ e.preventDefault(); openRun(a.dataset.open); } });
-const HOT = { inbox:[41,24], career:[69,15], privacy:[90,38], vocab:[33,59], podcast:[78,73] };
+const HOT = { inbox:[41,24], career:[69,15], privacy:[90,38], podcast:[78,73] };
 /* character state: normal | studying | strength | meeting | social. Read from status.json (published by a scheduled task; category only, no calendar details). ?state= previews one. */
 const CHAR = { normal:{day:['desk-day.mp4','poster-day.jpg'], night:['desk-night.mp4','poster-night.jpg']} };
 ['studying','strength','meeting','social'].forEach(k=>{ CHAR[k]={day:[`states/${k}-day.mp4`,`states/${k}-day.jpg`], night:[`states/${k}-night.mp4`,`states/${k}-night.jpg`]}; });
