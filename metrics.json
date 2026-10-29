@@ -1,19 +1,19 @@
 {
   "date": "2026-10-29",
-  "updatedAt": "2026-10-29T15:50:57Z",
+  "updatedAt": "2026-10-29T18:25:04Z",
   "stations": {
     "inbox": {
       "status": "ok",
-      "runs": 0,
+      "runs": 1,
       "issues": 0,
-      "toMe": 0,
-      "in": 0,
+      "toMe": 4,
+      "in": 42,
       "done": 0
     },
     "career": {
       "status": "warn",
-      "runs": 1,
-      "issues": 1,
+      "runs": 3,
+      "issues": 2,
       "toMe": 0,
       "in": 72,
       "done": 0
@@ -21,8 +21,17 @@
   },
   "run": {
     "inbox": {
-      "hist": "----------woo-",
-      "tasks": [],
+      "hist": "----------wooo",
+      "tasks": [
+        [
+          "—",
+          [
+            "Daily sweep triage: 42 threads",
+            "日巡检分拣：42 个会话"
+          ],
+          "ok"
+        ]
+      ],
       "issues": []
     },
     "career": {
@@ -35,6 +44,22 @@
             "每日搜岗（5 个方向）：筛查 72 个岗位"
           ],
           "warn"
+        ],
+        [
+          "—",
+          [
+            "Ops health check",
+            "总控巡检"
+          ],
+          "warn"
+        ],
+        [
+          "—",
+          [
+            "Event registration receipts",
+            "活动报名回执"
+          ],
+          "ok"
         ]
       ],
       "issues": [
@@ -50,6 +75,13 @@
           [
             "Job board connector failed to connect; fell back to public web search",
             "职位连接器连接失败，改走公开网页搜索"
+          ]
+        ],
+        [
+          "warn",
+          [
+            "Health check: 2 job-analysis spot checks needed fixes; sent back for rework",
+            "总控巡检：2 个岗位分析抽查需修正，已发返工"
           ]
         ]
       ]
