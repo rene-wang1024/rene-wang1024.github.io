@@ -1,6 +1,6 @@
 {
   "date": "2026-10-29",
-  "updatedAt": "2026-10-29T18:25:04Z",
+  "updatedAt": "2026-10-29T21:24:59Z",
   "stations": {
     "inbox": {
       "status": "ok",
@@ -12,10 +12,10 @@
     },
     "career": {
       "status": "warn",
-      "runs": 3,
-      "issues": 2,
-      "toMe": 0,
-      "in": 72,
+      "runs": 4,
+      "issues": 3,
+      "toMe": 9,
+      "in": 224,
       "done": 0
     }
   },
@@ -48,6 +48,14 @@
         [
           "—",
           [
+            "Live job search: 152 roles screened",
+            "在场搜岗：筛查 152 个岗位"
+          ],
+          "warn"
+        ],
+        [
+          "—",
+          [
             "Ops health check",
             "总控巡检"
           ],
@@ -66,15 +74,15 @@
         [
           "warn",
           [
-            "Job search coverage gap: 2 sources failed",
-            "搜岗覆盖不足：2 个来源失败"
+            "Job search coverage gap: 2 sources failed; job board connector unavailable, fell back to public web",
+            "搜岗覆盖不足：2 个来源失败，职位连接器连不上改走公开网页"
           ]
         ],
         [
           "warn",
           [
-            "Job board connector failed to connect; fell back to public web search",
-            "职位连接器连接失败，改走公开网页搜索"
+            "Live search was rate-limited by a job site; some search groups only partly ran",
+            "在场搜岗被职位网站限流，部分检索组只跑了一部分"
           ]
         ],
         [
