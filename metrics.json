@@ -1,6 +1,6 @@
 {
   "date": "2026-10-29",
-  "updatedAt": "2026-10-29T12:31:57Z",
+  "updatedAt": "2026-10-29T15:50:57Z",
   "stations": {
     "inbox": {
       "status": "ok",
@@ -11,11 +11,11 @@
       "done": 0
     },
     "career": {
-      "status": "ok",
-      "runs": 0,
-      "issues": 0,
+      "status": "warn",
+      "runs": 1,
+      "issues": 1,
       "toMe": 0,
-      "in": 0,
+      "in": 72,
       "done": 0
     }
   },
@@ -26,9 +26,33 @@
       "issues": []
     },
     "career": {
-      "hist": "w--oowow-wwww-",
-      "tasks": [],
-      "issues": []
+      "hist": "w--oowow-wwwww",
+      "tasks": [
+        [
+          "10:23",
+          [
+            "Daily job search (5 tracks): 72 roles screened",
+            "每日搜岗（5 个方向）：筛查 72 个岗位"
+          ],
+          "warn"
+        ]
+      ],
+      "issues": [
+        [
+          "warn",
+          [
+            "Job search coverage gap: 2 sources failed",
+            "搜岗覆盖不足：2 个来源失败"
+          ]
+        ],
+        [
+          "warn",
+          [
+            "Job board connector failed to connect; fell back to public web search",
+            "职位连接器连接失败，改走公开网页搜索"
+          ]
+        ]
+      ]
     }
   }
 }
