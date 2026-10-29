@@ -1,6 +1,6 @@
 {
   "date": "2026-10-28",
-  "updatedAt": "2026-10-28T21:24:03Z",
+  "updatedAt": "2026-10-29T00:24:16Z",
   "stations": {
     "inbox": {
       "status": "ok",
@@ -8,7 +8,7 @@
       "issues": 0,
       "toMe": 3,
       "in": 34,
-      "done": 0
+      "done": 2
     },
     "career": {
       "status": "warn",
