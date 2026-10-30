@@ -1,19 +1,19 @@
 {
   "date": "2026-10-30",
-  "updatedAt": "2026-10-30T15:25:18Z",
+  "updatedAt": "2026-10-30T18:24:37Z",
   "stations": {
     "inbox": {
       "status": "ok",
-      "runs": 0,
+      "runs": 1,
       "issues": 0,
-      "toMe": 0,
-      "in": 0,
+      "toMe": 4,
+      "in": 50,
       "done": 0
     },
     "career": {
       "status": "warn",
-      "runs": 1,
-      "issues": 1,
+      "runs": 3,
+      "issues": 2,
       "toMe": 5,
       "in": 78,
       "done": 0
@@ -21,8 +21,17 @@
   },
   "run": {
     "inbox": {
-      "hist": "---------wooo-",
-      "tasks": [],
+      "hist": "---------woooo",
+      "tasks": [
+        [
+          "—",
+          [
+            "Daily sweep triage: 50 threads",
+            "日巡检分拣：50 个会话"
+          ],
+          "ok"
+        ]
+      ],
       "issues": []
     },
     "career": {
@@ -35,6 +44,22 @@
             "每日搜岗（5 个方向）：筛查 78 个岗位"
           ],
           "warn"
+        ],
+        [
+          "—",
+          [
+            "Operations check",
+            "总控巡检"
+          ],
+          "warn"
+        ],
+        [
+          "—",
+          [
+            "Event registration receipts",
+            "活动报名回执"
+          ],
+          "ok"
         ]
       ],
       "issues": [
@@ -43,6 +68,13 @@
           [
             "Job search coverage gap: 4 sources failed",
             "搜岗覆盖不足：4 个来源失败"
+          ]
+        ],
+        [
+          "warn",
+          [
+            "Spot check flagged 2 role analyses for rework",
+            "抽查发现 2 个岗位分析需返工"
           ]
         ]
       ]
