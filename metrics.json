@@ -1,98 +1,34 @@
 {
-  "date": "2026-10-29",
-  "updatedAt": "2026-10-29T21:24:59Z",
+  "date": "2026-10-30",
+  "updatedAt": "2026-10-30T12:30:13Z",
   "stations": {
     "inbox": {
       "status": "ok",
-      "runs": 1,
+      "runs": 0,
       "issues": 0,
-      "toMe": 4,
-      "in": 42,
+      "toMe": 0,
+      "in": 0,
       "done": 0
     },
     "career": {
-      "status": "warn",
-      "runs": 4,
-      "issues": 3,
-      "toMe": 9,
-      "in": 224,
+      "status": "ok",
+      "runs": 0,
+      "issues": 0,
+      "toMe": 0,
+      "in": 0,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "----------wooo",
-      "tasks": [
-        [
-          "—",
-          [
-            "Daily sweep triage: 42 threads",
-            "日巡检分拣：42 个会话"
-          ],
-          "ok"
-        ]
-      ],
+      "hist": "---------wooo-",
+      "tasks": [],
       "issues": []
     },
     "career": {
-      "hist": "w--oowow-wwwww",
-      "tasks": [
-        [
-          "10:23",
-          [
-            "Daily job search (5 tracks): 72 roles screened",
-            "每日搜岗（5 个方向）：筛查 72 个岗位"
-          ],
-          "warn"
-        ],
-        [
-          "—",
-          [
-            "Live job search: 152 roles screened",
-            "在场搜岗：筛查 152 个岗位"
-          ],
-          "warn"
-        ],
-        [
-          "—",
-          [
-            "Ops health check",
-            "总控巡检"
-          ],
-          "warn"
-        ],
-        [
-          "—",
-          [
-            "Event registration receipts",
-            "活动报名回执"
-          ],
-          "ok"
-        ]
-      ],
-      "issues": [
-        [
-          "warn",
-          [
-            "Job search coverage gap: 2 sources failed; job board connector unavailable, fell back to public web",
-            "搜岗覆盖不足：2 个来源失败，职位连接器连不上改走公开网页"
-          ]
-        ],
-        [
-          "warn",
-          [
-            "Live search was rate-limited by a job site; some search groups only partly ran",
-            "在场搜岗被职位网站限流，部分检索组只跑了一部分"
-          ]
-        ],
-        [
-          "warn",
-          [
-            "Health check: 2 job-analysis spot checks needed fixes; sent back for rework",
-            "总控巡检：2 个岗位分析抽查需修正，已发返工"
-          ]
-        ]
-      ]
+      "hist": "--oowow-wwwww-",
+      "tasks": [],
+      "issues": []
     }
   }
 }
