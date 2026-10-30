@@ -1,6 +1,6 @@
 {
   "date": "2026-10-30",
-  "updatedAt": "2026-10-30T12:30:13Z",
+  "updatedAt": "2026-10-30T15:25:18Z",
   "stations": {
     "inbox": {
       "status": "ok",
@@ -11,11 +11,11 @@
       "done": 0
     },
     "career": {
-      "status": "ok",
-      "runs": 0,
-      "issues": 0,
-      "toMe": 0,
-      "in": 0,
+      "status": "warn",
+      "runs": 1,
+      "issues": 1,
+      "toMe": 5,
+      "in": 78,
       "done": 0
     }
   },
@@ -26,9 +26,26 @@
       "issues": []
     },
     "career": {
-      "hist": "--oowow-wwwww-",
-      "tasks": [],
-      "issues": []
+      "hist": "--oowow-wwwwww",
+      "tasks": [
+        [
+          "10:11",
+          [
+            "Daily job search (5 tracks): screened 78 roles",
+            "每日搜岗（5 个方向）：筛查 78 个岗位"
+          ],
+          "warn"
+        ]
+      ],
+      "issues": [
+        [
+          "warn",
+          [
+            "Job search coverage gap: 4 sources failed",
+            "搜岗覆盖不足：4 个来源失败"
+          ]
+        ]
+      ]
     }
   }
 }
