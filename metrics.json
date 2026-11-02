@@ -1,6 +1,6 @@
 {
   "date": "2026-11-01",
-  "updatedAt": "2026-11-01T13:24:23Z",
+  "updatedAt": "2026-11-02T01:24:39Z",
   "stations": {
     "inbox": {
       "status": "ok",
@@ -11,9 +11,9 @@
       "done": 0
     },
     "career": {
-      "status": "ok",
-      "runs": 0,
-      "issues": 0,
+      "status": "warn",
+      "runs": 2,
+      "issues": 1,
       "toMe": 0,
       "in": 0,
       "done": 0
@@ -26,9 +26,34 @@
       "issues": []
     },
     "career": {
-      "hist": "oowow-wwwwww--",
-      "tasks": [],
-      "issues": []
+      "hist": "oowow-wwwwww-w",
+      "tasks": [
+        [
+          "—",
+          [
+            "Weekly review",
+            "总控周复盘"
+          ],
+          "warn"
+        ],
+        [
+          "18:42",
+          [
+            "Job search gap check",
+            "搜岗查漏"
+          ],
+          "ok"
+        ]
+      ],
+      "issues": [
+        [
+          "warn",
+          [
+            "Weekly review partially completed: one dashboard sync step not done",
+            "周复盘部分完成：一项看板同步未做"
+          ]
+        ]
+      ]
     }
   }
 }
