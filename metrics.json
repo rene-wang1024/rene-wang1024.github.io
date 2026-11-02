@@ -1,28 +1,37 @@
 {
   "date": "2026-11-02",
-  "updatedAt": "2026-11-02T16:42:57Z",
+  "updatedAt": "2026-11-02T19:25:05Z",
   "stations": {
     "inbox": {
       "status": "ok",
-      "runs": 0,
+      "runs": 1,
       "issues": 0,
-      "toMe": 0,
-      "in": 0,
+      "toMe": 6,
+      "in": 90,
       "done": 0
     },
     "career": {
       "status": "warn",
-      "runs": 1,
-      "issues": 1,
-      "toMe": 0,
-      "in": 0,
+      "runs": 3,
+      "issues": 2,
+      "toMe": 3,
+      "in": 127,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "------woooo---",
-      "tasks": [],
+      "hist": "------woooo--o",
+      "tasks": [
+        [
+          "—",
+          [
+            "Daily sweep triage: 90 threads",
+            "日巡检分拣：90 个会话"
+          ],
+          "ok"
+        ]
+      ],
       "issues": []
     },
     "career": {
@@ -31,18 +40,41 @@
         [
           "10:36",
           [
-            "Daily job search (5 tracks): in progress, no counts yet",
-            "每日搜岗（5 个方向）：运行中，尚无计数"
+            "Daily job search (5 tracks): screened 127 jobs",
+            "每日搜岗（5 个方向）：筛查 127 个岗位"
           ],
           "warn"
+        ],
+        [
+          "—",
+          [
+            "Ops health check",
+            "总控巡检"
+          ],
+          "warn"
+        ],
+        [
+          "—",
+          [
+            "Event registration receipts",
+            "活动报名回执"
+          ],
+          "ok"
         ]
       ],
       "issues": [
         [
           "warn",
           [
-            "Daily job search had not finished at update time; counts pending",
-            "每日搜岗在更新时尚未完成，计数待定"
+            "Job search coverage gap: 3 sources failed, 18 need a browser check",
+            "搜岗覆盖不足：3 个来源失败，18 个来源需浏览器补查"
+          ]
+        ],
+        [
+          "warn",
+          [
+            "Health check spot review found 2 analyses needing fixes; sent back for rework",
+            "总控抽查发现 2 份分析需修正，已发返工"
           ]
         ]
       ]
