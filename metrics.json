@@ -1,6 +1,6 @@
 {
   "date": "2026-11-02",
-  "updatedAt": "2026-11-02T14:19:52Z",
+  "updatedAt": "2026-11-02T16:42:57Z",
   "stations": {
     "inbox": {
       "status": "ok",
@@ -11,9 +11,9 @@
       "done": 0
     },
     "career": {
-      "status": "ok",
-      "runs": 0,
-      "issues": 0,
+      "status": "warn",
+      "runs": 1,
+      "issues": 1,
       "toMe": 0,
       "in": 0,
       "done": 0
@@ -26,9 +26,26 @@
       "issues": []
     },
     "career": {
-      "hist": "owow-wwwwww-w-",
-      "tasks": [],
-      "issues": []
+      "hist": "owow-wwwwww-ww",
+      "tasks": [
+        [
+          "10:36",
+          [
+            "Daily job search (5 tracks): in progress, no counts yet",
+            "每日搜岗（5 个方向）：运行中，尚无计数"
+          ],
+          "warn"
+        ]
+      ],
+      "issues": [
+        [
+          "warn",
+          [
+            "Daily job search had not finished at update time; counts pending",
+            "每日搜岗在更新时尚未完成，计数待定"
+          ]
+        ]
+      ]
     }
   }
 }
