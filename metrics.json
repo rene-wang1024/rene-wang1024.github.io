@@ -1,33 +1,33 @@
 {
-  "date": "2026-11-02",
-  "updatedAt": "2026-11-02T19:25:05Z",
+  "date": "2026-11-03",
+  "updatedAt": "2026-11-03T22:57:44Z",
   "stations": {
     "inbox": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
-      "toMe": 6,
-      "in": 90,
+      "toMe": 1,
+      "in": 36,
       "done": 0
     },
     "career": {
       "status": "warn",
-      "runs": 3,
-      "issues": 2,
-      "toMe": 3,
-      "in": 127,
+      "runs": 4,
+      "issues": 3,
+      "toMe": 2,
+      "in": 130,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "------woooo--o",
+      "hist": "-----woooo--oo",
       "tasks": [
         [
           "—",
           [
-            "Daily sweep triage: 90 threads",
-            "日巡检分拣：90 个会话"
+            "Daily sweep triage: 36 threads",
+            "日巡检分拣：36 个会话"
           ],
           "ok"
         ]
@@ -35,13 +35,21 @@
       "issues": []
     },
     "career": {
-      "hist": "owow-wwwwww-ww",
+      "hist": "wow-wwwwww-www",
       "tasks": [
         [
-          "10:36",
+          "10:10",
           [
-            "Daily job search (5 tracks): screened 127 jobs",
-            "每日搜岗（5 个方向）：筛查 127 个岗位"
+            "Daily job search (5 tracks): screened 75 jobs",
+            "每日搜岗（5 个方向）：筛查 75 个岗位"
+          ],
+          "warn"
+        ],
+        [
+          "—",
+          [
+            "Job search second round with follow-up searches: screened 55 jobs",
+            "搜岗第二轮及补搜：筛查 55 个岗位"
           ],
           "warn"
         ],
@@ -66,8 +74,15 @@
         [
           "warn",
           [
-            "Job search coverage gap: 3 sources failed, 18 need a browser check",
-            "搜岗覆盖不足：3 个来源失败，18 个来源需浏览器补查"
+            "Job search coverage gap: 4 sources failed, 1 needs sign-in",
+            "搜岗覆盖不足：4 个来源失败，1 个来源需登录未查"
+          ]
+        ],
+        [
+          "warn",
+          [
+            "Health check coverage review found gaps in job search; sent back for rework",
+            "总控复查认为搜岗覆盖不足，已发返工"
           ]
         ],
         [
