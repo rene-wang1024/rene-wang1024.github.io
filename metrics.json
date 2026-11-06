@@ -1,33 +1,33 @@
 {
-  "date": "2026-11-03",
-  "updatedAt": "2026-11-03T22:57:44Z",
+  "date": "2026-11-05",
+  "updatedAt": "2026-11-06T02:24:18Z",
   "stations": {
     "inbox": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
-      "toMe": 1,
-      "in": 36,
+      "toMe": 2,
+      "in": 29,
       "done": 0
     },
     "career": {
       "status": "warn",
-      "runs": 4,
-      "issues": 3,
-      "toMe": 2,
-      "in": 130,
+      "runs": 3,
+      "issues": 2,
+      "toMe": 3,
+      "in": 49,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "-----woooo--oo",
+      "hist": "---woooo--oooo",
       "tasks": [
         [
           "—",
           [
-            "Daily sweep triage: 36 threads",
-            "日巡检分拣：36 个会话"
+            "Daily sweep triage: 29 threads",
+            "日巡检分拣：29 个会话"
           ],
           "ok"
         ]
@@ -35,21 +35,13 @@
       "issues": []
     },
     "career": {
-      "hist": "wow-wwwwww-www",
+      "hist": "w-wwwwww-wwwww",
       "tasks": [
         [
-          "10:10",
+          "06:43",
           [
-            "Daily job search (5 tracks): screened 75 jobs",
-            "每日搜岗（5 个方向）：筛查 75 个岗位"
-          ],
-          "warn"
-        ],
-        [
-          "—",
-          [
-            "Job search second round with follow-up searches: screened 55 jobs",
-            "搜岗第二轮及补搜：筛查 55 个岗位"
+            "Daily job search (5 tracks): screened 49 jobs",
+            "每日搜岗（5 个方向）：筛查 49 个岗位"
           ],
           "warn"
         ],
@@ -74,22 +66,22 @@
         [
           "warn",
           [
-            "Job search coverage gap: 4 sources failed, 1 needs sign-in",
-            "搜岗覆盖不足：4 个来源失败，1 个来源需登录未查"
+            "Job search coverage gap: 5 sources failed, 12 need a browser, 1 needs sign-in",
+            "搜岗覆盖不足：5 个来源失败，12 个需浏览器，1 个需登录未查"
           ]
         ],
         [
           "warn",
           [
-            "Health check coverage review found gaps in job search; sent back for rework",
-            "总控复查认为搜岗覆盖不足，已发返工"
+            "Coverage receipt sent back on first review; passed after follow-up searches",
+            "覆盖回执首轮退回，补搜后复审通过"
           ]
         ],
         [
           "warn",
           [
-            "Health check spot review found 2 analyses needing fixes; sent back for rework",
-            "总控抽查发现 2 份分析需修正，已发返工"
+            "One scheduled check has produced no results since 10-28; cause not found",
+            "一个定时检查自 10-28 后无运行结果，原因未查明"
           ]
         ]
       ]
