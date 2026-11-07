@@ -1,33 +1,33 @@
 {
-  "date": "2026-11-05",
-  "updatedAt": "2026-11-06T02:24:18Z",
+  "date": "2026-11-06",
+  "updatedAt": "2026-11-07T04:52:30Z",
   "stations": {
     "inbox": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
       "toMe": 2,
-      "in": 29,
+      "in": 30,
       "done": 0
     },
     "career": {
       "status": "warn",
       "runs": 3,
       "issues": 2,
-      "toMe": 3,
-      "in": 49,
+      "toMe": 5,
+      "in": 37,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "---woooo--oooo",
+      "hist": "--woooo--ooooo",
       "tasks": [
         [
           "—",
           [
-            "Daily sweep triage: 29 threads",
-            "日巡检分拣：29 个会话"
+            "Daily sweep triage: 30 threads",
+            "日巡检分拣：30 个会话"
           ],
           "ok"
         ]
@@ -35,13 +35,13 @@
       "issues": []
     },
     "career": {
-      "hist": "w-wwwwww-wwwww",
+      "hist": "-wwwwww-wwwwww",
       "tasks": [
         [
           "06:43",
           [
-            "Daily job search (5 tracks): screened 49 jobs",
-            "每日搜岗（5 个方向）：筛查 49 个岗位"
+            "Daily job search (5 tracks): screened 37 jobs",
+            "每日搜岗（5 个方向）：筛查 37 个岗位"
           ],
           "warn"
         ],
@@ -66,22 +66,22 @@
         [
           "warn",
           [
-            "Job search coverage gap: 5 sources failed, 12 need a browser, 1 needs sign-in",
-            "搜岗覆盖不足：5 个来源失败，12 个需浏览器，1 个需登录未查"
+            "Job search coverage gap: 4 sources failed, 11 need a browser, 1 needs sign-in",
+            "搜岗覆盖不足：4 个来源失败，11 个需浏览器，1 个需登录未查"
           ]
         ],
         [
           "warn",
           [
-            "Coverage receipt sent back on first review; passed after follow-up searches",
-            "覆盖回执首轮退回，补搜后复审通过"
+            "Coverage receipt still not passed after the third review",
+            "覆盖回执第 3 次审查仍未通过"
           ]
         ],
         [
           "warn",
           [
-            "One scheduled check has produced no results since 10-28; cause not found",
-            "一个定时检查自 10-28 后无运行结果，原因未查明"
+            "One scheduled check has had no results since 10-28: cause found, needs auto-approval turned on",
+            "一个定时检查自 10-28 后无运行结果：原因已查明，需开启自动批准"
           ]
         ]
       ]
