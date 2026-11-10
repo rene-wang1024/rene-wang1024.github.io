@@ -1,34 +1,83 @@
 {
-  "date": "2026-11-07",
-  "updatedAt": "2026-11-08T05:41:06Z",
+  "date": "2026-11-09",
+  "updatedAt": "2026-11-10T02:24:33Z",
   "stations": {
     "inbox": {
       "status": "ok",
-      "runs": 0,
+      "runs": 1,
       "issues": 0,
-      "toMe": 0,
-      "in": 0,
+      "toMe": 1,
+      "in": 24,
       "done": 0
     },
     "career": {
-      "status": "ok",
-      "runs": 0,
-      "issues": 0,
-      "toMe": 0,
-      "in": 0,
+      "status": "warn",
+      "runs": 3,
+      "issues": 2,
+      "toMe": 2,
+      "in": 41,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "-woooo--ooooo-",
-      "tasks": [],
+      "hist": "oooo--ooooo-oo",
+      "tasks": [
+        [
+          "—",
+          [
+            "Daily patrol triage: 24 threads",
+            "日巡检分拣：24 个会话"
+          ],
+          "ok"
+        ]
+      ],
       "issues": []
     },
     "career": {
-      "hist": "wwwwww-wwwwww-",
-      "tasks": [],
-      "issues": []
+      "hist": "wwww-wwwwww-ww",
+      "tasks": [
+        [
+          "—",
+          [
+            "Daily job search (5 tracks): screened 41 jobs",
+            "每日搜岗（5 个方向）：筛查 41 个岗位"
+          ],
+          "warn"
+        ],
+        [
+          "—",
+          [
+            "Control patrol",
+            "总控巡检"
+          ],
+          "warn"
+        ],
+        [
+          "—",
+          [
+            "Event registration receipts",
+            "活动报名回执"
+          ],
+          "ok"
+        ]
+      ],
+      "issues": [
+        [
+          "warn",
+          [
+            "Search coverage gap: 4 sources failed, 14 need a browser",
+            "搜岗覆盖不足：4 个来源失败，14 个需浏览器"
+          ]
+        ],
+        [
+          "warn",
+          [
+            "Control patrol partially completed: 6 issues found",
+            "总控巡检部分完成：发现 6 个问题"
+          ]
+        ]
+      ]
     }
   }
 }
