@@ -389,7 +389,7 @@ const PROJECTS = [
   {k:'podcast', tag:['IN MANDARIN','中文节目'], listen:'https://www.xiaoyuzhoufm.com/podcast/68f97908c348f4bf7ef79ea6',
    en:['Podcast Studio','An automation workbench for Not-So-Serious Law (不严肃法律), a Mandarin-language legal podcast: rough cut, fine cut and platform cuts from transcript to edit list, with hand-offs across the production team.','Every cut is proposed by AI and approved by ear.'],
    zh:['播客剪辑','中文法律播客《不严肃法律》的自动化工作台：从字幕到剪辑点方案，完成粗剪、精剪和各平台版本，并衔接制作团队之间的协作。','每个剪辑点由 AI 提出、我试听确认。'],
-   kv:[[5,'workflows','个工作流'],[2,'automated so far','个已自动化']]}
+   kv:[[5,'workflows','个工作流'],[3,'automated so far','个已自动化']]}
 ];
 const METHOD = [
   ['HUMAN','Map','拆解','Break each recurring project into tasks with clear inputs, outputs and a definition of done.','把每个日常项目拆成任务，明确输入、输出和完成标准。'],
@@ -563,7 +563,7 @@ const RUN = {
       ['Edit (rough cut)','剪辑（粗剪）','AGENT + HUMAN','auto'],
       ['Transcript from final video','从定稿视频生成口播文本','AGENT','plan'],
       ['Show notes & timestamps','Show notes 与时间码','AGENT + HUMAN','plan'],
-      ['Cover design','平面设计','HUMAN · GPT','manual'],
+      ['Cover design','平面设计','AGENT · GPT','auto'],
       ['Distribute to all platforms: Xiaoyuzhou, Apple Podcasts, Ximalaya, Bilibili, TikTok','全平台分发：小宇宙、Apple Podcasts、喜马拉雅、B 站、TikTok','AUTOMATED','auto']],
     loop:[
       ['HUMAN','Set the bar: what must stay, what the episode is for, how long it should run.','定标准：哪些内容必须保留、这一期要讲清什么、做多长。'],
