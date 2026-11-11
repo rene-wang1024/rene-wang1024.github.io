@@ -320,7 +320,7 @@ const M = {
     inbox:   {status:'ok',   runs:4, issues:0, toMe:7, in:145, done:5},
     career:  {status:'warn', runs:6, issues:2, toMe:2, in:38,  done:1},
     privacy: {status:'ok',   runs:1, issues:0, toMe:0, in:12,  done:0},
-    podcast: {status:'bad',  runs:0, issues:1, toMe:0, in:1,   done:0}
+    podcast: {status:'ok',   runs:0, issues:0, toMe:0, in:1,   done:0}
   }
 };
 const POS = { inbox:[37,15,'up'], career:[71,12,'up'], privacy:[90,24,'up'], podcast:[72,86,'down'] };
@@ -329,7 +329,7 @@ const S = {
   inbox:  {en:'Inbox triage', zh:'邮件分拣', m_en:s=>`<b>${s.in}</b> emails sorted`, m_zh:s=>`分拣 <b>${s.in}</b> 封邮件`},
   career: {en:'Career ops', zh:'求职运营', m_en:s=>`<b>${s.in}</b> postings screened`, m_zh:s=>`筛查 <b>${s.in}</b> 个岗位`},
   privacy:{en:'Privacy Radar', zh:'隐私雷达', m_en:s=>`<b>${s.in}</b> sources checked`, m_zh:s=>`检查 <b>${s.in}</b> 个来源`},
-  podcast:{en:'Podcast studio', zh:'播客剪辑', m_en:s=>`paused · needs attention`, m_zh:s=>`已暂停 · 需要处理`}
+  podcast:{en:'Podcast studio', zh:'播客剪辑', m_en:s=>`automated · I approve the fine cut`, m_zh:s=>`全流程自动 · 精剪由我确认`}
 };
 const T = {
   role:['Legal Operations & Regulatory Response | CIPP/C, PMP | Osgoode LL.M. Candidate','法律运营与监管应对 | CIPP/C, PMP | Osgoode LL.M. 在读'],
@@ -555,12 +555,12 @@ const RUN = {
       ['06:20',['Draft summaries, tag obligations','起草摘要、归类义务'],'ok'],
       ['06:40',['Verify against primary sources','对照官方原文核对'],'ok']],
     issues:[], ai:['Collects and drafts','采集与起草'], me:['Verifies before publishing','发布前核对']},
-  podcast:{hist:'ooo--b-----bbb', tasks:[
+  podcast:{hist:'ooo--o-----ooo', tasks:[
       ['—',['Rough-cut edit decision list','粗剪剪辑点方案'],'off'],
       ['—',['Write back to editing project','写回剪辑工程'],'off']],
-    issues:[['bad',['Waiting for my listening check before the next cut','等我试听确认后才能进入下一步']]],
+    issues:[],
     wf:[
-      ['Edit (rough cut)','剪辑（粗剪）','AGENT + HUMAN','auto'],
+      ['Edit: rough cut → fine cut (I approve the fine cut)','剪辑：粗剪 → 精剪（精剪由我确认）','AGENT + HUMAN','auto'],
       ['Transcript from final video','从定稿视频生成口播文本','AGENT','auto'],
       ['Show notes & timestamps','Show notes 与时间码','AGENT + HUMAN','auto'],
       ['Cover design','平面设计','AGENT · GPT','auto'],
@@ -586,7 +586,7 @@ const RUN = {
          ['Anti-corruption in big tech, Part 2: summoned by internal investigations','我在大厂反贪腐（二）：被约谈了怎么办？'],
          ['What employees should know when an internal investigations team calls them in: phones, WeChat and personal statements, signing interview notes, monitoring of work computers, and what happens once the company refers a case to police. With a former big-tech internal investigator (now a lawyer), a former big-tech in-house counsel and a senior criminal lawyer.','被公司监察约谈时怎么办：手机微信和私人账单、笔录要不要签、公司能否监控电脑，以及公司报案之后会发生什么。']]
       ]},
-    ai:['Drafts, self-checks, learns from every correction','出初稿、自查、从每次修改中学习'], me:['Sets the bar, makes content calls, approves the rules','定标准、做内容取舍、批准规则']}
+    ai:['Drafts, self-checks, learns from every correction','出初稿、自查、从每次修改中学习'], me:['Approves the fine cut, makes content calls, approves the rules','确认精剪、做内容取舍、批准规则']}
 };
 const LIVE = new Set();
 /* metrics.json: {date, updatedAt, stations:{k:{status,runs,issues,in,toMe,done}}, run:{k:{hist,tasks,issues}}} — counts and generic task names only */
