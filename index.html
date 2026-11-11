@@ -154,6 +154,16 @@ a.pj:hover{border-color:var(--ink)}
 .pj .kv div{display:flex;flex-direction:column}
 .pj .kv b{font-family:var(--f-num);font-size:26px;line-height:1;font-weight:600}
 .pj .kv span{font-size:11.5px;color:var(--muted)}
+.ep{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.ep li{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--panel-2);display:flex;flex-direction:column;gap:4px}
+.ep .eh{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.ep b{font-size:13.5px;font-weight:600}
+.ep .zh,.show .zh{font-size:12px;color:var(--muted)}
+.ep p{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
+.ep .meta{font-family:var(--f-mono);font-size:10.5px;color:var(--faint);white-space:nowrap}
+.show{display:flex;flex-direction:column;gap:4px;padding:12px;border:1px solid var(--line);border-radius:12px}
+.show b{font-size:15px} .show p{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
+.lang-tag{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;padding:2px 7px;border-radius:999px;color:var(--sky);background:color-mix(in srgb,var(--sky) 12%,transparent);white-space:nowrap}
 .pj .ctrl-line{min-height:3.1em;font-family:var(--f-mono);font-size:11px;color:var(--muted);border-top:1px dashed var(--line);padding-top:9px}
 .pj .go{font-family:var(--f-mono);font-size:11.5px;color:var(--sky)}
 .pj .go a{color:inherit;text-decoration:none}
@@ -339,7 +349,7 @@ const T = {
   intro:['I\'m Rene Wang, a legal and governance professional based in Toronto. I spent 16 years in public prosecution in Beijing, then led a 13-person legal cooperation team at ByteDance before joining TikTok Canada. I\'m completing an LL.M. in Canadian common law at Osgoode Hall, hold the CIPP/C and PMP, and I\'m looking for roles in legal operations and data privacy.','我是 Rene Wang，常驻多伦多的法律与治理从业者。我在北京做了 16 年公诉工作，之后在字节跳动带领 13 人的法律协作团队，随后加入 TikTok Canada。目前在 Osgoode Hall 攻读加拿大普通法 LL.M.，持有 CIPP/C 和 PMP，正在寻找法律运营与数据隐私方向的职位。'],
   privacy:['Public counts only, updated through the day. No email content, names of employers I apply to, or personal decisions are shown.','只公开计数，白天随运行更新；不展示邮件内容、所申请的雇主名称或个人决定。'],
   foot:['Built and maintained by Rene Wang','由 Rene Wang 设计和维护'],
-  open:['Open ↗','打开 ↗'], soon:['Write-up coming','介绍整理中'], repo:['GitHub ↗','GitHub ↗']
+  open:['Open ↗','打开 ↗'], soon:['Write-up coming','介绍整理中'], repo:['GitHub ↗','GitHub ↗'], listen:['Listen on Xiaoyuzhou ↗','在小宇宙收听 ↗']
 };
 /* contact links; an empty url hides that link */
 const LINKS = [
@@ -376,8 +386,9 @@ const PROJECTS = [
   {k:'inbox', en:['Inbox Triage','Reads my inbox (professional associations, school, recruiters, events, newsletters) and turns it into a short, prioritized list of what needs my decision.','My choices sync to my events tracker; the AI never replies for me.'],
    zh:['邮件分拣','读取我的邮箱（专业协会、学校、招聘、活动、订阅资讯等），整理成按优先级排列的待决定清单。','我的选择同步到活动追踪表；AI 从不替我回复。'],
    kv:[[145,'emails / week','封 / 周'],[67,'flagged for action','条需行动']]},
-  {k:'podcast', en:['Podcast Studio','An automation workbench for a Chinese-language legal podcast: rough cut, fine cut and platform cuts from transcript to edit list, with hand-offs across the production team.','Every cut is proposed by AI and approved by ear.'],
-   zh:['播客剪辑','一档中文法律播客的自动化工作台：从字幕到剪辑点方案，完成粗剪、精剪和各平台版本，并衔接制作团队之间的协作。','每个剪辑点由 AI 提出、我试听确认。'],
+  {k:'podcast', tag:['IN MANDARIN','中文节目'], listen:'https://www.xiaoyuzhoufm.com/podcast/68f97908c348f4bf7ef79ea6',
+   en:['Podcast Studio','An automation workbench for Not-So-Serious Law (不严肃法律), a Mandarin-language legal podcast: rough cut, fine cut and platform cuts from transcript to edit list, with hand-offs across the production team.','Every cut is proposed by AI and approved by ear.'],
+   zh:['播客剪辑','中文法律播客《不严肃法律》的自动化工作台：从字幕到剪辑点方案，完成粗剪、精剪和各平台版本，并衔接制作团队之间的协作。','每个剪辑点由 AI 提出、我试听确认。'],
    kv:[[5,'workflows','个工作流'],[1,'automated so far','个已自动化']]}
 ];
 const METHOD = [
@@ -430,10 +441,10 @@ function render(){
   document.getElementById('ratio').innerHTML=`<span class="lbl" id="nowclock">${esc(nowTO())}</span><span class="bar2" aria-hidden="true"><i style="width:${100-pct}%;background:var(--faint);opacity:.45"></i><i style="width:${pct}%;background:var(--coral)"></i></span><span><b style="color:var(--ink)">${pct.toFixed(1)}%</b> ${esc(t('ratio'))}</span>`;
   document.getElementById('projects').innerHTML=PROJECTS.map(p=>{const L=lang==='en'?p.en:p.zh; const s=M.stations[p.k];
     const tag=p.url?'a':'div'; const attrs=p.url?` href="${p.url}"`:'';
-    return `<${tag} class="pj" id="pj-${p.k}"${attrs}><div class="top"><span class="row" style="display:flex;gap:8px;align-items:center"><span class="dot ${s.status==='ok'?'':s.status}"></span><h3>${esc(L[0])}</h3></span>${p.live?'<span class="pill">LIVE</span>':''}</div>
+    return `<${tag} class="pj" id="pj-${p.k}"${attrs}><div class="top"><span class="row" style="display:flex;gap:8px;align-items:center"><span class="dot ${s.status==='ok'?'':s.status}"></span><h3>${esc(L[0])}</h3></span>${p.live?'<span class="pill">LIVE</span>':''}${p.tag?`<span class="lang-tag">${esc(p.tag[lang==='en'?0:1])}</span>`:''}</div>
       <p>${esc(L[1])}</p><div class="kv">${p.kv.map(([n,en,zh])=>`<div><b>${esc(n)}</b><span>${esc(lang==='en'?en:zh)}</span></div>`).join('')}</div>
       <div class="ctrl-line">${esc(L[2])}</div>
-      <span class="go ${p.url||p.repo?'':'muted'}">${p.url?t('open'):p.repo?`<a href="${p.repo}" target="_blank" rel="noopener">${t('repo')}</a>`:esc(t('soon'))}</span></${tag}>`;}).join('');
+      <span class="go ${p.url||p.repo||p.listen?'':'muted'}">${p.url?t('open'):p.listen?`<a href="${p.listen}" target="_blank" rel="noopener">${t('listen')}</a>`:p.repo?`<a href="${p.repo}" target="_blank" rel="noopener">${t('repo')}</a>`:esc(t('soon'))}</span></${tag}>`;}).join('');
   document.getElementById('method').innerHTML=METHOD.map(([w,en,zh,de,dz])=>`<div class="mt ${w==='HUMAN'?'h':''}"><span>${w==='AI'?(lang==='en'?'AGENT':'智能体'):w==='SUB'?(lang==='en'?'SUB-AGENT':'子智能体'):(lang==='en'?'HUMAN':'人工')}</span><b>${esc(lang==='en'?en:zh)}</b><p>${esc(lang==='en'?de:dz)}</p></div>`).join('');
   clock();
 }
@@ -560,6 +571,21 @@ const RUN = {
       ['HUMAN','Judge by ear and eye: accept, correct, or restore; make every content call.','凭耳朵和眼睛判断：接受、修改或恢复；所有内容取舍由人决定。'],
       ['AGENT','Learn from the gap: compare the human final with its draft and propose rules; the human approves what goes into the next version of the skill.','从差距中学习：比对人的定稿和自己的初稿，提出规则；由人批准哪些写进下一版技能。']],
     lesson:['EP35: the first draft matched the final length, but 9 minutes of content differed. New rule: shorten wording, never whole points.','EP35：初稿和定稿长度几乎一样，但有 9 分钟内容不同。新规则：精简表达，不整段删观点。'],
+    show:{url:'https://www.xiaoyuzhoufm.com/podcast/68f97908c348f4bf7ef79ea6',
+      name:['Not-So-Serious Law','不严肃法律'],
+      blurb:['A Mandarin-language podcast where legal friends (a former police officer, judge and prosecutor, big-tech in-house counsel and lawyers) chat casually about case stories you have never heard and anecdotes from the legal world. Episode notes below are English summaries; the audio is in Mandarin.',
+             '几位法律圈朋友（前公安、前法官、前检察官、大厂法务和律师）轻松闲聊没听过的案件故事和法律圈的奇闻逸事。'],
+      eps:[
+        ['EP36','2026-11-09','42 min','https://www.xiaoyuzhoufm.com/episode/6af11462b4a4e20202f6c633',
+         ['How ordinary people end up in money laundering','你是如何参与洗钱的？'],
+         ['How everyday "deals" such as cheap hotel rooms, discounted flights and game top-ups can pull ordinary people into laundering chains, what the criminal exposure looks like, and whether there is any remedy afterwards. With a former police officer, a former judge and a former prosecutor.','从低价酒店、折扣机票、游戏充值这些日常"优惠"说起，聊普通人如何被卷进洗钱链条、涉及哪些罪名、事后还有没有救济。']],
+        ['EP35','2026-10-25','37 min','https://www.xiaoyuzhoufm.com/episode/6ade58e5c96c8942ec1217c6',
+         ['Black PR: the business of paid hit pieces','一篇稿子20万？聊聊黑公关的生意经'],
+         ['How paid articles, paid takedowns and "protection fees" are used to pressure companies, where that becomes extortion or illegal business operations, and the recent series of model cases on "extortion through public opinion" issued by China\'s top court, top procuratorate and Ministry of Public Security.','付费发稿、付费删帖、"保护费"如何被用来施压企业，什么情况下构成敲诈勒索或非法经营，以及近期两高一部连发的“利用舆论敲诈”典型案例。']],
+        ['EP34','2026-10-19','47 min','https://www.xiaoyuzhoufm.com/episode/6ad4eb4e641ef406308d8fa2',
+         ['Anti-corruption in big tech, Part 2: summoned by internal investigations','我在大厂反贪腐（二）：被约谈了怎么办？'],
+         ['What employees should know when an internal investigations team calls them in: phones, WeChat and personal statements, signing interview notes, monitoring of work computers, and what happens once the company refers a case to police. With a former big-tech internal investigator (now a lawyer), a former big-tech in-house counsel and a senior criminal lawyer.','被公司监察约谈时怎么办：手机微信和私人账单、笔录要不要签、公司能否监控电脑，以及公司报案之后会发生什么。']]
+      ]},
     ai:['Drafts, self-checks, learns from every correction','出初稿、自查、从每次修改中学习'], me:['Sets the bar, makes content calls, approves the rules','定标准、做内容取舍、批准规则']}
 };
 const LIVE = new Set();
@@ -583,7 +609,7 @@ const RES = {ok:['done','完成'], warn:['check','需检查'], bad:['failed','�
 const DT = {
   title:['Run data','运行数据'], today:['Today','今天'], last14:['Last 14 days','最近 14 天'], tasks:['Tasks today','今天的任务'],
   issues:['Issues found','发现的问题'], none:['No issues today.','今天没有问题。'], aiDoes:['AGENT DOES','智能体负责'], iDecide:['HUMAN DECIDES','人来决定'], wf:['Workflows','工作流'], loop:['Collaboration pattern','协同模式'], lesson:['Calibration','校准'],
-  close:['Close','关闭'], card:['Project details ↓','项目介绍 ↓'], sample:['Sample data','示例数据'],
+  close:['Close','关闭'], onair:['On air','节目'], alleps:['All episodes on Xiaoyuzhou ↗','小宇宙查看全部节目 ↗'], card:['Project details ↓','项目介绍 ↓'], sample:['Sample data','示例数据'],
   stOk:['Running normally','运行正常'], stWarn:['Running, with issues to check','在运行，有问题待查'], stBad:['Paused, needs my attention','已暂停，需要我处理'],
   lOk:['ran OK','正常'], lWarn:['issues','有问题'], lBad:['failed / paused','失败/暂停'], lOff:['not scheduled','不需运行'],
   ago:['14d ago','14 天前']
@@ -599,6 +625,9 @@ function openRun(k){
   el.innerHTML=`<div class="dh"><div><span class="lbl">${dt('title')}${!LIVE.has(k)?' · '+dt('sample'):''}</span>
       <h3 id="d-title"><span class="dot ${s.status==='ok'?'':s.status}"></span>${esc(d[lang])}</h3><div class="dstat">${esc(stTxt)} · ${esc(M.date)}</div></div>
       <button type="button" class="x" id="d-close" aria-label="${dt('close')}">×</button></div>
+    ${r.show?`<div><span class="lbl">${dt('onair')}</span><div class="show" style="margin-top:8px"><span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><b>${esc(r.show.name[lang==='en'?0:1])}</b>${lang==='en'?`<span class="zh">${esc(r.show.name[1])}</span>`:''}<span class="lang-tag">${lang==='en'?'IN MANDARIN':'中文节目'}</span></span><p>${esc(r.show.blurb[lang==='en'?0:1])}</p></div>
+      <ul class="ep" style="margin-top:8px">${r.show.eps.map(([no,date,len,url,ti,su])=>`<li><div class="eh"><b>${esc(no)} · ${esc(ti[lang==='en'?0:1])}</b><span class="meta">${esc(date)} · ${esc(len)}</span></div>${lang==='en'?`<span class="zh">${esc(ti[1])}</span>`:''}<p>${esc(su[lang==='en'?0:1])}</p><a class="dlink" href="${url}" target="_blank" rel="noopener">${lang==='en'?'Listen (Mandarin) ↗':'收听 ↗'}</a></li>`).join('')}</ul>
+      <a class="dlink" href="${r.show.url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px">${dt('alleps')}</a></div>`:''}
     <div class="big3">${q4(s).map((n,i)=>`<div><span class="lbl">${esc(Q4L[lang][i])}</span><b class="${(i===2||i===3)&&n?'me':''}">${n}</b></div>`).join('')}</div>
     <div><span class="lbl">${dt('last14')}</span><div class="strip" style="margin-top:8px">${r.hist.split('').map(c=>`<i class="${map[c]||'off'}"></i>`).join('')}</div>
       <div class="strip-axis"><span>${dt('ago')}</span><span>${dt('today')}</span></div>
