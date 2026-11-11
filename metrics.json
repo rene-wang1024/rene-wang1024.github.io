@@ -1,33 +1,33 @@
 {
-  "date": "2026-11-09",
-  "updatedAt": "2026-11-10T02:24:33Z",
+  "date": "2026-11-10",
+  "updatedAt": "2026-11-11T02:24:11Z",
   "stations": {
     "inbox": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
-      "toMe": 1,
-      "in": 24,
+      "toMe": 3,
+      "in": 45,
       "done": 0
     },
     "career": {
       "status": "warn",
-      "runs": 3,
+      "runs": 2,
       "issues": 2,
-      "toMe": 2,
-      "in": 41,
+      "toMe": 1,
+      "in": 21,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "oooo--ooooo-oo",
+      "hist": "ooo--ooooo-ooo",
       "tasks": [
         [
           "—",
           [
-            "Daily patrol triage: 24 threads",
-            "日巡检分拣：24 个会话"
+            "Daily patrol triage: 45 threads",
+            "日巡检分拣：45 个会话"
           ],
           "ok"
         ]
@@ -35,13 +35,13 @@
       "issues": []
     },
     "career": {
-      "hist": "wwww-wwwwww-ww",
+      "hist": "www-wwwwww-www",
       "tasks": [
         [
           "—",
           [
-            "Daily job search (5 tracks): screened 41 jobs",
-            "每日搜岗（5 个方向）：筛查 41 个岗位"
+            "Daily job search (5 tracks): screened 21 jobs",
+            "每日搜岗（5 个方向）：筛查 21 个岗位"
           ],
           "warn"
         ],
@@ -52,29 +52,21 @@
             "总控巡检"
           ],
           "warn"
-        ],
-        [
-          "—",
-          [
-            "Event registration receipts",
-            "活动报名回执"
-          ],
-          "ok"
         ]
       ],
       "issues": [
         [
           "warn",
           [
-            "Search coverage gap: 4 sources failed, 14 need a browser",
-            "搜岗覆盖不足：4 个来源失败，14 个需浏览器"
+            "Search coverage gap: 2 sources failed",
+            "搜岗覆盖不足：2 个来源失败"
           ]
         ],
         [
           "warn",
           [
-            "Control patrol partially completed: 6 issues found",
-            "总控巡检部分完成：发现 6 个问题"
+            "Control patrol partially completed: 4 issues found",
+            "总控巡检部分完成：发现 4 个问题"
           ]
         ]
       ]
