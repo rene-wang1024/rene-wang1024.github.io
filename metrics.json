@@ -1,33 +1,41 @@
 {
-  "date": "2026-11-10",
-  "updatedAt": "2026-11-11T02:24:11Z",
+  "date": "2026-11-11",
+  "updatedAt": "2026-11-12T02:24:57Z",
   "stations": {
     "inbox": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
-      "toMe": 3,
-      "in": 45,
+      "toMe": 1,
+      "in": 23,
       "done": 0
     },
     "career": {
-      "status": "warn",
-      "runs": 2,
-      "issues": 2,
-      "toMe": 1,
-      "in": 21,
+      "status": "bad",
+      "runs": 4,
+      "issues": 3,
+      "toMe": 4,
+      "in": 25,
+      "done": 4
+    },
+    "privacy": {
+      "status": "ok",
+      "runs": 1,
+      "issues": 0,
+      "toMe": 0,
+      "in": 20,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "ooo--ooooo-ooo",
+      "hist": "oo--ooooo-oooo",
       "tasks": [
         [
           "—",
           [
-            "Daily patrol triage: 45 threads",
-            "日巡检分拣：45 个会话"
+            "Inbox triage: 23 threads",
+            "收件箱分拣：23 个会话"
           ],
           "ok"
         ]
@@ -35,13 +43,13 @@
       "issues": []
     },
     "career": {
-      "hist": "www-wwwwww-www",
+      "hist": "ww-wwwwww-wwww",
       "tasks": [
         [
-          "—",
+          "06:49",
           [
-            "Daily job search (5 tracks): screened 21 jobs",
-            "每日搜岗（5 个方向）：筛查 21 个岗位"
+            "Daily job search (5 tracks): screened 25 jobs",
+            "每日搜岗（5 个方向）：筛查 25 个岗位"
           ],
           "warn"
         ],
@@ -52,24 +60,69 @@
             "总控巡检"
           ],
           "warn"
+        ],
+        [
+          "—",
+          [
+            "Event registration receipts",
+            "活动报名回执"
+          ],
+          "ok"
+        ],
+        [
+          "17:19",
+          [
+            "Event registration",
+            "活动报名"
+          ],
+          "bad"
         ]
       ],
       "issues": [
         [
           "warn",
           [
-            "Search coverage gap: 2 sources failed",
-            "搜岗覆盖不足：2 个来源失败"
+            "Search coverage gap: 3 sources failed",
+            "搜岗覆盖不足：3 个来源失败"
           ]
         ],
         [
           "warn",
           [
-            "Control patrol partially completed: 4 issues found",
-            "总控巡检部分完成：发现 4 个问题"
+            "Control patrol partially completed: 5 issues found",
+            "总控巡检部分完成：发现 5 个问题"
+          ]
+        ],
+        [
+          "bad",
+          [
+            "One event registration could not run",
+            "一次活动报名未能执行"
           ]
         ]
       ]
+    },
+    "privacy": {
+      "hist": "bbbbbbbbbboobo",
+      "tasks": [
+        [
+          "07:17",
+          [
+            "Daily update: 20 sources checked, 2 added",
+            "每日更新：检查 20 个来源，新增 2 条"
+          ],
+          "ok"
+        ],
+        [
+          "07:17",
+          [
+            "Independent QA: 0 rejected",
+            "独立质检：退回 0 条"
+          ],
+          "ok"
+        ]
+      ],
+      "issues": []
     }
   }
 }
