@@ -1,55 +1,63 @@
 {
-  "date": "2026-11-11",
-  "updatedAt": "2026-11-12T02:24:57Z",
+  "date": "2026-11-12",
+  "updatedAt": "2026-11-13T02:24:40Z",
   "stations": {
     "inbox": {
-      "status": "ok",
+      "status": "warn",
       "runs": 1,
-      "issues": 0,
+      "issues": 1,
       "toMe": 1,
-      "in": 23,
+      "in": 46,
       "done": 0
     },
     "career": {
-      "status": "bad",
-      "runs": 4,
-      "issues": 3,
-      "toMe": 4,
-      "in": 25,
-      "done": 4
+      "status": "warn",
+      "runs": 3,
+      "issues": 2,
+      "toMe": 0,
+      "in": 11,
+      "done": 0
     },
     "privacy": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
       "toMe": 0,
-      "in": 20,
+      "in": 21,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "oo--ooooo-oooo",
+      "hist": "o--ooooo-oooow",
       "tasks": [
         [
           "—",
           [
-            "Inbox triage: 23 threads",
-            "收件箱分拣：23 个会话"
+            "Inbox triage: 46 threads",
+            "收件箱分拣：46 个会话"
           ],
-          "ok"
+          "warn"
         ]
       ],
-      "issues": []
+      "issues": [
+        [
+          "warn",
+          [
+            "Inbox triage partially completed: some newsletter items not fully processed",
+            "一次分拣部分完成：部分资讯类邮件未逐条处理"
+          ]
+        ]
+      ]
     },
     "career": {
-      "hist": "ww-wwwwww-wwww",
+      "hist": "w-wwwwww-wwwww",
       "tasks": [
         [
-          "06:49",
+          "06:42",
           [
-            "Daily job search (5 tracks): screened 25 jobs",
-            "每日搜岗（5 个方向）：筛查 25 个岗位"
+            "Daily job search (5 tracks): screened 11 jobs",
+            "每日搜岗（5 个方向）：筛查 11 个岗位"
           ],
           "warn"
         ],
@@ -68,14 +76,6 @@
             "活动报名回执"
           ],
           "ok"
-        ],
-        [
-          "17:19",
-          [
-            "Event registration",
-            "活动报名"
-          ],
-          "bad"
         ]
       ],
       "issues": [
@@ -89,35 +89,20 @@
         [
           "warn",
           [
-            "Control patrol partially completed: 5 issues found",
-            "总控巡检部分完成：发现 5 个问题"
-          ]
-        ],
-        [
-          "bad",
-          [
-            "One event registration could not run",
-            "一次活动报名未能执行"
+            "Control patrol partially completed: 4 issues found",
+            "总控巡检部分完成：发现 4 个问题"
           ]
         ]
       ]
     },
     "privacy": {
-      "hist": "bbbbbbbbbboobo",
+      "hist": "bbbbbbbbbooboo",
       "tasks": [
         [
-          "07:17",
+          "07:18",
           [
-            "Daily update: 20 sources checked, 2 added",
-            "每日更新：检查 20 个来源，新增 2 条"
-          ],
-          "ok"
-        ],
-        [
-          "07:17",
-          [
-            "Independent QA: 0 rejected",
-            "独立质检：退回 0 条"
+            "Daily update: 21 sources checked, 0 added",
+            "每日更新：检查 21 个来源，新增 0 条"
           ],
           "ok"
         ]
