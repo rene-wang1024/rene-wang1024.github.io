@@ -1,13 +1,13 @@
 {
-  "date": "2026-11-12",
-  "updatedAt": "2026-11-13T02:24:40Z",
+  "date": "2026-11-13",
+  "updatedAt": "2026-11-14T02:23:49Z",
   "stations": {
     "inbox": {
-      "status": "warn",
+      "status": "ok",
       "runs": 1,
-      "issues": 1,
-      "toMe": 1,
-      "in": 46,
+      "issues": 0,
+      "toMe": 0,
+      "in": 4,
       "done": 0
     },
     "career": {
@@ -15,7 +15,7 @@
       "runs": 3,
       "issues": 2,
       "toMe": 0,
-      "in": 11,
+      "in": 29,
       "done": 0
     },
     "privacy": {
@@ -23,41 +23,33 @@
       "runs": 1,
       "issues": 0,
       "toMe": 0,
-      "in": 21,
+      "in": 9,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "o--ooooo-oooow",
+      "hist": "--ooooo-oooowo",
       "tasks": [
         [
           "—",
           [
-            "Inbox triage: 46 threads",
-            "收件箱分拣：46 个会话"
+            "Inbox triage: 4 threads",
+            "收件箱分拣：4 个会话"
           ],
-          "warn"
+          "ok"
         ]
       ],
-      "issues": [
-        [
-          "warn",
-          [
-            "Inbox triage partially completed: some newsletter items not fully processed",
-            "一次分拣部分完成：部分资讯类邮件未逐条处理"
-          ]
-        ]
-      ]
+      "issues": []
     },
     "career": {
-      "hist": "w-wwwwww-wwwww",
+      "hist": "-wwwwww-wwwwww",
       "tasks": [
         [
           "06:42",
           [
-            "Daily job search (5 tracks): screened 11 jobs",
-            "每日搜岗（5 个方向）：筛查 11 个岗位"
+            "Daily job search (5 tracks): screened 29 jobs",
+            "每日搜岗（5 个方向）：筛查 29 个岗位"
           ],
           "warn"
         ],
@@ -82,27 +74,35 @@
         [
           "warn",
           [
-            "Search coverage gap: 3 sources failed",
-            "搜岗覆盖不足：3 个来源失败"
+            "Search coverage gap: 3 sources failed, 1 rate-limited",
+            "搜岗覆盖不足：3 个来源失败、1 个限流"
           ]
         ],
         [
           "warn",
           [
-            "Control patrol partially completed: 4 issues found",
-            "总控巡检部分完成：发现 4 个问题"
+            "Control patrol partially completed: 2 issues found",
+            "总控巡检部分完成：发现 2 个问题"
           ]
         ]
       ]
     },
     "privacy": {
-      "hist": "bbbbbbbbbooboo",
+      "hist": "bbbbbbbboobooo",
       "tasks": [
         [
-          "07:18",
+          "07:17",
           [
-            "Daily update: 21 sources checked, 0 added",
-            "每日更新：检查 21 个来源，新增 0 条"
+            "Daily update: 9 sources checked, 0 added",
+            "每日更新：检查 9 个来源，新增 0 条"
+          ],
+          "ok"
+        ],
+        [
+          "07:17",
+          [
+            "Independent QA: 0 rejected",
+            "独立质检：退回 0 条"
           ],
           "ok"
         ]
