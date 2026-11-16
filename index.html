@@ -329,7 +329,7 @@ const S = {
   inbox:  {en:'Inbox triage', zh:'邮件分拣', m_en:s=>`<b>${s.in}</b> emails sorted`, m_zh:s=>`分拣 <b>${s.in}</b> 封邮件`},
   career: {en:'Career ops', zh:'求职运营', m_en:s=>`<b>${s.in}</b> postings screened`, m_zh:s=>`筛查 <b>${s.in}</b> 个岗位`},
   privacy:{en:'Privacy Radar', zh:'隐私雷达', m_en:s=>`<b>${s.in}</b> sources checked`, m_zh:s=>`检查 <b>${s.in}</b> 个来源`},
-  podcast:{en:'Podcast studio', zh:'播客剪辑', m_en:s=>`automated · I approve the fine cut`, m_zh:s=>`全流程自动 · 精剪由我确认`}
+  podcast:{en:'Podcast studio', zh:'播客剪辑', m_en:s=>`AI drafts · a person approves each step`, m_zh:s=>`AI 先做 · 每一步由人确认`}
 };
 const T = {
   role:['Legal Operations & Regulatory Response | CIPP/C, PMP | Osgoode LL.M. Candidate','法律运营与监管应对 | CIPP/C, PMP | Osgoode LL.M. 在读'],
@@ -387,9 +387,9 @@ const PROJECTS = [
    zh:['邮件分拣','读取我的邮箱（专业协会、学校、招聘、活动、订阅资讯等），整理成按优先级排列的待决定清单。','我的选择同步到活动追踪表；AI 从不替我回复。'],
    kv:[[145,'emails / week','封 / 周'],[67,'flagged for action','条需行动']]},
   {k:'podcast', tag:['IN MANDARIN','中文节目'], listen:'https://www.xiaoyuzhoufm.com/podcast/68f97908c348f4bf7ef79ea6',
-   en:['Podcast Studio','An automation workbench for Not-So-Serious Law (不严肃法律), a Mandarin-language legal podcast: rough cut, fine cut and platform cuts from transcript to edit list, with hand-offs across the production team.','Every cut is proposed by AI and approved by ear.'],
-   zh:['播客剪辑','中文法律播客《不严肃法律》的自动化工作台：从字幕到剪辑点方案，完成粗剪、精剪和各平台版本，并衔接制作团队之间的协作。','每个剪辑点由 AI 提出、我试听确认。'],
-   kv:[[5,'workflows','个工作流'],[5,'automated so far','个已自动化']]}
+   en:['Podcast Studio','An AI-assisted workbench for Not-So-Serious Law (不严肃法律), a Mandarin-language legal podcast: rough cut, fine cut and platform cuts from transcript to edit list, with hand-offs across the production team.','Every cut is proposed by AI and approved by ear.'],
+   zh:['播客剪辑','中文法律播客《不严肃法律》的 AI 辅助工作台：从字幕到剪辑点方案，完成粗剪、精剪和各平台版本，并衔接制作团队之间的协作。','每个剪辑点由 AI 提出、我试听确认。'],
+   kv:[[5,'workflows','个工作流'],[5,'AI-assisted so far','个已由 AI 辅助']]}
 ];
 const METHOD = [
   ['HUMAN','Map','拆解','Break each recurring project into tasks with clear inputs, outputs and a definition of done.','把每个日常项目拆成任务，明确输入、输出和完成标准。'],
@@ -565,8 +565,8 @@ const RUN = {
       ['Edit: rough cut → fine cut (I approve the fine cut)','剪辑：粗剪 → 精剪（精剪由我确认）','AGENT + HUMAN','auto'],
       ['Transcript from final video','从定稿视频生成口播文本','AGENT','auto'],
       ['Show notes & timestamps','Show notes 与时间码','AGENT + HUMAN','auto'],
-      ['Cover design','平面设计','AGENT · GPT','auto'],
-      ['Distribute to all platforms: Xiaoyuzhou, Apple Podcasts, Ximalaya, Bilibili, TikTok','全平台分发：小宇宙、Apple Podcasts、喜马拉雅、B 站、TikTok','AUTOMATED','auto']],
+      ['Cover design','平面设计','AGENT (GPT) + HUMAN','auto'],
+      ['Distribute to all platforms: Xiaoyuzhou, Apple Podcasts, Ximalaya, Xiaohongshu, Douyin, Bilibili, WeChat Official Account (AI drafts the copy; the copy editor reviews it; the ops teammate edits and publishes)','全平台分发：小宇宙、Apple Podcasts、喜马拉雅、小红书、抖音、B 站、微信公众号（AI 起草文案，文案伙伴审核，运营伙伴编辑发布）','AGENT + HUMAN','auto']],
     loop:[
       ['HUMAN','Set the bar: what must stay, what the episode is for, how long it should run.','定标准：哪些内容必须保留、这一期要讲清什么、做多长。'],
       ['AGENT','Do the volume: draft every step, check its own work, hand over something ready to review.','做体量：每一步先出初稿，自查后交付一个可以直接审的版本。'],
@@ -607,7 +607,7 @@ async function loadMetrics(){
     return LIVE.size>0;
   }catch(e){ return false }
 }
-const RES = {ok:['done','完成'], warn:['check','需检查'], bad:['failed','失败'], off:['not run','未运行'], auto:['automated','已自动化'], wip:['building','搭建中'], plan:['planned','计划中'], manual:['manual','手动']};
+const RES = {ok:['done','完成'], warn:['check','需检查'], bad:['failed','失败'], off:['not run','未运行'], auto:['AI-assisted','AI 辅助'], wip:['building','搭建中'], plan:['planned','计划中'], manual:['manual','手动']};
 const DT = {
   title:['Run data','运行数据'], today:['Today','今天'], last14:['Last 14 days','最近 14 天'], tasks:['Tasks today','今天的任务'],
   issues:['Issues found','发现的问题'], none:['No issues today.','今天没有问题。'], aiDoes:['AGENT DOES','智能体负责'], iDecide:['HUMAN DECIDES','人来决定'], wf:['Workflows','工作流'], loop:['Collaboration pattern','协同模式'], lesson:['Calibration','校准'],
