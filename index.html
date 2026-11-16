@@ -180,6 +180,8 @@ a.pj:hover .go,.pj .go a:hover{text-decoration:underline;text-underline-offset:3
 .mt.h span{color:var(--coral)}
 .mt b{font-size:15px}
 .mt p{margin:0;color:var(--muted);font-size:13px}
+.mt .iso{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.04em;color:var(--muted);opacity:.85;margin-top:2px}
+.sh .soa{font-family:var(--f-mono);font-size:11px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
 footer{margin-top:44px;border-top:1px solid var(--line);padding-block:16px 40px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--faint);font-size:12.5px}
 
 
@@ -300,7 +302,7 @@ footer{margin-top:44px;border-top:1px solid var(--line);padding-block:16px 40px;
   </section>
 
   <section class="block">
-    <div class="sh"><h2 data-t="methH"></h2></div>
+    <div class="sh"><h2 data-t="methH"></h2><a class="soa" href="https://github.com/rene-wang1024/rene-wang1024/blob/main/ai-workshop-iso42001-soa.md" target="_blank" rel="noopener" data-t="methSoa"></a></div>
     <div class="method" id="method"></div>
   </section>
 
@@ -346,6 +348,7 @@ const T = {
   ratio:['of today\'s items reached me','今天的事项送到了我手上'],
   projH:['The systems','四个系统'], projSub:['Tap a station above for its run data','点上方插图里的站点查看运行数据'],
   methH:['How they are governed','怎么管住它们'],
+  methSoa:['Mapped to ISO/IEC 42001 · self-assessed, not certified · Statement of Applicability ↗','对照 ISO/IEC 42001 · 自评，未经认证 · 适用性声明 ↗'],
   intro:['I\'m Rene Wang, a legal and governance professional based in Toronto. I spent 16 years in public prosecution in Beijing, then led a 13-person legal cooperation team at ByteDance before joining TikTok Canada. I\'m completing an LL.M. in Canadian common law at Osgoode Hall, hold the CIPP/C and PMP, and I\'m looking for roles in legal operations and data privacy.','我是 Rene Wang，常驻多伦多的法律与治理从业者。我在北京做了 16 年公诉工作，之后在字节跳动带领 13 人的法律协作团队，随后加入 TikTok Canada。目前在 Osgoode Hall 攻读加拿大普通法 LL.M.，持有 CIPP/C 和 PMP，正在寻找法律运营与数据隐私方向的职位。'],
   privacy:['Public counts only, updated through the day. No email content, names of employers I apply to, or personal decisions are shown.','只公开计数，白天随运行更新；不展示邮件内容、所申请的雇主名称或个人决定。'],
   foot:['Built and maintained by Rene Wang','由 Rene Wang 设计和维护'],
@@ -392,12 +395,12 @@ const PROJECTS = [
    kv:[[5,'workflows','个工作流'],[5,'AI-assisted so far','个已由 AI 辅助']]}
 ];
 const METHOD = [
-  ['HUMAN','Map','拆解','Break each recurring project into tasks with clear inputs, outputs and a definition of done.','把每个日常项目拆成任务，明确输入、输出和完成标准。'],
-  ['HUMAN','Design','设计','Write a playbook for each workflow (rules, fact boundaries, a golden example), then automate it.','为每个工作流写 playbook（规则、事实边界、标准样例），再设为自动运行。'],
-  ['AI','Execute','执行','Search, sort, summarize and log on a schedule, following the playbook.','按 playbook 定时检索、分拣、摘要、记录。'],
-  ['SUB','Review','审查','An independent agent checks the output against the playbook and the golden example.','另一个独立智能体对照 playbook 和标准样例审查产出。'],
-  ['HUMAN','Decide','决定','Anything that needs judgment goes to a human; nothing is sent automatically.','需要判断的都交给人，任何内容都不会自动发出。'],
-  ['HUMAN','Calibrate','校准','Decisions become rules; each rule is re-checked after 14 days.','决定沉淀为规则，每条规则 14 天后复核。']
+  ['HUMAN','Map','拆解','Break each recurring project into tasks with clear inputs, outputs and a definition of done.','把每个日常项目拆成任务，明确输入、输出和完成标准。','A.6.2.2'],
+  ['HUMAN','Design','设计','Write a playbook for each workflow (rules, fact boundaries, a golden example), then automate it.','为每个工作流写 playbook（规则、事实边界、标准样例），再设为自动运行。','A.6.2.3'],
+  ['AI','Execute','执行','Search, sort, summarize and log on a schedule, following the playbook.','按 playbook 定时检索、分拣、摘要、记录。','A.6.2.8'],
+  ['SUB','Review','审查','An independent agent checks the output against the playbook and the golden example.','另一个独立智能体对照 playbook 和标准样例审查产出。','A.6.2.4'],
+  ['HUMAN','Decide','决定','Anything that needs judgment goes to a human; nothing is sent automatically.','需要判断的都交给人，任何内容都不会自动发出。','A.9.2'],
+  ['HUMAN','Calibrate','校准','Decisions become rules; each rule is re-checked after 14 days.','决定沉淀为规则，每条规则 14 天后复核。','Clause 10.1']
 ];
 let lang='en', mode=null;
 try{const s=localStorage.getItem('rw-lang'); if(s==='en'||s==='zh') lang=s;}catch(e){}
@@ -447,7 +450,7 @@ function render(){
       <p>${esc(L[1])}</p><div class="kv">${p.kv.map(([n,en,zh])=>`<div><b>${esc(n)}</b><span>${esc(lang==='en'?en:zh)}</span></div>`).join('')}</div>
       <div class="ctrl-line">${esc(L[2])}</div>
       <span class="go ${p.url||p.repo||p.listen?'':'muted'}">${p.url?t('open'):p.listen?`<a href="${p.listen}" target="_blank" rel="noopener">${t('listen')}</a>`:p.repo?`<a href="${p.repo}" target="_blank" rel="noopener">${t('repo')}</a>`:esc(t('soon'))}</span></${tag}>`;}).join('');
-  document.getElementById('method').innerHTML=METHOD.map(([w,en,zh,de,dz])=>`<div class="mt ${w==='HUMAN'?'h':''}"><span>${w==='AI'?(lang==='en'?'AGENT':'智能体'):w==='SUB'?(lang==='en'?'SUB-AGENT':'子智能体'):(lang==='en'?'HUMAN':'人工')}</span><b>${esc(lang==='en'?en:zh)}</b><p>${esc(lang==='en'?de:dz)}</p></div>`).join('');
+  document.getElementById('method').innerHTML=METHOD.map(([w,en,zh,de,dz,iso])=>`<div class="mt ${w==='HUMAN'?'h':''}"><span>${w==='AI'?(lang==='en'?'AGENT':'智能体'):w==='SUB'?(lang==='en'?'SUB-AGENT':'子智能体'):(lang==='en'?'HUMAN':'人工')}</span><b>${esc(lang==='en'?en:zh)}</b><p>${esc(lang==='en'?de:dz)}</p>${iso?`<small class="iso">ISO/IEC 42001 ${esc(iso)}</small>`:''}</div>`).join('');
   clock();
 }
 const h=torontoHour(); setMode(h>=7&&h<18?'day':'night');
