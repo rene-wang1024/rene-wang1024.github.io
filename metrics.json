@@ -1,41 +1,42 @@
 {
-  "date": "2026-11-16",
-  "updatedAt": "2026-11-17T02:24:36Z",
+  "date": "2026-11-17",
+  "updatedAt": "2026-11-18T02:24:45Z",
   "stations": {
     "inbox": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
       "toMe": 0,
-      "in": 6,
+      "in": 1,
       "done": 0
     },
     "career": {
       "status": "warn",
-      "runs": 3,
+      "runs": 2,
       "issues": 2,
-      "toMe": 0,
+      "toMe": 2,
       "in": 23,
-      "done": 0
+      "done": 2,
+      "screened": 21
     },
     "privacy": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
       "toMe": 0,
-      "in": 9,
+      "in": 6,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "oooo-oooowoo-o",
+      "hist": "ooo-oooowoo-oo",
       "tasks": [
         [
-          "—",
+          "12:00",
           [
-            "Daily sweep: 6 conversations",
-            "日巡检分拣：6 个会话"
+            "Instant sweep: 1 conversation",
+            "立即分拣：1 个会话"
           ],
           "ok"
         ]
@@ -43,13 +44,13 @@
       "issues": []
     },
     "career": {
-      "hist": "wwww-wwwwww-ww",
+      "hist": "www-wwwwww-www",
       "tasks": [
         [
-          "06:46",
+          "06:41",
           [
-            "Daily job search (5 tracks): 23 postings screened",
-            "每日搜岗（5 个方向）：筛查 23 个岗位"
+            "Daily job search (5 tracks): 21 postings screened",
+            "每日搜岗（5 个方向）：筛查 21 个岗位"
           ],
           "warn"
         ],
@@ -60,22 +61,14 @@
             "总控巡检"
           ],
           "warn"
-        ],
-        [
-          "—",
-          [
-            "Event registration receipts",
-            "活动报名回执"
-          ],
-          "ok"
         ]
       ],
       "issues": [
         [
           "warn",
           [
-            "Search coverage gap: 3 sources failed",
-            "搜岗覆盖不足：3 个来源失败"
+            "Search coverage gap: 2 sources failed or skipped",
+            "搜岗覆盖不足：2 个来源失败或未查"
           ]
         ],
         [
@@ -88,13 +81,13 @@
       ]
     },
     "privacy": {
-      "hist": "bbbbbooboooooo",
+      "hist": "bbbboobooooooo",
       "tasks": [
         [
           "07:17",
           [
-            "Daily update: 9 sources checked, 0 added",
-            "每日更新：检查 9 个来源，新增 0 条"
+            "Daily update: 6 sources checked, 0 added",
+            "每日更新：检查 6 个来源，新增 0 条"
           ],
           "ok"
         ]
