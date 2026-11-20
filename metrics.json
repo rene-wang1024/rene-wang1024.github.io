@@ -1,58 +1,58 @@
 {
-  "date": "2026-11-18",
-  "updatedAt": "2026-11-19T02:24:40Z",
+  "date": "2026-11-19",
+  "updatedAt": "2026-11-20T02:24:36Z",
   "stations": {
     "inbox": {
       "status": "ok",
       "runs": 3,
       "issues": 0,
-      "toMe": 7,
-      "in": 50,
+      "toMe": 3,
+      "in": 39,
       "done": 0
     },
     "career": {
       "status": "warn",
       "runs": 3,
       "issues": 2,
-      "toMe": 3,
-      "in": 30,
-      "done": 0,
-      "screened": 28
+      "toMe": 10,
+      "in": 26,
+      "done": 6,
+      "screened": 22
     },
     "privacy": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
       "toMe": 0,
-      "in": 10,
+      "in": 7,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "oo-oooowoo-ooo",
+      "hist": "o-oooowoo-oooo",
       "tasks": [
         [
           "—",
           [
-            "Daily sweep: 26 conversations",
-            "日巡检分拣：26 个会话"
+            "Instant sweep: 31 conversations",
+            "立即分拣：31 个会话"
           ],
           "ok"
         ],
         [
           "—",
           [
-            "Instant sweep: 0 conversations",
-            "立即分拣：0 个会话"
+            "Daily sweep: 4 conversations",
+            "日巡检分拣：4 个会话"
           ],
           "ok"
         ],
         [
           "—",
           [
-            "Daily sweep: 24 conversations",
-            "日巡检分拣：24 个会话"
+            "Instant sweep: 4 conversations",
+            "立即分拣：4 个会话"
           ],
           "ok"
         ]
@@ -60,13 +60,13 @@
       "issues": []
     },
     "career": {
-      "hist": "ww-wwwwww-wwww",
+      "hist": "w-wwwwww-wwwww",
       "tasks": [
         [
           "—",
           [
-            "Daily job search (5 tracks): 28 postings screened",
-            "每日搜岗（5 个方向）：筛查 28 个岗位"
+            "Daily job search (5 tracks): 22 postings screened",
+            "每日搜岗（5 个方向）：筛查 22 个岗位"
           ],
           "warn"
         ],
@@ -91,8 +91,8 @@
         [
           "warn",
           [
-            "Search coverage gap: 1 source not checked (login required)",
-            "搜岗覆盖不足：1 个来源未查（需登录）"
+            "Search coverage gap: 1 source failed, 1 not checked",
+            "搜岗覆盖不足：1 个来源失败、1 个来源未查"
           ]
         ],
         [
@@ -105,13 +105,21 @@
       ]
     },
     "privacy": {
-      "hist": "bbbooboooooooo",
+      "hist": "bboobooooooooo",
       "tasks": [
         [
-          "08:17",
+          "07:18",
           [
-            "Daily update: 10 sources checked, 0 added",
-            "每日更新：检查 10 个来源，新增 0 条"
+            "Daily update: 7 sources checked, 1 added",
+            "每日更新：检查 7 个来源，新增 1 条"
+          ],
+          "ok"
+        ],
+        [
+          "07:18",
+          [
+            "Independent QA: 0 rejected",
+            "独立质检：退回 0 条"
           ],
           "ok"
         ]
