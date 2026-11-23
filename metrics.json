@@ -1,39 +1,39 @@
 {
-  "date": "2026-11-21",
-  "updatedAt": "2026-11-22T02:24:00Z",
+  "date": "2026-11-22",
+  "updatedAt": "2026-11-23T02:25:00Z",
   "stations": {
     "inbox": {
       "status": "ok",
       "runs": 2,
       "issues": 0,
-      "toMe": 0,
-      "in": 30,
+      "toMe": 4,
+      "in": 27,
       "done": 0
     },
     "career": {
-      "status": "ok",
-      "runs": 0,
-      "issues": 0,
-      "toMe": 0,
-      "in": 0,
-      "done": 0,
-      "screened": 0
+      "status": "warn",
+      "runs": 4,
+      "issues": 3,
+      "toMe": 5,
+      "in": 16,
+      "done": 2,
+      "screened": 16
     },
     "privacy": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
       "toMe": 0,
-      "in": 9,
+      "in": 8,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "oooowoo-oooooo",
+      "hist": "ooowoo-ooooooo",
       "tasks": [
         [
-          "—",
+          "12:59",
           [
             "Instant sweep: 0 conversations",
             "立即分拣：0 个会话"
@@ -43,8 +43,8 @@
         [
           "—",
           [
-            "Daily sweep: 30 conversations",
-            "日巡检分拣：30 个会话"
+            "Daily sweep: 27 conversations",
+            "日巡检分拣：27 个会话"
           ],
           "ok"
         ]
@@ -52,18 +52,73 @@
       "issues": []
     },
     "career": {
-      "hist": "wwwwww-wwwwww-",
-      "tasks": [],
-      "issues": []
+      "hist": "wwwww-wwwwww-w",
+      "tasks": [
+        [
+          "—",
+          [
+            "Daily job scout (weekend alert emails): 16 postings screened",
+            "每日搜岗（周末提醒邮件补搜）：筛查 16 个岗位"
+          ],
+          "warn"
+        ],
+        [
+          "13:43",
+          [
+            "Weekly recall check",
+            "每周查漏"
+          ],
+          "ok"
+        ],
+        [
+          "18:41",
+          [
+            "Weekly recall check (supplement)",
+            "每周查漏（补充）"
+          ],
+          "warn"
+        ],
+        [
+          "18:41",
+          [
+            "Weekly review",
+            "周复盘"
+          ],
+          "warn"
+        ]
+      ],
+      "issues": [
+        [
+          "warn",
+          [
+            "Weekend sweep: 1 posting needs site verification",
+            "周末补搜：1 个线索需官网核实"
+          ]
+        ],
+        [
+          "warn",
+          [
+            "Recall check: 2 missed postings, backfilled",
+            "查漏：漏检 2 个，已补录"
+          ]
+        ],
+        [
+          "warn",
+          [
+            "Recall supplement: some sources could not be read",
+            "查漏补充：部分来源未能读取"
+          ]
+        ]
+      ]
     },
     "privacy": {
-      "hist": "oobooooooooooo",
+      "hist": "oboooooooooooo",
       "tasks": [
         [
           "07:17",
           [
-            "Daily update: 9 sources checked, 1 added",
-            "每日更新：检查 9 个来源，新增 1 条"
+            "Daily update: 8 sources checked, 0 added",
+            "每日更新：检查 8 个来源，新增 0 条"
           ],
           "ok"
         ],
