@@ -1,50 +1,42 @@
 {
-  "date": "2026-11-22",
-  "updatedAt": "2026-11-23T02:25:00Z",
+  "date": "2026-11-23",
+  "updatedAt": "2026-11-24T02:24:40Z",
   "stations": {
     "inbox": {
       "status": "ok",
-      "runs": 2,
+      "runs": 1,
       "issues": 0,
       "toMe": 4,
-      "in": 27,
+      "in": 34,
       "done": 0
     },
     "career": {
       "status": "warn",
-      "runs": 4,
-      "issues": 3,
-      "toMe": 5,
-      "in": 16,
-      "done": 2,
-      "screened": 16
+      "runs": 3,
+      "issues": 2,
+      "toMe": 4,
+      "in": 26,
+      "done": 1,
+      "screened": 23
     },
     "privacy": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
       "toMe": 0,
-      "in": 8,
+      "in": 9,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "ooowoo-ooooooo",
+      "hist": "oowoo-oooooooo",
       "tasks": [
-        [
-          "12:59",
-          [
-            "Instant sweep: 0 conversations",
-            "立即分拣：0 个会话"
-          ],
-          "ok"
-        ],
         [
           "—",
           [
-            "Daily sweep: 27 conversations",
-            "日巡检分拣：27 个会话"
+            "Daily sweep: 34 conversations",
+            "日巡检分拣：34 个会话"
           ],
           "ok"
         ]
@@ -52,81 +44,58 @@
       "issues": []
     },
     "career": {
-      "hist": "wwwww-wwwwww-w",
+      "hist": "wwww-wwwwww-ww",
       "tasks": [
+        [
+          "06:43",
+          [
+            "Daily job scout (5 tracks): 23 postings screened",
+            "每日搜岗（5 个方向）：筛查 23 个岗位"
+          ],
+          "warn"
+        ],
         [
           "—",
           [
-            "Daily job scout (weekend alert emails): 16 postings screened",
-            "每日搜岗（周末提醒邮件补搜）：筛查 16 个岗位"
+            "Master patrol",
+            "总控巡检"
           ],
           "warn"
         ],
         [
-          "13:43",
+          "—",
           [
-            "Weekly recall check",
-            "每周查漏"
+            "Event sign-up receipt check",
+            "活动报名回执"
           ],
           "ok"
-        ],
-        [
-          "18:41",
-          [
-            "Weekly recall check (supplement)",
-            "每周查漏（补充）"
-          ],
-          "warn"
-        ],
-        [
-          "18:41",
-          [
-            "Weekly review",
-            "周复盘"
-          ],
-          "warn"
         ]
       ],
       "issues": [
         [
           "warn",
           [
-            "Weekend sweep: 1 posting needs site verification",
-            "周末补搜：1 个线索需官网核实"
+            "Job scout coverage gap: some sources failed to load",
+            "搜岗覆盖不足：部分来源读取失败"
           ]
         ],
         [
           "warn",
           [
-            "Recall check: 2 missed postings, backfilled",
-            "查漏：漏检 2 个，已补录"
-          ]
-        ],
-        [
-          "warn",
-          [
-            "Recall supplement: some sources could not be read",
-            "查漏补充：部分来源未能读取"
+            "Master patrol: one spot-check sent back for rework",
+            "总控巡检：1 项抽查已发返工"
           ]
         ]
       ]
     },
     "privacy": {
-      "hist": "oboooooooooooo",
+      "hist": "booooooooooooo",
       "tasks": [
         [
           "07:17",
           [
-            "Daily update: 8 sources checked, 0 added",
-            "每日更新：检查 8 个来源，新增 0 条"
-          ],
-          "ok"
-        ],
-        [
-          "07:17",
-          [
-            "Independent QA: 0 rejected",
-            "独立质检：退回 0 条"
+            "Daily update: 9 sources checked, 0 added",
+            "每日更新：检查 9 个来源，新增 0 条"
           ],
           "ok"
         ]
