@@ -1,80 +1,56 @@
 {
-  "date": "2026-11-24",
-  "updatedAt": "2026-11-25T02:25:12Z",
+  "date": "2026-11-25",
+  "updatedAt": "2026-11-26T02:24:17Z",
   "stations": {
     "inbox": {
-      "status": "warn",
-      "runs": 3,
-      "issues": 1,
-      "toMe": 5,
-      "in": 60,
+      "status": "ok",
+      "runs": 1,
+      "issues": 0,
+      "toMe": 6,
+      "in": 52,
       "done": 0
     },
     "career": {
       "status": "warn",
       "runs": 3,
       "issues": 2,
-      "toMe": 8,
-      "in": 37,
-      "done": 8,
-      "screened": 33
+      "toMe": 7,
+      "in": 39,
+      "done": 0,
+      "screened": 36
     },
     "privacy": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
       "toMe": 0,
-      "in": 6,
+      "in": 13,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "owoo-oooooooow",
+      "hist": "woo-oooooooowo",
       "tasks": [
         [
           "—",
           [
-            "Daily sweep: 2 conversations",
-            "日巡检分拣：2 个会话"
+            "Daily sweep: 52 conversations",
+            "日巡检分拣：52 个会话"
           ],
           "ok"
-        ],
-        [
-          "12:28",
-          [
-            "Sweep now: 8 conversations",
-            "立即分拣：8 个会话"
-          ],
-          "ok"
-        ],
-        [
-          "—",
-          [
-            "Inbox sweep: 50 conversations",
-            "分拣：50 个会话"
-          ],
-          "warn"
         ]
       ],
-      "issues": [
-        [
-          "warn",
-          [
-            "One sweep partly done: some follow-up notes not added",
-            "一次分拣部分完成：部分后续备注未追加"
-          ]
-        ]
-      ]
+      "issues": []
     },
     "career": {
-      "hist": "www-wwwwww-www",
+      "hist": "ww-wwwwww-wwww",
       "tasks": [
         [
-          "06:43",
+          "06:42",
           [
-            "Daily job scout (5 tracks): 33 postings screened",
-            "每日搜岗（5 个方向）：筛查 33 个岗位"
+            "Daily job scout (5 tracks): 36 postings screened",
+            "每日搜岗（5 个方向）：筛查 36 个岗位"
           ],
           "warn"
         ],
@@ -99,15 +75,15 @@
         [
           "warn",
           [
-            "Job scout coverage gap: 3 sources not fully read",
-            "搜岗覆盖不足：3 个来源未完整读取"
+            "Job scout coverage gap: 8 sources not fully read",
+            "搜岗覆盖不足：8 个来源未完整读取"
           ]
         ],
         [
           "warn",
           [
             "Master patrol: one coverage record sent back for rework",
-            "总控巡检：1 份覆盖记录已发返工"
+            "总控巡检：1 份覆盖记录被退回返工"
           ]
         ]
       ]
@@ -116,15 +92,15 @@
       "hist": "oooooooooooooo",
       "tasks": [
         [
-          "07:18",
+          "07:17",
           [
-            "Daily update: 6 sources checked, 1 added",
-            "每日更新：检查 6 个来源，新增 1 条"
+            "Daily update: 13 sources checked, 1 added",
+            "每日更新：检查 13 个来源，新增 1 条"
           ],
           "ok"
         ],
         [
-          "07:18",
+          "07:17",
           [
             "Independent QA: 0 rejected",
             "独立质检：退回 0 条"
