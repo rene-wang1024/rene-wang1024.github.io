@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-25",
-  "updatedAt": "2026-11-26T02:24:17Z",
+  "date": "2026-11-26",
+  "updatedAt": "2026-11-27T02:25:00Z",
   "stations": {
     "inbox": {
       "status": "ok",
@@ -14,23 +14,23 @@
       "status": "warn",
       "runs": 3,
       "issues": 2,
-      "toMe": 7,
-      "in": 39,
-      "done": 0,
-      "screened": 36
+      "toMe": 8,
+      "in": 41,
+      "done": 1,
+      "screened": 37
     },
     "privacy": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
       "toMe": 0,
-      "in": 13,
+      "in": 14,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "woo-oooooooowo",
+      "hist": "oo-oooooooowoo",
       "tasks": [
         [
           "—",
@@ -44,13 +44,13 @@
       "issues": []
     },
     "career": {
-      "hist": "ww-wwwwww-wwww",
+      "hist": "w-wwwwww-wwwww",
       "tasks": [
         [
-          "06:42",
+          "06:43",
           [
-            "Daily job scout (5 tracks): 36 postings screened",
-            "每日搜岗（5 个方向）：筛查 36 个岗位"
+            "Daily job scout (5 tracks): 37 postings screened",
+            "每日搜岗（5 个方向）：筛查 37 个岗位"
           ],
           "warn"
         ],
@@ -75,15 +75,15 @@
         [
           "warn",
           [
-            "Job scout coverage gap: 8 sources not fully read",
-            "搜岗覆盖不足：8 个来源未完整读取"
+            "Job scout coverage gap: 1 source failed, 16 need a browser",
+            "搜岗覆盖不足：1 个来源失败、16 个需浏览器"
           ]
         ],
         [
           "warn",
           [
-            "Master patrol: one coverage record sent back for rework",
-            "总控巡检：1 份覆盖记录被退回返工"
+            "Master patrol: 2 job analyses sent back for rework",
+            "总控巡检：2 份岗位分析被退回返工"
           ]
         ]
       ]
@@ -92,15 +92,15 @@
       "hist": "oooooooooooooo",
       "tasks": [
         [
-          "07:17",
+          "07:31",
           [
-            "Daily update: 13 sources checked, 1 added",
-            "每日更新：检查 13 个来源，新增 1 条"
+            "Daily update: 14 sources checked, 1 added",
+            "每日更新：检查 14 个来源，新增 1 条"
           ],
           "ok"
         ],
         [
-          "07:17",
+          "07:31",
           [
             "Independent QA: 0 rejected",
             "独立质检：退回 0 条"
