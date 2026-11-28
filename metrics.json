@@ -1,42 +1,42 @@
 {
-  "date": "2026-11-26",
-  "updatedAt": "2026-11-27T02:25:00Z",
+  "date": "2026-11-27",
+  "updatedAt": "2026-11-28T02:24:26Z",
   "stations": {
     "inbox": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
-      "toMe": 6,
-      "in": 52,
+      "toMe": 2,
+      "in": 59,
       "done": 0
     },
     "career": {
       "status": "warn",
       "runs": 3,
       "issues": 2,
-      "toMe": 8,
-      "in": 41,
+      "toMe": 5,
+      "in": 28,
       "done": 1,
-      "screened": 37
+      "screened": 25
     },
     "privacy": {
       "status": "ok",
       "runs": 1,
       "issues": 0,
       "toMe": 0,
-      "in": 14,
+      "in": 17,
       "done": 0
     }
   },
   "run": {
     "inbox": {
-      "hist": "oo-oooooooowoo",
+      "hist": "o-oooooooowooo",
       "tasks": [
         [
           "—",
           [
-            "Daily sweep: 52 conversations",
-            "日巡检分拣：52 个会话"
+            "Daily sweep: 59 conversations",
+            "日巡检分拣：59 个会话"
           ],
           "ok"
         ]
@@ -44,13 +44,13 @@
       "issues": []
     },
     "career": {
-      "hist": "w-wwwwww-wwwww",
+      "hist": "-wwwwww-wwwwww",
       "tasks": [
         [
-          "06:43",
+          "—",
           [
-            "Daily job scout (5 tracks): 37 postings screened",
-            "每日搜岗（5 个方向）：筛查 37 个岗位"
+            "Daily job scout (5 tracks): 25 postings screened",
+            "每日搜岗（5 个方向）：筛查 25 个岗位"
           ],
           "warn"
         ],
@@ -75,15 +75,15 @@
         [
           "warn",
           [
-            "Job scout coverage gap: 1 source failed, 16 need a browser",
-            "搜岗覆盖不足：1 个来源失败、16 个需浏览器"
+            "Job scout coverage gap: 1 source not checked, 2 need a browser",
+            "搜岗覆盖不足：1 个来源未查、2 个需浏览器"
           ]
         ],
         [
           "warn",
           [
-            "Master patrol: 2 job analyses sent back for rework",
-            "总控巡检：2 份岗位分析被退回返工"
+            "Master patrol: 1 job analysis sent back for rework, 6 issues logged",
+            "总控巡检：1 份岗位分析被退回返工，共记录 6 项问题"
           ]
         ]
       ]
@@ -92,15 +92,15 @@
       "hist": "oooooooooooooo",
       "tasks": [
         [
-          "07:31",
+          "07:18",
           [
-            "Daily update: 14 sources checked, 1 added",
-            "每日更新：检查 14 个来源，新增 1 条"
+            "Daily update: 17 sources checked, 2 added",
+            "每日更新：检查 17 个来源，新增 2 条"
           ],
           "ok"
         ],
         [
-          "07:31",
+          "07:18",
           [
             "Independent QA: 0 rejected",
             "独立质检：退回 0 条"
